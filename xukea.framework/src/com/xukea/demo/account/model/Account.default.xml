@@ -3,9 +3,9 @@
 PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 
-<mapper namespace="com.broader.demo.account.model.Account" >
+<mapper namespace="com.xukea.demo.account.model.Account" >
 
-    <resultMap id="AccountMap" type="com.broader.demo.account.model.Account">
+    <resultMap id="AccountMap" type="com.xukea.demo.account.model.Account">
     </resultMap>
     
     <!-- 分页查询 -->

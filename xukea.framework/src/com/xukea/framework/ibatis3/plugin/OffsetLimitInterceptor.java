@@ -88,7 +88,7 @@ public class OffsetLimitInterceptor implements Interceptor{
 		builder.fetchSize(ms.getFetchSize());
 		builder.statementType(ms.getStatementType());
 		builder.keyGenerator(ms.getKeyGenerator());
-		builder.keyProperty(ms.getKeyProperty());
+//		builder.keyProperty(ms.getKeyProperty());
 		
 		//setStatementTimeout()
 		builder.timeout(ms.getTimeout());
