@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.xukea.common.util.sequence.model.Sequence">
+    <resultMap id="SequenceMap" type="com.xukea.common.util.sequence.model.Sequence">
+        <result property="tabName" column="TAB_NAME"  javaType="String"/>
+        <result property="nextId"  column="NEXT_ID"   javaType="Long"/>
+    </resultMap>
+    
+    <insert id="insert" >
+        INSERT INTO sys_sequence (TAB_NAME, NEXT_ID)
+        VALUES (#{tabName}, #{nextId} )
+    </insert>
+    
+    <update id="update" >
+        UPDATE sys_sequence SET
+          NEXT_ID=#{nextId}
+        WHERE TAB_NAME=#{tabName}
+    </update>
+    
+	<select id="getNextId" parameterType="string" resultMap="SequenceMap">
+		SELECT TAB_NAME, NEXT_ID
+		FROM sys_sequence 
+		WHERE TAB_NAME=#{value}
+	</select>
+	
+    <select id="getNextCode" parameterType="hashmap" resultType="string">
+        SELECT max(CODE)
+        FROM ${tabName} 
+        WHERE CODE like '${preCode}___'
+    </select>
+</mapper>

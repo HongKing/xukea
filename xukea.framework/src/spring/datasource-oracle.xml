@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans  http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
+       default-autowire="byName" default-lazy-init="false">
+
+    <!-- 数据源2 -->
+    
+    <!-- 
+    <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+        <property name="jndiName">
+            <value>jndi/xukea</value>
+        </property>
+    </bean>
+    -->
+    
+    <!-- 数据源定义,使用Apache DBCP 连接池 -->
+    <bean id="dataSource2" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="${jdbc2.driver}"/>
+        <property name="url" value="${jdbc2.url}"/>
+        <property name="username" value="${jdbc2.username}"/>
+        <property name="password" value="${jdbc2.password}"/>
+    </bean>
+    
+    <bean id="jdbcTemplate2" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource2"/>
+    </bean>
+    <!-- Transaction manager for a single JDBC DataSource -->
+    <bean id="transactionManager2" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource2"/>
+    </bean>
+    <bean id="sqlSessionFactory2" class="com.xukea.framework.ibatis3.SqlSessionFactoryFactoryBean">
+        <property name="configLocation" value="classpath:ibatis3/oracle.xml"/>
+        <property name="mapperLocations" value="classpath*:/com/**/model/*.oracle.xml"/>
+        <property name="dataSource" ref="dataSource2"/>
+    </bean>
+    
+</beans>

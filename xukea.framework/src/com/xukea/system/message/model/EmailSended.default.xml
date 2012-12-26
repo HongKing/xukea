@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.xukea.system.message.model.EmailSended" >
+    <resultMap id="EmailSendedMap" type="com.xukea.system.message.model.EmailSended">
+		<result column="ID"	 property="id"	 javaType="java.lang.Long"/>
+		<result column="SUBJECT"	 property="subject"	 javaType="java.lang.String"/>
+		<result column="CONTENT"	 property="content"	 javaType="java.lang.String"/>
+		<result column="TOADDR"	 property="toaddr"	 javaType="java.lang.String"/>
+        <result column="FILE_IDS"  property="fileIds"   javaType="java.lang.String"/>
+		<result column="SEND_TIME"	 property="sendTime"	 javaType="java.util.Date"/>
+    </resultMap>
+    
+    
+    <!-- 新增信息 -->
+    <insert id="insert" parameterType="com.xukea.system.message.model.EmailSended" >
+	<![CDATA[
+		INSERT INTO msg_email_send (
+		    ID, SUBJECT, CONTENT, TOADDR, FILE_IDS, SEND_TIME
+		) VALUES (
+			#{id}, #{subject}, #{content}, #{toaddr}, #{fileIds}, #{sendTime}
+		)
+	]]>
+    </insert>
+	
+    
+    
+</mapper>

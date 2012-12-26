@@ -1,0 +1,13 @@
+
+/*  ========== Jquery Plugin Css Import Base ==========  */
+
+/* Tipsy */
+@import "jquery.plugin/tipsy-style.css";
+
+/* Uniform */
+@import "uniform/uniform.default.css";
+
+/* multiselect */
+@import "multiselect/ui.multiselect.css";
+@import "multiselect/jquery.multiselect.css";
+@import "multiselect/jquery.multiselect.filter.css";

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.xukea.common.util.logdb.model.SysErrorLog" >
+    <resultMap id="SysErrorLogMap" type="com.xukea.common.util.logdb.model.SysErrorLog">
+		<result column="ERR_TIME"	 property="errTime"	 javaType="java.util.Date"/>
+		<result column="ERR_LEVEL"	 property="errLevel"	 javaType="java.lang.String"/>
+		<result column="ERR_FROM"	 property="errFrom"	 javaType="java.lang.String"/>
+        <result column="ERR_VALUE"   property="errValue"  javaType="java.lang.String"/>
+		<result column="MSG_SHORT"	 property="msgShort"	 javaType="java.lang.String"/>
+		<result column="MSG_ALL"	 property="msgAll"	 javaType="java.lang.String"/>
+
+    </resultMap>
+    
+    <!-- 新增信息 -->
+    <insert id="insert" parameterType="com.xukea.common.util.logdb.model.SysErrorLog" >
+	<![CDATA[
+		INSERT INTO sys_error_log (
+		    ERR_TIME, ERR_LEVEL, ERR_FROM, ERR_VALUE, MSG_SHORT, MSG_ALL
+		) VALUES (
+			#{errTime}, #{errLevel}, #{errFrom}, #{errValue}, #{msgShort}, #{msgAll}
+		)
+	]]>
+    </insert>
+	
+</mapper>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.xukea.system.attachment.model.Attachment" >
+    <resultMap id="AttachmentMap" type="com.xukea.system.attachment.model.Attachment">
+		<result column="ID"	 property="id"	 javaType="java.lang.Long"/>
+		<result column="FILE_NAME"	 property="fileName"	 javaType="java.lang.String"/>
+		<result column="FILE_URL"	 property="fileUrl"	 javaType="java.lang.String"/>
+		<result column="FILE_SIZE"	 property="fileSize"	 javaType="java.lang.Float"/>
+		<result column="FILE_TYPE"	 property="fileType"	 javaType="java.lang.String"/>
+		<result column="REMARK"	 property="remark"	 javaType="java.lang.String"/>
+		<result column="UPLOAD_USER"	 property="uploadUser"	 javaType="java.lang.Long"/>
+		<result column="UPLOAD_DATE"	 property="uploadDate"	 javaType="java.util.Date"/>
+    </resultMap>
+    
+    <!-- 新增信息 -->
+    <insert id="insert" parameterType="com.xukea.system.attachment.model.Attachment" >
+	<![CDATA[
+		INSERT INTO sys_attachment (
+		    ID, FILE_NAME, FILE_URL, FILE_SIZE, FILE_TYPE, REMARK, UPLOAD_USER, UPLOAD_DATE
+		) VALUES (
+			#{id}, #{fileName}, #{fileUrl}, #{fileSize}, #{fileType}, #{remark}, #{uploadUser}, #{uploadDate}
+		)
+	]]>
+    </insert>
+	
+    <!-- 单条信息详情 -->
+    <select id="getFileById" resultMap="AttachmentMap" parameterType="java.lang.Long" >
+    <![CDATA[
+        SELECT *
+        FROM sys_attachment
+        WHERE ID = #{value}
+    ]]>
+    </select>
+    
+    <!-- 信息详情 -->
+    <select id="getListByIds" resultMap="AttachmentMap" parameterType="java.lang.String">
+        SELECT *
+        FROM sys_attachment
+        WHERE ID in ( ${value} )
+    </select>
+    
+    
+</mapper>

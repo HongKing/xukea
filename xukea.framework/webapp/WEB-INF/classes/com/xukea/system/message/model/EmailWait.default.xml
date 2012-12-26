@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.xukea.system.message.model.EmailWait" >
+    <resultMap id="EmailWaitMap" type="com.xukea.system.message.model.EmailWait">
+		<result column="ID"	 property="id"	 javaType="java.lang.Long"/>
+		<result column="SUBJECT"	 property="subject"	 javaType="java.lang.String"/>
+		<result column="CONTENT"	 property="content"	 javaType="java.lang.String"/>
+		<result column="TOADDR"	 property="toaddr"	 javaType="java.lang.String"/>
+        <result column="FILE_IDS"  property="fileIds"   javaType="java.lang.String"/>
+    </resultMap>
+    
+    <!-- 新增信息 -->
+    <insert id="insert" parameterType="com.xukea.system.message.model.EmailWait" >
+	<![CDATA[
+		INSERT INTO msg_email_wait (
+		    ID, SUBJECT, CONTENT, TOADDR, FILE_IDS
+		) VALUES (
+			#{id}, #{subject}, #{content}, #{toaddr}, #{fileIds}
+		)
+	]]>
+    </insert>
+	
+    <!-- 删除信息 -->
+    <delete id="delete" parameterType="java.lang.Long">
+    <![CDATA[
+        DELETE FROM msg_email_wait
+        WHERE ID = #{value} 
+    ]]>
+    </delete>
+    
+    <!-- 信息详情（分页查询） -->
+    <select id="getEmailList" resultMap="EmailWaitMap" >
+        SELECT * 
+        FROM msg_email_wait
+    </select>
+    
+    
+</mapper>
