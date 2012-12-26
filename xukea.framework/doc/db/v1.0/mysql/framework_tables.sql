@@ -101,6 +101,6 @@ create table SYS_SETTINGS
    EDIT_DATE            DATETIME comment '更新时间',
    primary key (NAME)
 );
-
+ 
 alter table SYS_SETTINGS comment '系统设置';
 
