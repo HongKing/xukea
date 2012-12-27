@@ -43,10 +43,9 @@ public class SysSettingsDao  extends BaseDao<SysSettings, Long>{
 	 * @return
 	 */
 	public List<SysSettings> getList(Map<String, Object> map){
-		PageList<SysSettings> pageList = getSqlSessionTemplate().selectPageList(namespace + ".getList", 1, 5);
-		return pageList.getResult();
-		
-//		return getSqlSessionTemplate().selectList(namespace + ".getList", map);
+//		PageList<SysSettings> pageList = getSqlSessionTemplate().selectPageList(namespace + ".getList", 1, 5);
+//		return pageList.getResult();
+		return getSqlSessionTemplate().selectList(namespace + ".getList", map);
 	}
 
 	

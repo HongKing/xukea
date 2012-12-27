@@ -18,7 +18,7 @@
     <!-- Configures support for @Controllers -->
     <mvc:annotation-driven />
     
-    <!-- 国际化操作 拦截器 必需配置，可以和其它国际化方式通用 -->
+    <!-- 国际化语言包配置（必需配置拦截器），可以和其它国际化方式通用 -->
     <bean id="messageSource" class="com.xukea.framework.util.MessageSourceUtil">
         <property name="basename" value="i18n/*" /><!-- p:basename="i18n/messages" -->
     </bean>
@@ -83,7 +83,9 @@
     
     <!--  spring mvc 拦截器 -->
     <mvc:interceptors>
+        <!-- 全局拦截器 -->
         <bean class="com.xukea.common.adapter.RequestGlobalAdapter" />
+        <!-- 国际化拦截器 -->
         <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
 	        <property name="paramName" value="locale" />
 	    </bean>

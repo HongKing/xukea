@@ -41,10 +41,11 @@
     <!-- 强制使用CGLIB代理  -->
     <aop:aspectj-autoproxy proxy-target-class="true"/>
 
-    <!-- 以AspectJ方式 定义 AOP -->
+    <!-- 事务切面配置，以AspectJ方式 定义 AOP -->
     <aop:config proxy-target-class="true">
         <aop:advisor pointcut="execution(* com.xukea.framework.base.BaseService.*(..))" advice-ref="txAdvice"/>
-        <aop:advisor pointcut="execution(* com.*..*.service.*Service.*(..))"              advice-ref="txAdvice"/>
+        <aop:advisor pointcut="execution(* com.*..*.service.*Service.*(..))"            advice-ref="txAdvice"/>
+        <aop:advisor pointcut="execution(* com.*..*.dao.*Dao.*(..))"                    advice-ref="txAdvice"/>
     </aop:config>
     
     <!-- 支持 @Transactional 标记 -->
@@ -52,12 +53,13 @@
     
     <!-- 基本事务定义,使用transactionManager作事务管理,默认get* find*方法的事务为readonly,其余方法按默认设置.
                  默认的设置请参考Spring文档事务一章. transaction-manager="transactionManager"-->
-    <tx:advice id="txAdvice" >
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
         <tx:attributes>
-            <tx:method name="find*"  read-only="true"/>
-            <tx:method name="get*"   read-only="true"/>
-            <tx:method name="query*" read-only="true"/>
-            <tx:method name="*"      read-only="false"/>
+            <tx:method name="find*"   propagation="SUPPORTS" read-only="true"/>
+            <tx:method name="get*"    propagation="SUPPORTS" read-only="true"/>
+            <tx:method name="query*"  propagation="SUPPORTS" read-only="true"/>
+            <tx:method name="select*" propagation="SUPPORTS" read-only="true"/>
+            <tx:method name="*"       propagation="REQUIRED" read-only="false"/>
         </tx:attributes>
     </tx:advice>
     
@@ -65,7 +67,4 @@
     <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
     <bean class="org.springframework.aop.aspectj.annotation.AnnotationAwareAspectJAutoProxyCreator" />
     
-    <!--  
-    <bean id="cacheAdministrator" class="com.opensymphony.oscache.general.GeneralCacheAdministrator" />
-    -->
 </beans>
