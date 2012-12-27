@@ -2,12 +2,19 @@ package com.xukea.framework.ibatis3.plugin;
 
 
 
+import java.util.List;
 import java.util.Properties;
 
+import org.apache.ibatis.cache.Cache;
 import org.apache.ibatis.executor.Executor;
+import org.apache.ibatis.executor.keygen.KeyGenerator;
 import org.apache.ibatis.mapping.BoundSql;
 import org.apache.ibatis.mapping.MappedStatement;
+import org.apache.ibatis.mapping.ParameterMap;
+import org.apache.ibatis.mapping.ResultMap;
+import org.apache.ibatis.mapping.ResultSetType;
 import org.apache.ibatis.mapping.SqlSource;
+import org.apache.ibatis.mapping.StatementType;
 import org.apache.ibatis.mapping.MappedStatement.Builder;
 import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.plugin.Intercepts;
@@ -17,6 +24,8 @@ import org.apache.ibatis.plugin.Signature;
 import org.apache.ibatis.session.ResultHandler;
 import org.apache.ibatis.session.RowBounds;
 
+import com.xukea.common.util.StringUtil;
+import com.xukea.framework.base.BaseStringUtil;
 import com.xukea.framework.ibatis3.plugin.dialect.Dialect;
 import com.xukea.framework.util.PropertiesHelper;
 
@@ -29,8 +38,8 @@ import com.xukea.framework.util.PropertiesHelper;
  * 配置文件内容:
  * <pre>
  * 	&lt;plugins>
- *		&lt;plugin interceptor="cn.org.rapid_framework.ibatis3.plugin.OffsetLimitInterceptor">
- *			&lt;property name="dialectClass" value="cn.org.rapid_framework.jdbc.dialect.MySQLDialect"/>
+ *		&lt;plugin interceptor="cn.org.xukea.ibatis3.plugin.OffsetLimitInterceptor">
+ *			&lt;property name="dialectClass" value="cn.org.xukea.jdbc.dialect.MySQLDialect"/>
  *		&lt;/plugin>
  *	&lt;/plugins>
  * </pre>
@@ -54,7 +63,7 @@ public class OffsetLimitInterceptor implements Interceptor{
 		return invocation.proceed();
 	}
 
-	void processIntercept(final Object[] queryArgs) {
+	private void processIntercept(final Object[] queryArgs) {
 		//queryArgs = query(MappedStatement ms, Object parameter, RowBounds rowBounds, ResultHandler resultHandler)
 		MappedStatement ms = (MappedStatement)queryArgs[MAPPED_STATEMENT_INDEX];
 		Object parameter = queryArgs[PARAMETER_INDEX];
@@ -80,15 +89,28 @@ public class OffsetLimitInterceptor implements Interceptor{
 		}
 	}
 	
-	//see: MapperBuilderAssistant
-	private MappedStatement copyFromMappedStatement(MappedStatement ms,SqlSource newSqlSource) {
-		Builder builder = new MappedStatement.Builder(ms.getConfiguration(),ms.getId(),newSqlSource,ms.getSqlCommandType());
+	/**
+	 * @see: MapperBuilderAssistant
+	 * @param ms
+	 * @param newSqlSource
+	 * @return
+	 */
+	private MappedStatement copyFromMappedStatement(MappedStatement ms, SqlSource newSqlSource) {
+		Builder builder = new MappedStatement.Builder(ms.getConfiguration(), ms.getId(), newSqlSource, ms.getSqlCommandType());
 		
 		builder.resource(ms.getResource());
 		builder.fetchSize(ms.getFetchSize());
 		builder.statementType(ms.getStatementType());
+		builder.databaseId(ms.getDatabaseId());
+		
+
+		String keyProperty = BaseStringUtil.arrayToCommaDelimitedString(ms.getKeyProperties());
+		builder.keyProperty(keyProperty);
+
+		String keyColumns = BaseStringUtil.arrayToCommaDelimitedString(ms.getKeyColumns());
+		builder.keyColumn(keyColumns);
+		
 		builder.keyGenerator(ms.getKeyGenerator());
-		builder.keyProperty(ms.getKeyProperty());
 		
 		//setStatementTimeout()
 		builder.timeout(ms.getTimeout());

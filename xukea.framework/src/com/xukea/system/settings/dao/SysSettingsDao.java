@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.stereotype.Repository;
 
 import com.xukea.framework.base.BaseDao;
+import com.xukea.framework.util.PageList;
 import com.xukea.system.settings.model.SysSettings;
 
 
@@ -42,7 +43,10 @@ public class SysSettingsDao  extends BaseDao<SysSettings, Long>{
 	 * @return
 	 */
 	public List<SysSettings> getList(Map<String, Object> map){
-		return getSqlSessionTemplate().selectList(namespace + ".getList", map);
+		PageList<SysSettings> pageList = getSqlSessionTemplate().selectPageList(namespace + ".getList", 1, 5);
+		return pageList.getResult();
+		
+//		return getSqlSessionTemplate().selectList(namespace + ".getList", map);
 	}
 
 	
