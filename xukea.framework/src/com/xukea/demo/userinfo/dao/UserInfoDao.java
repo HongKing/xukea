@@ -75,7 +75,7 @@ public class UserInfoDao extends BaseDao<UserInfo, Long>{
 	 * @return
 	 */
 	public PageList<UserInfo> getPageForList(PageList<UserInfo> page, HashMap<String, Object> map){
-		return getSqlSessionTemplate().getPageForList(namespace +".getList", map, page);
+		return null;//getSqlSessionTemplate().getPageForList(namespace +".getList", map, page);
 	}
 
 }

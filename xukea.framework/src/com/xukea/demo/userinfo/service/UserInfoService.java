@@ -16,7 +16,6 @@ import com.xukea.demo.userinfo.dao.UserExpDao;
 import com.xukea.demo.userinfo.dao.UserInfoDao;
 import com.xukea.demo.userinfo.model.UserInfo;
 import com.xukea.framework.base.BaseService;
-import com.xukea.framework.ibatis3.EntityDao;
 import com.xukea.framework.util.PageList;
 
 @Service

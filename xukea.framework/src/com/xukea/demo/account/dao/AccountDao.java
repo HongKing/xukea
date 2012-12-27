@@ -1,7 +1,6 @@
 package com.xukea.demo.account.dao;
 
 
-import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.stereotype.Repository;
 
 import com.xukea.demo.account.model.Account;
@@ -18,7 +17,7 @@ public class AccountDao  extends BaseDao<Account, Long>{
 	 * @return
 	 */
 	public PageList<Account> getPageForList(PageList<Account> page){
-		return getSqlSessionTemplate().getPageForList(namespace +".getList", page);
+		return getSqlSessionTemplate().selectPageList(namespace +".getList", page);
 	}
 
 }
