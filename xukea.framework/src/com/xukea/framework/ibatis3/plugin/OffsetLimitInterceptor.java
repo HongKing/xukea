@@ -1,21 +1,10 @@
 package com.xukea.framework.ibatis3.plugin;
 
-
-
-import java.util.List;
 import java.util.Properties;
 
-import org.apache.ibatis.cache.Cache;
 import org.apache.ibatis.executor.Executor;
-import org.apache.ibatis.executor.keygen.KeyGenerator;
 import org.apache.ibatis.mapping.BoundSql;
 import org.apache.ibatis.mapping.MappedStatement;
-import org.apache.ibatis.mapping.ParameterMap;
-import org.apache.ibatis.mapping.ResultMap;
-import org.apache.ibatis.mapping.ResultSetType;
-import org.apache.ibatis.mapping.SqlSource;
-import org.apache.ibatis.mapping.StatementType;
-import org.apache.ibatis.mapping.MappedStatement.Builder;
 import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.plugin.Intercepts;
 import org.apache.ibatis.plugin.Invocation;
@@ -24,8 +13,7 @@ import org.apache.ibatis.plugin.Signature;
 import org.apache.ibatis.session.ResultHandler;
 import org.apache.ibatis.session.RowBounds;
 
-import com.xukea.common.util.StringUtil;
-import com.xukea.framework.base.BaseStringUtil;
+import com.xukea.framework.ibatis3.BaseSqlSessionUtil;
 import com.xukea.framework.ibatis3.plugin.dialect.Dialect;
 import com.xukea.framework.util.PropertiesHelper;
 
@@ -45,16 +33,15 @@ import com.xukea.framework.util.PropertiesHelper;
  * </pre>
  * 
  */
-
 @Intercepts({@Signature(
-		type= Executor.class,
+		type   = Executor.class,
 		method = "query",
-		args = {MappedStatement.class, Object.class, RowBounds.class, ResultHandler.class})})
+		args   = {MappedStatement.class, Object.class, RowBounds.class, ResultHandler.class})})
 public class OffsetLimitInterceptor implements Interceptor{
-	static int MAPPED_STATEMENT_INDEX = 0;
-	static int PARAMETER_INDEX = 1;
-	static int ROWBOUNDS_INDEX = 2;
-	static int RESULT_HANDLER_INDEX = 3;
+	static int IDX_STATEMENT = 0;
+	static int IDX_PARAMETER = 1;
+	static int IDX_ROWBOUNDS = 2;
+	static int IDX_RS_HANDLE = 3;
 	
 	Dialect dialect;
 	
@@ -65,11 +52,11 @@ public class OffsetLimitInterceptor implements Interceptor{
 
 	private void processIntercept(final Object[] queryArgs) {
 		//queryArgs = query(MappedStatement ms, Object parameter, RowBounds rowBounds, ResultHandler resultHandler)
-		MappedStatement ms = (MappedStatement)queryArgs[MAPPED_STATEMENT_INDEX];
-		Object parameter = queryArgs[PARAMETER_INDEX];
-		final RowBounds rowBounds = (RowBounds)queryArgs[ROWBOUNDS_INDEX];
+		MappedStatement ms = (MappedStatement)queryArgs[IDX_STATEMENT];
+		Object parameter   = queryArgs[IDX_PARAMETER];
+		final RowBounds rowBounds = (RowBounds)queryArgs[IDX_ROWBOUNDS];
 		int offset = rowBounds.getOffset();
-		int limit = rowBounds.getLimit();
+		int limit  = rowBounds.getLimit();
 		
 		if(dialect.supportsLimit() && (offset != RowBounds.NO_ROW_OFFSET || limit != RowBounds.NO_ROW_LIMIT)) {
 			BoundSql boundSql = ms.getBoundSql(parameter);
@@ -82,54 +69,14 @@ public class OffsetLimitInterceptor implements Interceptor{
 			}
 			limit = RowBounds.NO_ROW_LIMIT;
 			
-			queryArgs[ROWBOUNDS_INDEX] = new RowBounds(offset,limit);
+			queryArgs[IDX_ROWBOUNDS] = new RowBounds(offset, limit);
+			
 			BoundSql newBoundSql = new BoundSql(ms.getConfiguration(),sql, boundSql.getParameterMappings(), boundSql.getParameterObject());
-			MappedStatement newMs = copyFromMappedStatement(ms, new BoundSqlSqlSource(newBoundSql));
-			queryArgs[MAPPED_STATEMENT_INDEX] = newMs;
+			MappedStatement.Builder builder = BaseSqlSessionUtil.copyMappedStatement(ms, newBoundSql);
+			queryArgs[IDX_STATEMENT] = builder.build();
 		}
 	}
 	
-	/**
-	 * @see: MapperBuilderAssistant
-	 * @param ms
-	 * @param newSqlSource
-	 * @return
-	 */
-	private MappedStatement copyFromMappedStatement(MappedStatement ms, SqlSource newSqlSource) {
-		Builder builder = new MappedStatement.Builder(ms.getConfiguration(), ms.getId(), newSqlSource, ms.getSqlCommandType());
-		
-		builder.resource(ms.getResource());
-		builder.fetchSize(ms.getFetchSize());
-		builder.statementType(ms.getStatementType());
-		builder.databaseId(ms.getDatabaseId());
-		
-
-		String keyProperty = BaseStringUtil.arrayToCommaDelimitedString(ms.getKeyProperties());
-		builder.keyProperty(keyProperty);
-
-		String keyColumns = BaseStringUtil.arrayToCommaDelimitedString(ms.getKeyColumns());
-		builder.keyColumn(keyColumns);
-		
-		builder.keyGenerator(ms.getKeyGenerator());
-		
-		//setStatementTimeout()
-		builder.timeout(ms.getTimeout());
-		
-		//setStatementResultMap()
-		builder.parameterMap(ms.getParameterMap());
-		
-		//setStatementResultMap()
-		builder.resultMaps(ms.getResultMaps());
-		builder.resultSetType(ms.getResultSetType());
-	    
-		//setStatementCache()
-		builder.cache(ms.getCache());
-		builder.flushCacheRequired(ms.isFlushCacheRequired());
-		builder.useCache(ms.isUseCache());
-		
-		return builder.build();
-	}
-
 	public Object plugin(Object target) {
 		return Plugin.wrap(target, this);
 	}
@@ -141,16 +88,6 @@ public class OffsetLimitInterceptor implements Interceptor{
 		} catch (Exception e) {
 			throw new RuntimeException("cannot create dialect instance by dialectClass:"+dialectClass,e);
 		} 
-	}
-	
-	public static class BoundSqlSqlSource implements SqlSource {
-		BoundSql boundSql;
-		public BoundSqlSqlSource(BoundSql boundSql) {
-			this.boundSql = boundSql;
-		}
-		public BoundSql getBoundSql(Object parameterObject) {
-			return boundSql;
-		}
 	}
 	
 }
