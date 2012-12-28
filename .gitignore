@@ -4,3 +4,4 @@
 *.jar
 *.war
 *.ear
+/xukea.framework/webapp/WEB-INF/classes
