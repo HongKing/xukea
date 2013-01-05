@@ -7,7 +7,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.xukea.framework.base.BaseService;
 import com.xukea.system.settings.dao.SysSettingsDao;
@@ -18,7 +18,7 @@ import com.xukea.system.settings.model.SysSettings;
  * @author 石头
  *
  */
-@Component
+@Service
 public class SysSettingsService extends BaseService<SysSettings, Long>{
 
 	@Resource

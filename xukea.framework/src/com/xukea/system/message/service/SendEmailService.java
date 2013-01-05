@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.xukea.common.util.sequence.service.SequenceService;
 import com.xukea.framework.base.BaseService;
@@ -15,7 +15,7 @@ import com.xukea.system.message.model.EmailSended;
 import com.xukea.system.message.model.EmailWait;
 
 
-@Component
+@Service
 public class SendEmailService extends BaseService<EmailWait, Long>{
 
 	@Resource
