@@ -43,7 +43,7 @@ public class LoginAdapter extends BaseRequestAdapter {
 		
 		// 用户登录拦截
 		HttpSession session = request.getSession();
-		UserBasicInfo user = (UserBasicInfo) session.getAttribute(UserBasicInfo.SESSION_NAME);
+		UserBasicInfo user = UserBasicInfo.getFromSession(request);
 		if(user==null){
 			//如果不是AJAX请求，则记录登录前的访问页面，便于登录后跳转
 			if(!WebUtil.isAjaxRequest(request)){
