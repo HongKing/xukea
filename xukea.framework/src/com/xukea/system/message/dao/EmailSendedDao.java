@@ -13,7 +13,7 @@ import com.xukea.system.message.model.EmailSended;
  */
 @Repository
 public class EmailSendedDao  extends BaseDao<EmailSended, Long>{
-    private String namespace = "com.xukea.system.email.model.EmailSended";
+    private String namespace = "com.xukea.system.message.model.EmailSended";
 
 	/**
 	 * 新增已发邮件
