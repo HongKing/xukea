@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+PUBLIC "-//ibatis.apache.org//DTD Config 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-config.dtd">
+<configuration>
+    
+    <!-- 指定数据库分页方言Dialect, 其它方言:OracleDialect,SQLServerDialect,MySQLDialect-->
+    <plugins>
+        <plugin interceptor="com.xukea.framework.ibatis3.plugin.OffsetLimitInterceptor">
+            <property name="dialectClass" value="com.xukea.framework.ibatis3.plugin.dialect.SQLServerDialect"/>
+        </plugin>
+    </plugins>
+    
+</configuration>

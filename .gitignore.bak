@@ -1,0 +1,7 @@
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
+/xukea.framework/webapp/WEB-INF/classes

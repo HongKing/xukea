@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.xukea.demo.userinfo.model.UserInfo" >
+    
+    <resultMap id="UserInfoMap" type="com.xukea.demo.userinfo.model.UserInfo">
+    </resultMap>
+    
+    <!-- 新增信息 -->
+    <!-- #{id,javaType=Long} -->
+    <insert id="insert" parameterType="com.xukea.demo.userinfo.model.UserInfo" >
+		<selectKey resultType="int" keyProperty="id" order="BEFORE" >
+		  SELECT SQEN_DEMO_USER_INFO.nextVal FROM dual
+		</selectKey>
+		<![CDATA[
+			INSERT INTO DEMO_USER_INFO (
+			    ID, USERNAME, PASSWORD, SEX, PHONE, EMAIL, CREATE_DATE
+			) VALUES (
+			    #{id} ,
+			    #{userName,jdbcType=VARCHAR} ,
+			    #{password,jdbcType=VARCHAR} ,
+			    #{sex,javaType=Long} ,
+			    #{phone,jdbcType=VARCHAR} ,
+			    #{email,jdbcType=VARCHAR} ,
+			    sysdate
+			)
+		]]>
+    </insert>
+	
+    <!-- 删除信息 -->
+    <delete id="delete" parameterType="java.lang.Long">
+    <![CDATA[
+        DELETE FROM DEMO_USER_INFO
+        WHERE ID = #{value} 
+    ]]>
+    </delete>
+    
+    <!-- 更新信息 -->
+    <update id="update" parameterType="com.xukea.demo.userinfo.model.UserInfo">
+    <![CDATA[
+        UPDATE DEMO_USER_INFO SET
+            USERNAME = #{userName,jdbcType=VARCHAR} ,
+            PASSWORD = #{password,jdbcType=VARCHAR} ,
+            SEX = #{sex,jdbcType=TINYINT} ,
+            PHONE = #{phone,jdbcType=VARCHAR} ,
+            EMAIL = #{email,jdbcType=VARCHAR}
+        WHERE 
+            ID = #{id} 
+    ]]>
+    </update>
+    
+    <!-- 单条信息详情 -->
+    <select id="getById" resultMap="UserInfoMap" parameterType="java.lang.Long" >
+    <![CDATA[
+		SELECT *
+		FROM DEMO_USER_INFO
+		WHERE ID = #{value}
+    ]]>
+    </select>
+    
+    <!-- 所有信息详情（分页查询） -->
+    <select id="getList" resultMap="UserInfoMap" parameterType="map">
+        SELECT *
+        FROM DEMO_USER_INFO
+        WHERE 1=1
+        <if test="userName != null">
+            AND USERNAME like '${userName}%'
+        </if>
+        <if test="sex != null">
+            AND SEX = #{sex}
+        </if>
+        <if test="phone != null">
+            AND PHONE like #{phone}||'%'
+        </if>
+        ORDER BY ID ASC
+    </select>
+    
+</mapper>
