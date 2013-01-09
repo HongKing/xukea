@@ -14,8 +14,8 @@ import com.xukea.common.exception.PageNotFoundException;
 import com.xukea.common.exception.UnLoginException;
 import com.xukea.common.exception.UnauthorizedException;
 import com.xukea.common.util.Config;
-import com.xukea.common.util.Constants;
 import com.xukea.common.util.WebUtil;
+import com.xukea.framework.base.BaseConstants;
 import com.xukea.framework.base.BaseExceptionResolver;
 
 /**
@@ -58,7 +58,7 @@ public class GlobalExceptionResolver extends BaseExceptionResolver{
 	 */
 	private ModelAndView doUnLogin(HttpServletRequest request, HttpServletResponse response, Exception ex){
 		if(WebUtil.isAjaxRequest(request)){
-			this.outputErrorJSON(request, response, Constants.HTTP_UNLOGIN, "未登录");
+			this.outputErrorJSON(request, response, BaseConstants.HTTP_UNLOGIN, "未登录");
 			return null;
 		}else{
 			return new ModelAndView(ERROR_PAGE_login);
@@ -73,7 +73,7 @@ public class GlobalExceptionResolver extends BaseExceptionResolver{
 	 */
 	private ModelAndView do403(HttpServletRequest request, HttpServletResponse response, Exception ex){
 		if(WebUtil.isAjaxRequest(request)){
-			this.outputErrorJSON(request, response, Constants.HTTP_FORBIDDEN, "禁止访问");
+			this.outputErrorJSON(request, response, BaseConstants.HTTP_FORBIDDEN, "禁止访问");
 			return null;
 		}else{
 			return new ModelAndView(ERROR_PAGE_403);
@@ -89,7 +89,7 @@ public class GlobalExceptionResolver extends BaseExceptionResolver{
 	 */
 	private ModelAndView do404(HttpServletRequest request, HttpServletResponse response, Exception ex){
 		if(WebUtil.isAjaxRequest(request)){
-			this.outputErrorJSON(request, response, Constants.HTTP_NOT_FOUND, "页面不存在");
+			this.outputErrorJSON(request, response, BaseConstants.HTTP_NOT_FOUND, "页面不存在");
 			return null;
 		}else{
 			return new ModelAndView(ERROR_PAGE_404);
@@ -105,7 +105,7 @@ public class GlobalExceptionResolver extends BaseExceptionResolver{
 	 */
 	private ModelAndView do500(HttpServletRequest request, HttpServletResponse response, Exception ex){
 		if(WebUtil.isAjaxRequest(request)){
-			this.outputErrorJSON(request, response, Constants.HTTP_SERVER_ERROR, ex.getMessage());
+			this.outputErrorJSON(request, response, BaseConstants.HTTP_SERVER_ERROR, ex.getMessage());
 			return null;
 		}else{
 			return new ModelAndView(ERROR_PAGE_500, "errmsg", ex);

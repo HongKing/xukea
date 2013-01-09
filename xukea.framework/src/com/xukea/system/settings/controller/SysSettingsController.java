@@ -83,7 +83,6 @@ public class SysSettingsController extends BaseRestSpringController<SysSettings,
 		}
 		
 		// update cache
-//		SysSettingsCache.getInstance().refresh();
 		Config.getInstance().refresh();
 		
 		// output

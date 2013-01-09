@@ -16,7 +16,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONObject;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -40,6 +42,7 @@ import com.xukea.system.attachment.service.AttachmentService;
 @Controller
 @RequestMapping("/system/attachment")
 public class AttachmentController extends BaseRestSpringController<Attachment, Long> {
+	private final Logger log = Logger.getLogger(getClass());
 	
 	@Resource
 	private AttachmentService attachmentService;
@@ -52,7 +55,7 @@ public class AttachmentController extends BaseRestSpringController<Attachment, L
 	 */
 	@RequestMapping(value="/upload")
 	public void fileupload(MultipartHttpServletRequest request, HttpServletResponse response) throws Exception {
-		UserBasicInfo user = (UserBasicInfo) request.getSession().getAttribute(UserBasicInfo.SESSION_NAME);
+		UserBasicInfo user = UserBasicInfo.getFromSession(request);
 		
 		List<MultipartFile> list = request.getFiles("files");
 		
@@ -109,15 +112,28 @@ public class AttachmentController extends BaseRestSpringController<Attachment, L
 	 * @throws Exception 
 	 */
 	@RequestMapping(value="/download")
-	public void downloadFile(HttpServletRequest request,HttpServletResponse response) throws PageNotFoundException, IOException{
+	public String downloadFile(HttpServletRequest request) throws PageNotFoundException, IOException{
 		long fid = WebUtil.getValueLong(request, "fid", -1);
+		return "redirect:/system/attachment/download/"+fid;
+	}
+	
+	/**
+	 * 文件下载
+	 * @param request
+	 * @param response
+	 * @throws PageNotFoundException 
+	 * @throws IOException 
+	 * @throws Exception 
+	 */
+	@RequestMapping(value="/download/{fid}")
+	public void downloadFile(HttpServletRequest request, HttpServletResponse response, @PathVariable long fid) throws PageNotFoundException, IOException{
 		Attachment file = attachmentService.getFileById(fid);
 		if(file==null){
 			throw new PageNotFoundException();
 		}
 		
 		String fileName = file.getFileName();//得到下载文件的名字 
-		int    fileSize = (int) file.getFileSize() * 1024;
+//		int    fileSize = (int) file.getFileSize() * 1024;
         try {
         	String agent = WebUtil.getClientInfo(request);
         	if (null != agent && -1 != agent.indexOf("MSIE")){
@@ -132,7 +148,7 @@ public class AttachmentController extends BaseRestSpringController<Attachment, L
 		}
 		response.setHeader("Content-Disposition", "attachment;filename=\""+ fileName +"\"");
 		response.setContentType( FileUploadUtil.getFileMimeType(file.getFileType()) ); //设置response的编码方式 
-//	    response.setContentLength( fileSize );
+//	    response.setContentLength( fileSize ); // 暂时去除文件大小的输出，防止浏览器接受数据不完整
         
 		try {
 			OutputStream myout  = response.getOutputStream();//从response对象中得到输出流,准备下载
@@ -148,7 +164,7 @@ public class AttachmentController extends BaseRestSpringController<Attachment, L
 	        buff.close();
 	        myout.close();
 		} catch (IOException e) {
-			e.printStackTrace();
+			log.error("download error, file id is "+fid, e);
 			throw e;
 		}
 	}

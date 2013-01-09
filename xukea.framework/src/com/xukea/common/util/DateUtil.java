@@ -5,6 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import com.xukea.framework.base.BaseConstants;
+
 
 /**
  * 时期处理
@@ -43,7 +45,7 @@ public class DateUtil {
 	 * @return
 	 */
 	public static String getDate4Time(Date date){
-		SimpleDateFormat sdf = new SimpleDateFormat(Constants.FORMAT_DATE_TIME);
+		SimpleDateFormat sdf = new SimpleDateFormat(BaseConstants.FORMAT_DATE_TIME);
 		return date==null ? null : sdf.format(date);
 	}
 
@@ -52,7 +54,7 @@ public class DateUtil {
 	 * @return
 	 */
 	public static String getDate4Time(Date date, int afterDay){
-		SimpleDateFormat sdf = new SimpleDateFormat(Constants.FORMAT_DATE_TIME);
+		SimpleDateFormat sdf = new SimpleDateFormat(BaseConstants.FORMAT_DATE_TIME);
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
 		cal.add(Calendar.DAY_OF_YEAR, 0+afterDay);
@@ -73,7 +75,7 @@ public class DateUtil {
 	 * @return
 	 */
 	public static String getDate2String(Date date){
-		SimpleDateFormat sdf = new SimpleDateFormat(Constants.FORMAT_DATE);
+		SimpleDateFormat sdf = new SimpleDateFormat(BaseConstants.FORMAT_DATE);
 		try{
 			return sdf.format(date);
 		}catch(Exception e){
@@ -107,7 +109,7 @@ public class DateUtil {
 	 * @return
 	 */
 	public static String getDate2String(Date date, int afterDay){
-		SimpleDateFormat sdf = new SimpleDateFormat(Constants.FORMAT_DATE);
+		SimpleDateFormat sdf = new SimpleDateFormat(BaseConstants.FORMAT_DATE);
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
 		cal.add(Calendar.DAY_OF_YEAR, 0+afterDay);
@@ -128,7 +130,7 @@ public class DateUtil {
 	 * @return
 	 */
 	public static String getTime2String(Date date){
-		SimpleDateFormat sdf = new SimpleDateFormat(Constants.FORMAT_TIME);
+		SimpleDateFormat sdf = new SimpleDateFormat(BaseConstants.FORMAT_TIME);
 		return date==null ? null : sdf.format(date);
 	}
 	
@@ -165,14 +167,14 @@ public class DateUtil {
 		// 根据传入数据判断所采用的格式
 		SimpleDateFormat tempFormat;
 		text = text.trim();
-		if( text.length() == Constants.FORMAT_DATE.length() ){
-			tempFormat = new SimpleDateFormat( Constants.FORMAT_DATE );
-		}else if( text.length() == Constants.FORMAT_TIME.length() ){
-			tempFormat = new SimpleDateFormat( Constants.FORMAT_TIME );
-		}else if( text.length() == Constants.FORMAT_TIME_HM.length() ){
-			tempFormat = new SimpleDateFormat( Constants.FORMAT_TIME_HM );
+		if( text.length() == BaseConstants.FORMAT_DATE.length() ){
+			tempFormat = new SimpleDateFormat( BaseConstants.FORMAT_DATE );
+		}else if( text.length() == BaseConstants.FORMAT_TIME.length() ){
+			tempFormat = new SimpleDateFormat( BaseConstants.FORMAT_TIME );
+		}else if( text.length() == BaseConstants.FORMAT_TIME_HM.length() ){
+			tempFormat = new SimpleDateFormat( BaseConstants.FORMAT_TIME_HM );
 		}else{
-			tempFormat = new SimpleDateFormat( Constants.FORMAT_DATE_TIME );
+			tempFormat = new SimpleDateFormat( BaseConstants.FORMAT_DATE_TIME );
 		}
 		// 时间比较
 		try {

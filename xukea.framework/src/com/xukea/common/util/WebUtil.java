@@ -6,6 +6,8 @@ import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.xukea.framework.base.BaseConstants;
+
 /**
  * HTTP处理相关的辅助类
  */
@@ -205,7 +207,7 @@ public final class WebUtil {
     public static Date getValueDate(HttpServletRequest request, String key, Date defval){
     	try{
     		String temp = (String) request.getParameter(key);
-    		DateFormat dateFormat = new SimpleDateFormat(Constants.FORMAT_DATE);
+    		DateFormat dateFormat = new SimpleDateFormat(BaseConstants.FORMAT_DATE);
     		return temp==null ? defval : dateFormat.parse(temp);
     	}catch(Exception e){
     		return defval;
@@ -222,7 +224,7 @@ public final class WebUtil {
     public static Date getValueTime(HttpServletRequest request, String key, Date defval){
     	try{
     		String temp = (String) request.getParameter(key);
-    		DateFormat dateFormat = new SimpleDateFormat(Constants.FORMAT_TIME);
+    		DateFormat dateFormat = new SimpleDateFormat(BaseConstants.FORMAT_TIME);
     		return temp==null ? defval : dateFormat.parse(temp);
     	}catch(Exception e){
     		return defval;
@@ -239,7 +241,7 @@ public final class WebUtil {
     public static Date getValueDate4Time(HttpServletRequest request, String key, Date defval){
     	try{
     		String temp = (String) request.getParameter(key);
-    		DateFormat dateFormat = new SimpleDateFormat(Constants.FORMAT_DATE_TIME);
+    		DateFormat dateFormat = new SimpleDateFormat(BaseConstants.FORMAT_DATE_TIME);
     		return temp==null ? defval : dateFormat.parse(temp);
     	}catch(Exception e){
     		return defval;

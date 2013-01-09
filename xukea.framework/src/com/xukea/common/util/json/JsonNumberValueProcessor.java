@@ -2,7 +2,8 @@ package com.xukea.common.util.json;
 
 import java.text.DecimalFormat;
 
-import com.xukea.common.util.Constants;
+import com.xukea.framework.base.BaseConstants;
+
 
 import net.sf.json.JsonConfig;
 import net.sf.json.processors.JsonValueProcessor;
@@ -13,7 +14,7 @@ import net.sf.json.processors.JsonValueProcessor;
  * @version
  */
 public class JsonNumberValueProcessor implements JsonValueProcessor {
-    public static final String DEFAULT_PATTERN = Constants.FORMAT_NUMBER_2;  
+    public static final String DEFAULT_PATTERN = BaseConstants.FORMAT_NUMBER_2;  
     private DecimalFormat formater;  
 
     /**   

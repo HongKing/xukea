@@ -4,7 +4,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import com.xukea.common.util.Constants;
+import com.xukea.framework.base.BaseConstants;
+
 
 import net.sf.json.JsonConfig;
 import net.sf.json.processors.JsonValueProcessor;
@@ -15,7 +16,7 @@ import net.sf.json.processors.JsonValueProcessor;
  * @version
  */
 public class JsonDateValueProcessor implements JsonValueProcessor {
-    public static final String DEFAULT_PATTERN = Constants.FORMAT_DATE_TIME;  
+    public static final String DEFAULT_PATTERN = BaseConstants.FORMAT_DATE_TIME;  
     private DateFormat formater;  
 
     /**   
