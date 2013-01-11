@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.xukea.main.user.model.User" >
+    <resultMap id="UserMap" type="com.xukea.main.user.model.User">
+		<result column="ID"	 property="id"	 javaType="java.lang.Long"/>
+		<result column="USER_NAME"	 property="userName"	 javaType="java.lang.String"/>
+		<result column="REAL_NAME"	 property="realName"	 javaType="java.lang.String"/>
+		<result column="PASSWORD"	 property="password"	 javaType="java.lang.String"/>
+		<result column="SEX"	 property="sex"	 javaType="java.lang.String"/>
+		<result column="MOBILE"	 property="mobile"	 javaType="java.lang.String"/>
+		<result column="EMAIL"	 property="email"	 javaType="java.lang.String"/>
+		<result column="TELEPHONE"	 property="telephone"	 javaType="java.lang.String"/>
+		<result column="ADDRESS"	 property="address"	 javaType="java.lang.String"/>
+		<result column="POSTCODE"	 property="postcode"	 javaType="java.lang.String"/>
+		<result column="STATUS"	 property="status"	 javaType="java.lang.String"/>
+		<result column="ADD_DATE"	 property="addDate"	 javaType="java.util.Date"/>
+		<result column="EDIT_DATE"	 property="editDate"	 javaType="java.util.Date"/>
+    </resultMap>
+    
+    <!-- 新增信息 -->
+    <insert id="insert" parameterType="com.xukea.main.user.model.User" >
+	<![CDATA[
+		INSERT INTO usr_user (
+		    ID, USER_NAME, REAL_NAME, PASSWORD, SEX, MOBILE, EMAIL, TELEPHONE, ADDRESS, POSTCODE, STATUS, ADD_DATE, EDIT_DATE
+		) VALUES (
+			#{id}, #{userName}, #{realName}, #{password}, #{sex}, #{mobile}, #{email}, #{telephone}, #{address}, #{postcode}, #{status}, #{addDate}, #{editDate}
+		)
+	]]>
+    </insert>
+    
+    <!-- 单条信息详情 -->
+    <select id="getById" resultMap="UserMap" parameterType="java.lang.Long" >
+    <![CDATA[
+		SELECT ID, USER_NAME, REAL_NAME, PASSWORD, SEX, MOBILE, EMAIL, TELEPHONE, ADDRESS, POSTCODE, STATUS, ADD_DATE, EDIT_DATE
+		FROM usr_user
+		WHERE ID = #{id}
+    ]]>
+    </select>
+    
+    
+</mapper>

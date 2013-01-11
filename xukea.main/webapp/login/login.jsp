@@ -9,7 +9,7 @@
 <body>
 
 <img src="${ctx_static}/captcha.jpg" />
-<a href="${ctx}/login/logon">登录</a>
+<a href="${ctx}/login/login?_method=post">登录</a>
 
 </body>
 </html>

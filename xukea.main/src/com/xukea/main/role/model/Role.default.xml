@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.xukea.main.role.model.Role" >
+    <resultMap id="RoleMap" type="com.xukea.main.role.model.Role">
+		<result column="CODE"	 property="code"	 javaType="java.lang.String"/>
+		<result column="NAME"	 property="name"	 javaType="java.lang.String"/>
+		<result column="SHORT_WORD"	 property="shortWord"	 javaType="java.lang.String"/>
+		<result column="REMARK"	 property="remark"	 javaType="java.lang.String"/>
+		<result column="CAN_EDIT"	 property="canEdit"	 javaType="java.lang.Boolean"/>
+		<result column="CAN_DELET"	 property="canDelet"	 javaType="java.lang.Boolean"/>
+		<result column="ORDER_IDX"	 property="orderIdx"	 javaType="java.lang.Integer"/>
+    </resultMap>
+    
+    <!-- 新增信息 -->
+    <insert id="insert" parameterType="com.xukea.main.role.model.Role" >
+	<![CDATA[
+		INSERT INTO usr_role (
+		    CODE, NAME, SHORT_WORD, REMARK, CAN_EDIT, CAN_DELET, ORDER_IDX
+		) VALUES (
+			#{code}, #{name}, #{shortWord}, #{remark}, #{canEdit}, #{canDelet}, #{orderIdx}
+		)
+	]]>
+    </insert>
+	
+    <!-- 删除信息 -->
+    <delete id="delete" parameterType="java.lang.String">
+    <![CDATA[
+        DELETE FROM usr_role
+        WHERE CODE = #{value} 
+    ]]>
+    </delete>
+    
+    <!-- 信息详情 -->
+    <select id="getList" resultMap="RoleMap" parameterType="map">
+        SELECT CODE, NAME, SHORT_WORD, REMARK, CAN_EDIT, CAN_DELET, ORDER_IDX
+        FROM usr_role
+    </select>
+    
+    
+    
+</mapper>

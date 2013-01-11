@@ -32,7 +32,7 @@ public class SystemInitBean implements InitializingBean, DisposableBean, BeanFac
 		log.debug("系统初始化");
 		SysSettingsCache.getInstance().refresh();   //缓存系统设置
 //		
-		ThreadManager.getInstance().startSendEmailThread(); //线程启动：异步发送邮件线程
+//		ThreadManager.getInstance().startSendEmailThread(); //线程启动：异步发送邮件线程
 	}
 
 	public void setServletContext(ServletContext arg0) {

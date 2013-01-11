@@ -89,6 +89,9 @@
         <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
 	        <property name="paramName" value="locale" />
 	    </bean>
+	    <!-- 全局登录拦截 -->
+	    <bean class="com.xukea.common.adapter.LoginAdapter" />
+	    
 	    <!--  
         <mvc:interceptor>
             <mvc:mapping path="/demo/account/*" />
