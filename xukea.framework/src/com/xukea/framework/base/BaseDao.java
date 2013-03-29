@@ -1,7 +1,5 @@
 package com.xukea.framework.base;
 
-import java.io.Serializable;
-
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.log4j.Logger;
 import org.springframework.dao.support.DaoSupport;
@@ -14,7 +12,7 @@ import com.xukea.framework.ibatis3.BaseSqlSessionTemplate;
  * @version 1.0
  * @date    2012-12-27
  */
-public abstract class BaseDao<E, PK extends Serializable> extends DaoSupport {
+public abstract class BaseDao extends DaoSupport {
     protected final Logger log = Logger.getLogger(this.getClass());
     
     /**
@@ -28,7 +26,9 @@ public abstract class BaseDao<E, PK extends Serializable> extends DaoSupport {
     private BaseSqlSessionTemplate sqlSessionTemplate;
     
 	protected void checkDaoConfig() throws IllegalArgumentException {
-		log.error("sqlSessionFactory must be not null");
+		if(sqlSessionFactory==null){
+			log.error("sqlSessionFactory must be not null");
+		}
 	}
 	
 	/**
@@ -40,16 +40,16 @@ public abstract class BaseDao<E, PK extends Serializable> extends DaoSupport {
 		this.sqlSessionTemplate = new BaseSqlSessionTemplate(sqlSessionFactory);
 	}
 
-	/**
-	 * 
-	 * @return
-	 */
-	public SqlSessionFactory getSqlSessionFactory() {
-		return sqlSessionFactory;
-	}
+//	/**
+//	 * sqlSessionFactory，暂时无用，
+//	 * @return
+//	 */
+//	public SqlSessionFactory getSqlSessionFactory() {
+//		return sqlSessionFactory;
+//	}
 
 	/**
-	 * 
+	 * SQL执行模板
 	 * @return
 	 */
     public BaseSqlSessionTemplate getSqlSessionTemplate() {
