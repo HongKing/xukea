@@ -8,7 +8,7 @@ package com.xukea.framework.base;
  * @version  1.0
  * @date     2012.02.16
  */
-public class BaseThread extends Thread{
+public abstract class BaseThread extends Thread{
 	public static final int NEW      = 0; //新建
 	public static final int WAITING  = 1; //就绪
 	public static final int WORKING  = 2; //工作中
@@ -20,7 +20,9 @@ public class BaseThread extends Thread{
 	public BaseThread(ThreadGroup group, String tname){
 		super(group, tname);
 	}
-
+	
+	public abstract void run();
+	
 	/**
 	 * 启动线程
 	 */
