@@ -19,7 +19,7 @@ import com.xukea.system.attachment.model.Attachment;
  *
  */
 @Service
-public class AttachmentService extends BaseService<Attachment, Long> {
+public class AttachmentService extends BaseService {
 	
 	@Resource
 	private AttachmentDao attachmentDao; 

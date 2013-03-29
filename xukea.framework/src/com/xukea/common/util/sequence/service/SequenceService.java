@@ -15,7 +15,7 @@ import com.xukea.framework.base.BaseService;
  *
  */
 @Service
-public class SequenceService extends BaseService<Sequence, Long>{
+public class SequenceService extends BaseService{
 
 	@Resource
 	private SequenceDao sequenceDao;

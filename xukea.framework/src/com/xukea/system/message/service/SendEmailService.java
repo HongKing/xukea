@@ -16,7 +16,7 @@ import com.xukea.system.message.model.EmailWait;
 
 
 @Service
-public class SendEmailService extends BaseService<EmailWait, Long>{
+public class SendEmailService extends BaseService {
 
 	@Resource
 	private EmailWaitDao emailWaitDao;

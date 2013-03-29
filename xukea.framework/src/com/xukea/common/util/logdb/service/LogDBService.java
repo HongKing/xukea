@@ -21,7 +21,7 @@ import com.xukea.framework.base.BaseService;
  *
  */
 @Service
-public class LogDBService extends BaseService<Object, String>{
+public class LogDBService extends BaseService{
 	private Logger log = Logger.getLogger(this.getClass());
 	
 	@Resource

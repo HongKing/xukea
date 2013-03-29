@@ -15,7 +15,7 @@ import com.xukea.framework.base.BaseDao;
  *
  */
 @Repository
-public class SequenceDao extends BaseDao<Sequence, Long>{
+public class SequenceDao extends BaseDao{
 	private String namespace = "com.xukea.common.util.sequence.model.Sequence";
 
 	/**

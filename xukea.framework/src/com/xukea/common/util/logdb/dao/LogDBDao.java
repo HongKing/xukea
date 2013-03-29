@@ -7,7 +7,7 @@ import com.xukea.framework.base.BaseDao;
 
 
 @Repository
-public class LogDBDao extends BaseDao<Object, String>{
+public class LogDBDao extends BaseDao{
 	
 	/**
 	 * 保存日志到数据库

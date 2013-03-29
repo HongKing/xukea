@@ -14,7 +14,7 @@ import com.xukea.system.message.model.EmailWait;
  * @version
  */
 @Repository
-public class EmailWaitDao  extends BaseDao<EmailWait, Long>{
+public class EmailWaitDao  extends BaseDao {
     private String namespace = "com.xukea.system.message.model.EmailWait";
 	
 	/**

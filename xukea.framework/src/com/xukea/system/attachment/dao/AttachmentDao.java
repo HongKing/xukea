@@ -14,7 +14,7 @@ import com.xukea.system.attachment.model.Attachment;
  * @version
  */
 @Repository
-public class AttachmentDao  extends BaseDao<Attachment, Long>{
+public class AttachmentDao  extends BaseDao{
     private String namespace = "com.xukea.system.attachment.model.Attachment";
     
 	/**

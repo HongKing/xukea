@@ -19,7 +19,7 @@ import com.xukea.system.settings.model.SysSettings;
  *
  */
 @Service
-public class SysSettingsService extends BaseService<SysSettings, Long>{
+public class SysSettingsService extends BaseService {
 
 	@Resource
 	private SysSettingsDao sysSetingsDao;

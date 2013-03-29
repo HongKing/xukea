@@ -15,7 +15,7 @@ import com.xukea.system.settings.model.SysSettings;
  * @version
  */
 @Repository
-public class SysSettingsDao  extends BaseDao<SysSettings, Long>{
+public class SysSettingsDao  extends BaseDao{
     private String namespace = "com.xukea.system.settings.model.SysSettings";
 
 	/**

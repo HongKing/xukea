@@ -12,7 +12,7 @@ import com.xukea.system.message.model.EmailSended;
  * @version
  */
 @Repository
-public class EmailSendedDao  extends BaseDao<EmailSended, Long>{
+public class EmailSendedDao  extends BaseDao {
     private String namespace = "com.xukea.system.message.model.EmailSended";
 
 	/**
