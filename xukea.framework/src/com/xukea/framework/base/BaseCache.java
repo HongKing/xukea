@@ -3,6 +3,8 @@ package com.xukea.framework.base;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import com.opensymphony.oscache.base.NeedsRefreshException;
 import com.opensymphony.oscache.general.GeneralCacheAdministrator;
 
@@ -13,7 +15,8 @@ import com.opensymphony.oscache.general.GeneralCacheAdministrator;
  *
  * @param <T>
  */
-public class BaseCache<T> extends GeneralCacheAdministrator {
+public abstract class BaseCache<T> extends GeneralCacheAdministrator {
+	protected final Logger log = Logger.getLogger(getClass());
 
 	//过期时间(单位为秒);  
 	private int refreshPeriod;
@@ -49,13 +52,21 @@ public class BaseCache<T> extends GeneralCacheAdministrator {
 	 * @return
 	 * @throws NeedsRefreshException
 	 */
-	public T get(String key) throws NeedsRefreshException {
+	public T get(String key) {
 		try {
 			return (T)this.getFromCache(this.group + "_" + key, this.refreshPeriod);
 		} catch (NeedsRefreshException e) {
 			//如果一个NeedsRefreshException出现 必须调用putInCache或cancelUpdate来避免死锁情况发生.
 			this.cancelUpdate(this.group + "_" + key);
-			throw e;
+			this.refresh(); //刷新缓存
+			// 刷新后，重新获取数据
+			try {
+				return (T)this.getFromCache(this.group + "_" + key, this.refreshPeriod);
+			} catch (NeedsRefreshException ee) {
+				//刷新缓存后，还有异常的话，说明该key对应的数据不存在
+				log.error("There is no cache for : "+key);
+				return null;
+			}
 		}
 	}
 
@@ -76,12 +87,20 @@ public class BaseCache<T> extends GeneralCacheAdministrator {
 	 * @return
 	 * @throws NeedsRefreshException
 	 */
-	public List<T> getList(String key) throws NeedsRefreshException {
+	public List<T> getList(String key) {
 		try {
 			return (List<T>) this.getFromCache(this.group + "_" + key + "_list", this.refreshPeriod);
 		} catch (NeedsRefreshException e) {
 			this.cancelUpdate(this.group + "_" + key);
-			throw e;
+			this.refresh(); //刷新缓存
+			// 刷新后，重新获取数据
+			try {
+				return (List<T>) this.getFromCache(this.group + "_" + key + "_list", this.refreshPeriod);
+			} catch (NeedsRefreshException ee) {
+				//刷新缓存后，还有异常的话，说明该key对应的数据不存在
+				log.error("There is no cache for : "+key);
+				return null;
+			}
 		}
 	}
 	
@@ -91,6 +110,10 @@ public class BaseCache<T> extends GeneralCacheAdministrator {
 	 * @param key
 	 */
 	public void remove(String key) {
+		//获取缓存对象
+		T temp = this.get(key);
+		if(temp==null) return;
+		//删除缓存
 		this.flushEntry(this.group + "_" + key);
 	}
 
@@ -100,6 +123,10 @@ public class BaseCache<T> extends GeneralCacheAdministrator {
 	 * @param key
 	 */
 	public void removeList(String key) {
+		//获取缓存对象
+		List<T> temp = this.getList(key);
+		if(temp==null) return;
+		//删除缓存
 		this.flushEntry(this.group + "_" + key + "_list");
 	}
 	
@@ -109,4 +136,35 @@ public class BaseCache<T> extends GeneralCacheAdministrator {
 	public void removeAll() {
 		this.flushGroup(group);
 	}
+
+	/**
+	 * 更新缓存
+	 * 
+	 * @param key
+	 * @param value
+	 */
+	public void update(String key, T value){
+		if(value==null) return;
+		
+		this.remove(key);
+		this.put(key, value);
+	}
+
+	/**
+	 * 更新缓存
+	 * 
+	 * @param key
+	 * @param value
+	 */
+	public void update(String key, List<T> value){
+		if(value==null) return;
+		
+		this.removeList(key);
+		this.putList(key, value);
+	}
+	
+	/**
+	 * 更新缓存
+	 */
+	public abstract void refresh();
 }
