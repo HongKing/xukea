@@ -17,7 +17,7 @@ import com.xukea.main.role.model.Menu;
  *
  */
 @Service
-public class MenuService extends BaseService<Menu, String> {
+public class MenuService extends BaseService {
 	
 	@Resource
 	private MenuDao menuDao; 

@@ -16,7 +16,7 @@ import com.xukea.main.role.model.Menu;
  * @version
  */
 @Repository
-public class MenuDao  extends BaseDao<Menu, String>{
+public class MenuDao  extends BaseDao{
     private String namespace = "com.xukea.main.role.model.Menu";
     
     /**
