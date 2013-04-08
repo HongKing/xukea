@@ -5,8 +5,8 @@ import java.io.File;
 import org.springframework.validation.Errors;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.xukea.common.util.Config;
 import com.xukea.common.util.FileUploadUtil;
+import com.xukea.common.util.cache.Config;
 import com.xukea.framework.base.BaseValidator;
 
 

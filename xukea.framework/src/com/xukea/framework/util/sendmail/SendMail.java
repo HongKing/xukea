@@ -5,7 +5,8 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.xukea.common.util.Config;
+import com.xukea.common.util.cache.Config;
+
 
 
 /**

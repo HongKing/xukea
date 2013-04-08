@@ -6,37 +6,33 @@ import java.util.Enumeration;
 import java.util.List;
 import java.util.Properties;
 
-import org.apache.log4j.Logger;
-
 import com.xukea.framework.base.BaseCache;
 import com.xukea.framework.util.ContextUtil;
 import com.xukea.system.settings.model.SysSettings;
 import com.xukea.system.settings.service.SysSettingsService;
-import com.opensymphony.oscache.base.NeedsRefreshException;
 
 
 /**
  * 系统设置缓存<br>
- * 使用时请配合Config类使用
  * 
  * @author  FishBoy
  * @version 1.0
  * @date    2012-02-16
  */
-public class SysSettingsCache extends BaseCache<SysSettings>{
+public class Config extends BaseCache<SysSettings>{
 	
 	private static String GROUP_NAME     = "settings";
 	private static int    REFRESH_PERIOD = 24*60*60;
 	
 	private static Object lock = new Object(); 
-	private static SysSettingsCache instance = null;
+	private static Config instance = null;
 	
 	private SysSettingsService sysSettingsService;
 
 	/**
 	 * 构造方法，service需在这里手动获取bean
 	 */
-	private SysSettingsCache(){
+	private Config(){
 		super(GROUP_NAME, REFRESH_PERIOD);
 		
 		// Service需要手动加载
@@ -47,11 +43,11 @@ public class SysSettingsCache extends BaseCache<SysSettings>{
 	 * 单例工厂
 	 * @return
 	 */
-	public static SysSettingsCache getInstance() {
+	public static Config getInstance() {
 		if (instance == null) {
 			synchronized( lock ){   
                 if (instance == null){   
-                    instance = new SysSettingsCache();   
+                    instance = new Config();   
                 }   
             }
 		}
@@ -68,7 +64,63 @@ public class SysSettingsCache extends BaseCache<SysSettings>{
 		SysSettings temp = get(key);
 		return temp==null ? null : temp.getValue();
 	}
-	
+
+	/**
+     * 得到key的值（字符串）<br>
+     * 默认值：空字符串
+     * @param  key 取得其值的键
+     * @return 字符串
+     */
+    public String getString(String key) {
+    	String value = getValue(key);
+        return value==null ? "" : value;
+    }
+
+	/**
+     * 得到key的值（字符串）<br>
+     * 默认值：空字符串
+     * @param  key 取得其值的键
+     * @return 字符串
+     */
+    public String getString(String key, String charset) {
+    	String value = getString(key);
+        try {
+			value = new String(value.getBytes(), charset);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+        return value;
+    }
+    
+	/**
+     * 得到key的值（数字）<br>
+     * 默认值：0
+     * @param  key 取得其值的键
+     * @return 数字
+     */
+    public int getInt(String key){
+    	String val = getString(key);
+    	try{
+    		return Integer.parseInt(val);
+    	}catch(Exception e){
+    		return 0;
+    	}
+    }
+
+	/**
+     * 得到key的值（boolean）<br>
+     * 默认值：false
+     * @param  key 取得其值的键
+     * @return 数字
+     */
+    public boolean getBoolean(String key){
+    	String val = getString(key);
+    	try{
+    		return Boolean.parseBoolean(val);
+    	}catch(Exception e){
+    		return false;
+    	}
+    }
 	
 	/**
 	 * 刷新缓存

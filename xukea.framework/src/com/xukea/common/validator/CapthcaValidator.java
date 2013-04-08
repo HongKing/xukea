@@ -4,7 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.validation.Errors;
 
-import com.xukea.common.util.Config;
+import com.xukea.common.util.cache.Config;
 import com.xukea.framework.base.BaseValidator;
 
 

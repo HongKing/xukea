@@ -4,7 +4,8 @@ import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.xukea.common.util.Config;
+import com.xukea.common.util.cache.Config;
+
 
 
 /**

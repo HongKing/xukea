@@ -12,6 +12,8 @@ import org.apache.log4j.Logger;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.xukea.common.util.cache.Config;
+
 
 /**
  * 文件上传处理

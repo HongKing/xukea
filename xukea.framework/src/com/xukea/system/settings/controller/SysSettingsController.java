@@ -8,8 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.xukea.common.util.Config;
 import com.xukea.common.util.WebUtil;
+import com.xukea.common.util.cache.Config;
 import com.xukea.framework.base.BaseRestSpringController;
 import com.xukea.system.settings.model.SysSettings;
 import com.xukea.system.settings.service.SysSettingsService;

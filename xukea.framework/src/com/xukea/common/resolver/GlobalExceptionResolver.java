@@ -13,8 +13,8 @@ import com.xukea.common.exception.ForbiddenException;
 import com.xukea.common.exception.PageNotFoundException;
 import com.xukea.common.exception.UnLoginException;
 import com.xukea.common.exception.UnauthorizedException;
-import com.xukea.common.util.Config;
 import com.xukea.common.util.WebUtil;
+import com.xukea.common.util.cache.Config;
 import com.xukea.framework.base.BaseConstants;
 import com.xukea.framework.base.BaseExceptionResolver;
 
