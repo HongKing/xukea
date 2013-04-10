@@ -2,6 +2,7 @@ package com.xukea.common.util.cache;
 
 
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Properties;
@@ -34,9 +35,6 @@ public class Config extends BaseCache<SysSettings>{
 	 */
 	private Config(){
 		super(GROUP_NAME, REFRESH_PERIOD);
-		
-		// Service需要手动加载
-		sysSettingsService = ContextUtil.getBean(SysSettingsService.class);
 	}
 	
 	/**
@@ -162,9 +160,31 @@ public class Config extends BaseCache<SysSettings>{
 	 * @param obj
 	 */
 	private void cacheFromDB(){
+		boolean flag = assetSysSettingsService();
+		if(!flag){
+			log.debug("config cache, db is not ready");
+			return;
+		}
 		List<SysSettings> list = sysSettingsService.getListByName( null );
 		for(SysSettings temp : list){
 			this.put(temp.getName(), temp); //缓存当前对象
 		}
+	}
+	
+	/**
+	 * 检测Service是否准备就绪
+	 * @return
+	 */
+	private boolean assetSysSettingsService(){
+		if(sysSettingsService==null){
+			// Service需要手动加载
+			try{
+				sysSettingsService = ContextUtil.getBean(SysSettingsService.class);
+			}catch(Exception e){
+				log.error(e);
+				return false;
+			}
+		}
+		return true;
 	}
 }
