@@ -15,6 +15,15 @@
         http://www.springframework.org/schema/mvc       http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd"
     default-autowire="byName"   >
     
+    <!--针对注解的处理器配置  -->
+    <!-- component-scan自动搜索@Controller , @Service , @Repository , @Component等标注的类 ，并转化为bean
+         @Service用于标注业务组件，@Controller用于标注控制层组件，@Repository用于标注DAO组件，@Component泛指组件
+    -->
+    <context:annotation-config />
+    <context:component-scan base-package="com.xukea.**.controller"/>
+    <context:component-scan base-package="com.xukea.**.dao"/>
+    <context:component-scan base-package="com.xukea.**.service" />
+    
     <!-- Configures support for @Controllers -->
     <mvc:annotation-driven />
     
@@ -34,16 +43,6 @@
         </property>
     </bean>
 
-    <!--针对注解的处理器配置  -->
-    <context:annotation-config />
-    
-    <!-- component-scan自动搜索@Controller , @Service , @Repository , @Component等标注的类 ，并转化为bean
-         @Service用于标注业务组件，@Controller用于标注控制层组件，@Repository用于标注DAO组件，@Component泛指组件
-    -->
-    <context:component-scan base-package="com.xukea.**.controller"/>
-    <context:component-scan base-package="com.xukea.**.dao"/>
-    <context:component-scan base-package="com.xukea.**.service" />
-    
     <!-- 静态资源文件访问配置 -->
     <mvc:default-servlet-handler/>
     <mvc:resources mapping="/static/**" location="/" />
