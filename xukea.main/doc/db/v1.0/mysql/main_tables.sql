@@ -6,7 +6,7 @@
 drop index UNQ_USR_MDL_GROUP on USR_MDL_GROUP;
 drop index UNQ_USR_MDL_MENU  on USR_MDL_MENU;
 drop index UNQ_USR_ROLE      on USR_ROLE;
-drop index IDX_USR_USER_NAME on USR_USER;
+drop index UNQ_USR_USER_NAME on USR_USER;
 
 drop table if exists PLUGIN_INFO;
 drop table if exists PLUGIN_RELATION;
@@ -170,9 +170,9 @@ create table USR_USER
 alter table USR_USER comment '用户基础信息';
 
 /*==============================================================*/
-/* Index: IDX_USR_USER_NAME                                     */
+/* Index: UNQ_USR_USER_NAME                                     */
 /*==============================================================*/
-create index IDX_USR_USER_NAME on USR_USER
+create index UNQ_USR_USER_NAME on USR_USER
 (
    USER_NAME
 );
