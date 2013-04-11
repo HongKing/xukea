@@ -41,6 +41,12 @@
     <!--                       以下不可修改                                                       -->  
     <!-- ===================================================== -->
 
+    <!-- Spring ApplicationContext配置文件的路径,可使用通配符，多个路径用,号分隔，此参数用于后面的Spring-Context loader -->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath*:spring/*.xml</param-value>
+    </context-param>
+    
     <!-- Spring MVC配置 -->
     <servlet>
 		<servlet-name>springmvc</servlet-name>
@@ -65,6 +71,22 @@
         <servlet-name>springmvc</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
+    
+    <!-- spring security  start-->
+    <!-- spring security 过滤器授权代理，会产生一个过滤器链，来处理security中的过滤器  命名一定要是springSecurityFilterChain -->
+    <filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <!-- 此监听器会在session创建和销毁的时候通知Spring Security,如果要限制用户登录个数，这里就要配置. -->
+    <listener>
+         <listener-class>org.springframework.security.web.session.HttpSessionEventPublisher</listener-class>
+    </listener> 
+    <!-- spring security  end -->
 
   
     <!-- JPEG 验证码-->
@@ -77,12 +99,6 @@
         <servlet-name>captchaJpeg</servlet-name>
         <url-pattern>/captcha.jpg</url-pattern>
     </servlet-mapping>
-    
-	<!-- Spring ApplicationContext配置文件的路径,可使用通配符，多个路径用,号分隔，此参数用于后面的Spring-Context loader -->
-	<context-param>
-		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath*:spring/*.xml</param-value>
-	</context-param>
 	
 	<!-- 默认i18n资源文件，国际化迁移到spring-mvc配置文件中，此处无效
 	<context-param>
