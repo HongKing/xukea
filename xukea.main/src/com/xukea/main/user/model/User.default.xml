@@ -32,12 +32,10 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
     </insert>
     
     <!-- 单条信息详情 -->
-    <select id="getById" resultMap="UserMap" parameterType="java.lang.Long" >
-    <![CDATA[
-		SELECT ID, USER_NAME, REAL_NAME, PASSWORD, SEX, MOBILE, EMAIL, TELEPHONE, ADDRESS, POSTCODE, STATUS, ADD_DATE, EDIT_DATE
+    <select id="getUserByUserName" resultMap="UserMap" parameterType="java.lang.String" >
+		SELECT *
 		FROM usr_user
-		WHERE ID = #{id}
-    ]]>
+		WHERE user_name = #{value}
     </select>
     
     
