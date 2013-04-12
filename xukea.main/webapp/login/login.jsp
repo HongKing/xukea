@@ -45,12 +45,26 @@
 <div class="container">
     <form class="form-signin" action="${ctx}/login/login" method="post">
         <h2 class="form-signin-heading">用户登录</h2>
-        <input type="text"     class="input-block-level" placeholder="用户名 / 邮箱 / 手机号" />
-        <input type="password" class="input-block-level" placeholder="登录密码"/>
+        <div><%=request.getAttribute("ERROR_MSG")==null ? "" : request.getAttribute("ERROR_MSG") %></div>
+        <input type="text"     name="username" class="input-block-level" placeholder="用户名 / 邮箱 / 手机号" />
+        <input type="password" name="password" class="input-block-level" placeholder="登录密码"/>
         <button class="btn btn-large btn-primary" type="submit">登录</button>
+        <button class="btn btn-large btn-primary" type="button">AJAX登录</button>
     </form>
 
 </div> <!-- /container -->
-
+<script type="text/javascript">
+JQ("button[type='button']").click(function(){
+	var param = {};
+	param.username = JQ("input[name='username']").val();
+	param.password = JQ("input[name='password']").val();
+	JQ.sendPost("${ctx}/login/login", param, function(data){
+		window.location.href="${ctx}/index"
+	}, function(data){
+		alert(data.xukea_msg);
+	});
+	return false;
+});
+</script>
 </body>
 </html>
