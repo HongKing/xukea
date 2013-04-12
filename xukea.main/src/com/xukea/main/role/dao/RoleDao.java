@@ -18,7 +18,8 @@ public class RoleDao  extends BaseDao{
     private String namespace = "com.xukea.main.role.model.Role";
 	
     /**
-     * 根据用户ID获取用户拥有的权限
+     * 根据用户ID获取用户拥有的权限<br>
+     * 包含通用权限"PUBLIC_ROLE"
      * @param userID
      * @return
      */

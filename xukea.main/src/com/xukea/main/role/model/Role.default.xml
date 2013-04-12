@@ -35,13 +35,13 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
     
     <!-- 根据用户ID获取用户拥有的权限 -->
     <select id="getRoleByUserId" resultMap="RoleMap"  parameterType="java.lang.Long">
-        SELECT *
+        SELECT DISTINCT *
         FROM usr_role
         WHERE CODE IN (
             SELECT DISTINCT ROLE_CODE 
             FROM usr_user_role 
-            WHERE user_id = #{value}
-        )
+            WHERE user_id = 0
+        ) OR CODE = '000'
     </select>
     
     <!-- 获取资源对应的角色信息 -->
