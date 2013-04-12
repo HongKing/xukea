@@ -40,7 +40,7 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
         WHERE CODE IN (
             SELECT DISTINCT ROLE_CODE 
             FROM usr_user_role 
-            WHERE user_id = 0
+            WHERE user_id = #{value}
         ) OR CODE = '000'
     </select>
     
@@ -50,7 +50,7 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
         FROM usr_role r, usr_mdl_group_role gr, usr_mdl_group_menu gm
         WHERE r.CODE = gr.ROLE_CODE
             AND gr.MDLG_CODE = gm.MDLG_CODE
-            AND gm.MENU_CODE = '001'
+            AND gm.MENU_CODE = #{value}
     </select>
     
     
