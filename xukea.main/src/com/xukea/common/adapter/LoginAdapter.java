@@ -16,7 +16,8 @@ import com.xukea.framework.base.BaseRequestAdapter;
 
 
 /**
- * 拦截器：需登录才能访问
+ * 拦截器：需登录才能访问<br>
+ * SpringSecruity的拦截器将优先执行
  */
 public class LoginAdapter extends BaseRequestAdapter {
 	private final Logger log = Logger.getLogger(getClass());
@@ -58,9 +59,7 @@ public class LoginAdapter extends BaseRequestAdapter {
 		
 		return true;
 
-//		// 用户权限控制
-//		//TODO
-//		throw new ForbiddenException();
+		// 用户权限控制（交由Spring Security处理）
 	}
 	
 	
