@@ -45,7 +45,9 @@
         <beans:property name="sessionAuthenticationStrategy" ref="concurrentSessionControlStrategy"/> <!-- 用户登录个数限制 --> 
     </beans:bean>  
     <beans:bean id="loginSuccessHandler"  class="com.xukea.common.security.authentication.LoginSuccessHandler"/>
-    <beans:bean id="loginFailureHandler"  class="com.xukea.common.security.authentication.LoginFailureHandler"/>
+    <beans:bean id="loginFailureHandler"  class="com.xukea.common.security.authentication.LoginFailureHandler">
+        <beans:property name="useForward" value="true"/>
+    </beans:bean>
     
     <!--  限制用户登录个数  -->
     <beans:bean id="concurrentSessionControlStrategy" class="org.springframework.security.web.authentication.session.ConcurrentSessionControlStrategy">
