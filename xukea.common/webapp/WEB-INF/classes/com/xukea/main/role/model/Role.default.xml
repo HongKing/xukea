@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.xukea.main.role.model.Role" >
+    <resultMap id="RoleMap" type="com.xukea.main.role.model.Role">
+		<result column="CODE"	 property="code"	 javaType="java.lang.String"/>
+		<result column="NAME"	 property="name"	 javaType="java.lang.String"/>
+		<result column="SHORT_WORD"	 property="shortWord"	 javaType="java.lang.String"/>
+		<result column="REMARK"	 property="remark"	 javaType="java.lang.String"/>
+		<result column="CAN_EDIT"	 property="canEdit"	 javaType="java.lang.Boolean"/>
+		<result column="CAN_DELET"	 property="canDelet"	 javaType="java.lang.Boolean"/>
+		<result column="ORDER_IDX"	 property="orderIdx"	 javaType="java.lang.Integer"/>
+    </resultMap>
+    
+    <!-- 新增信息 -->
+    <insert id="insert" parameterType="com.xukea.main.role.model.Role" >
+	<![CDATA[
+		INSERT INTO usr_role (
+		    CODE, NAME, SHORT_WORD, REMARK, CAN_EDIT, CAN_DELET, ORDER_IDX
+		) VALUES (
+			#{code}, #{name}, #{shortWord}, #{remark}, #{canEdit}, #{canDelet}, #{orderIdx}
+		)
+	]]>
+    </insert>
+	
+    <!-- 删除信息 -->
+    <delete id="delete" parameterType="java.lang.String">
+    <![CDATA[
+        DELETE FROM usr_role
+        WHERE CODE = #{value} 
+    ]]>
+    </delete>
+    
+    <!-- 根据用户ID获取用户拥有的权限 -->
+    <select id="getRoleByUserId" resultMap="RoleMap"  parameterType="java.lang.Long">
+        SELECT DISTINCT *
+        FROM usr_role
+        WHERE CODE IN (
+            SELECT DISTINCT ROLE_CODE 
+            FROM usr_user_role 
+            WHERE user_id = #{value}
+        ) OR CODE = '000'
+    </select>
+    
+    <!-- 获取资源对应的角色信息 -->
+    <select id="getRoleByMenuCode" resultMap="RoleMap"  parameterType="java.lang.String">
+        SELECT DISTINCT r.*
+        FROM usr_role r, usr_mdl_group_role gr, usr_mdl_group_menu gm
+        WHERE r.CODE = gr.ROLE_CODE
+            AND gr.MDLG_CODE = gm.MDLG_CODE
+            AND gm.MENU_CODE = #{value}
+    </select>
+    
+    
+</mapper>

@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="srcMain"/>
 	<classpathentry kind="src" path="test"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/aopalliance.jar"/>
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/aspectjrt-1.6.9.jar"/>
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/aspectjweaver-1.6.9.jar"/>
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/bouncycastle-jdk15-133.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/cglib-nodep-2.2.3.jar"/>
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/classes12.jar"/>
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/com.springsource.javax.annotation-1.0.0.jar"/>
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/commons-beanutils-1.8.3.jar"/>
@@ -30,8 +32,6 @@
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/oscache-2.4.1.jar"/>
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/poi-2.5.1.jar"/>
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/servlet-api-2.4.jar"/>
-	<classpathentry kind="lib" path="webapp/WEB-INF/lib/sqljdbc4.jar"/>
-	<classpathentry kind="lib" path="webapp/WEB-INF/lib/standard-1.1.2.jar"/>
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/spring-aop-3.2.0.RELEASE.jar"/>
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/spring-aspects-3.2.0.RELEASE.jar"/>
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/spring-beans-3.2.0.RELEASE.jar"/>
@@ -46,6 +46,12 @@
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/spring-web-3.2.0.RELEASE.jar"/>
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/spring-webmvc-3.2.0.RELEASE.jar"/>
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/spring-webmvc-portlet-3.2.0.RELEASE.jar"/>
-	<classpathentry kind="lib" path="webapp/WEB-INF/lib/cglib-nodep-2.2.3.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/sqljdbc4.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/standard-1.1.2.jar"/>
+	<classpathentry kind="lib" path="/xukea.main/webapp/WEB-INF/lib/com.xukea.common.1.0.0.jar"/>
+	<classpathentry kind="lib" path="/xukea.main/webapp/WEB-INF/lib/com.xukea.security.1.0.0.jar"/>
+	<classpathentry kind="lib" path="/xukea.security/webapp/WEB-INF/lib/spring-security-config-3.2.0.M1.jar"/>
+	<classpathentry kind="lib" path="/xukea.security/webapp/WEB-INF/lib/spring-security-core-3.2.0.M1.jar"/>
+	<classpathentry kind="lib" path="/xukea.security/webapp/WEB-INF/lib/spring-security-web-3.2.0.M1.jar"/>
 	<classpathentry kind="output" path="webapp/WEB-INF/classes"/>
 </classpath>

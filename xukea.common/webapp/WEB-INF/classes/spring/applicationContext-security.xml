@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+                        
+
+    <!-- 用户验证通过才能授权，若不通过会跳到authentication-failure-url(验证失败页面)
+    若用户验证通过，但没有default-target-url的访问权限，则会跳转至access-denied-page(授权失败页面) -->
+    <http pattern="/static/**" security="none" /><!-- 静态资源不需验证 -->
+    <http entry-point-ref="loginUrlEntryPoint">
+        <anonymous />
+        <custom-filter ref="securityFilter"          before="FILTER_SECURITY_INTERCEPTOR" /> <!-- 加载系统权限 -->
+        <custom-filter ref="concurrentSessionFilter" before="CONCURRENT_SESSION_FILTER"/>    <!-- Session失效过滤器 -->
+        <custom-filter ref="securityLoginFilter"     before="FORM_LOGIN_FILTER" />           <!-- 自定义登录验证 -->
+        <!-- 自定义异常处理 -->
+        <access-denied-handler ref="accessDeniedHandler"/>
+    </http>
+
+    <beans:bean id="securityFilter" class="com.xukea.common.filter.security.SecurityFilter">
+        <beans:property name="securityMetadataSource" ref="securityMetadataSource" />       <!-- 权限资源加载管理 即 加载数据库配置的URL和Token-->
+        <beans:property name="accessDecisionManager"  ref="accessDecisionManager" />        <!-- 访问决策管理     即 验证用户是否有权限访问数据库配置的URL-->
+        <beans:property name="authenticationManager"  ref="authenticationManager" />        <!-- 认证管理         即 登录用户对象封装 -->
+    </beans:bean>
+
+    <!-- 权限资源加载管理器：资源源数据定义，将所有的资源和权限对应关系建立起来，即定义某一资源可以被哪些角色访问 -->
+    <beans:bean id="securityMetadataSource" class="com.xukea.common.security.SecurityMetadataSource"/>
+
+    <!-- 决策管理器：验证用户是否有权限访问受保护的URL-->
+    <beans:bean id="accessDecisionManager" class="com.xukea.common.security.AccessDecisionManagerImpl"/>
+    
+    <!-- 认证管理器：获取用户权限放置UserDetails对象中 -->
+    <authentication-manager alias="authenticationManager">
+        <authentication-provider user-service-ref="userDetailService"></authentication-provider>
+    </authentication-manager>
+    <beans:bean id="userDetailService" class="com.xukea.common.security.MyUserDetailService"></beans:bean>
+    
+   <!-- 配置自己的登录验证方法 -->
+    <beans:bean id="securityLoginFilter" class="com.xukea.common.filter.security.SecurityLoginFilter">  
+        <beans:property name="authenticationSuccessHandler"  ref="loginSuccessHandler"/>         <!-- 登录成功处理 -->
+        <beans:property name="authenticationFailureHandler"  ref="loginFailureHandler"/>         <!-- 登录失败处理 -->
+        <beans:property name="authenticationManager"         ref="authenticationManager"/>       <!-- 认证管理器   -->
+        <beans:property name="sessionAuthenticationStrategy" ref="concurrentSessionControlStrategy"/> <!-- 用户登录个数限制 --> 
+    </beans:bean>  
+    <beans:bean id="loginSuccessHandler"  class="com.xukea.common.security.authentication.LoginSuccessHandler"/>
+    <beans:bean id="loginFailureHandler"  class="com.xukea.common.security.authentication.LoginFailureHandler">
+        <beans:property name="useForward" value="true"/>
+    </beans:bean>
+    
+    <!--  限制用户登录个数  -->
+    <beans:bean id="concurrentSessionControlStrategy" class="org.springframework.security.web.authentication.session.ConcurrentSessionControlStrategy">
+        <beans:constructor-arg ref="sessionRegistry"/>
+        <beans:property name="exceptionIfMaximumExceeded" value="false"/>  <!-- true: 超出的登录个数被阻止, false: 剔除前面的登录 -->
+        <beans:property name="maximumSessions" value="1"/>                 <!-- 同一个用户允许登录的个数 -->
+    </beans:bean>
+    
+    <!-- Session过期拦截器 主要针对 用户登录提出前一个登录用户得分过滤器-->
+    <beans:bean id="concurrentSessionFilter" class="com.xukea.common.filter.security.SecuritySessionFilter">
+        <beans:property name="sessionRegistry" ref="sessionRegistry"/>
+    </beans:bean>
+    
+    <!-- 未登录跳转 -->
+    <beans:bean id="loginUrlEntryPoint" class="com.xukea.common.security.LoginUrlEntryPoint" />
+    
+    <!-- spring session注册器: 用来存储用户的Session --> 
+    <beans:bean id="sessionRegistry" class="org.springframework.security.core.session.SessionRegistryImpl" />
+    
+    <!-- 自定义异常处理 -->
+    <beans:bean id="accessDeniedHandler" class="com.xukea.common.security.authentication.MyAccessDeniedHandler"/>
+    
+</beans:beans>

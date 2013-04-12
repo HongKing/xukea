@@ -1,13 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="src" path="test"/>
-	<classpathentry kind="lib" path="/xukea.security/webapp/WEB-INF/lib/spring-security-config-3.2.0.M1.jar"/>
-	<classpathentry kind="lib" path="/xukea.security/webapp/WEB-INF/lib/spring-security-core-3.2.0.M1.jar"/>
-	<classpathentry kind="lib" path="/xukea.security/webapp/WEB-INF/lib/spring-security-web-3.2.0.M1.jar"/>
-	<classpathentry kind="lib" path="webapp/WEB-INF/lib/com.xukea.common.1.0.0.jar"/>
-	<classpathentry kind="lib" path="webapp/WEB-INF/lib/com.xukea.framework.1.0.0.jar"/>
-	<classpathentry kind="lib" path="webapp/WEB-INF/lib/com.xukea.security.1.0.0.jar"/>
+	<classpathentry kind="src" path="srcMain"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="/xukea.framework/webapp/WEB-INF/lib/aopalliance.jar"/>
 	<classpathentry kind="lib" path="/xukea.framework/webapp/WEB-INF/lib/aspectjrt-1.6.9.jar"/>
 	<classpathentry kind="lib" path="/xukea.framework/webapp/WEB-INF/lib/aspectjweaver-1.6.9.jar"/>
@@ -52,6 +47,10 @@
 	<classpathentry kind="lib" path="/xukea.framework/webapp/WEB-INF/lib/spring-webmvc-portlet-3.2.0.RELEASE.jar"/>
 	<classpathentry kind="lib" path="/xukea.framework/webapp/WEB-INF/lib/sqljdbc4.jar"/>
 	<classpathentry kind="lib" path="/xukea.framework/webapp/WEB-INF/lib/standard-1.1.2.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/spring-security-config-3.2.0.M1.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/spring-security-core-3.2.0.M1.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/spring-security-web-3.2.0.M1.jar"/>
+	<classpathentry kind="lib" path="/xukea.main/webapp/WEB-INF/lib/com.xukea.common.1.0.0.jar"/>
+	<classpathentry kind="lib" path="/xukea.main/webapp/WEB-INF/lib/com.xukea.framework.1.0.0.jar"/>
 	<classpathentry kind="output" path="webapp/WEB-INF/classes"/>
 </classpath>
