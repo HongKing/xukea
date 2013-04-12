@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 
+import com.xukea.common.util.WebUtil;
 import com.xukea.common.util.cache.Config;
 
 
@@ -23,13 +24,16 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
             Authentication authentication) throws ServletException, IOException {
-    	
     	//TODO 登陆成功之后的日志记录等业务处理
+
+        if (WebUtil.isAjaxRequest(request)) {
+            WebUtil.outputSuccessJSON(request, response, "");
+        } else {
+        	// 设置登陆成功之后的跳转页面
+        	String targetUrl = Config.getInstance().getString("security.url.login.success");
+        	this.setTargetUrlParameter(targetUrl);
+        	super.onAuthenticationSuccess(request, response, authentication);
+        }
     	
-    	// 设置登陆成功之后的跳转页面
-    	String targetUrl = Config.getInstance().getString("security.url.login.success");
-    	this.setTargetUrlParameter(targetUrl);
-    	
-    	super.onAuthenticationSuccess(request, response, authentication);
     }
 }

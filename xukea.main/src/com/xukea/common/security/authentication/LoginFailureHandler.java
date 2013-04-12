@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 
+import com.xukea.common.util.WebUtil;
 import com.xukea.common.util.cache.Config;
 
 
@@ -24,12 +25,20 @@ public class LoginFailureHandler extends SimpleUrlAuthenticationFailureHandler {
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
     		AuthenticationException exception) throws IOException, ServletException {
     	//TODO 登录出错之后的日志记录等业务处理
-    	
-    	// 设置登录出错之后的跳转页面
-    	String failureUrl = Config.getInstance().getString("security.url.login.failure");
-    	this.setDefaultFailureUrl(failureUrl);
-    	
-    	super.onAuthenticationFailure(request, response, exception);
+
+        String msg = exception.getMessage();
+        if (WebUtil.isAjaxRequest(request)) {
+            WebUtil.outputErrorJSON(request, response, msg);
+        } else {
+        	request.setAttribute("ERROR_MSG", msg);
+        	// 设置登录出错之后的跳转页面
+        	String failureUrl = Config.getInstance().getString("security.url.login.failure");
+        	this.setDefaultFailureUrl(failureUrl);
+        	super.onAuthenticationFailure(request, response, exception);
+        }
     }
     
+    public void setUseForward(boolean forwardToDestination) {
+    	super.setUseForward(true);
+    }
 }
