@@ -12,6 +12,7 @@ import org.springframework.web.context.ServletContextAware;
 
 import com.xukea.common.util.cache.Config;
 import com.xukea.common.util.cache.MenuCache;
+import com.xukea.common.util.cache.SecurityCache;
 import com.xukea.common.util.thread.ThreadManager;
 
 
@@ -31,8 +32,9 @@ public class SystemInitBean implements InitializingBean, DisposableBean, BeanFac
 	 */
 	public void afterPropertiesSet() throws Exception {
 		log.debug("系统初始化");
-		Config.getInstance().refresh();    //缓存系统设置
-		MenuCache.getInstance().refresh(); //缓存菜单目录
+		Config.getInstance().refresh();         //缓存系统设置
+		MenuCache.getInstance().refresh();      //缓存菜单目录
+		SecurityCache.getInstance().refresh();  //缓存资源权限对应关系
 //		
 //		ThreadManager.getInstance().startSendEmailThread(); //线程启动：异步发送邮件线程
 	}
