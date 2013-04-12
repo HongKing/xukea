@@ -5,11 +5,16 @@ import java.util.List;
 
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.GrantedAuthorityImpl;
-import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
+import com.xukea.framework.util.ContextUtil;
+import com.xukea.main.role.model.Role;
+import com.xukea.main.role.service.RoleService;
+import com.xukea.main.user.model.User;
+import com.xukea.main.user.service.UserService;
 
 /**
  * 用户权限信息等基本数据封装
@@ -17,31 +22,40 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
  *
  */
 public class MyUserDetailService implements UserDetailsService {
+
+	private RoleService roleService;
+	
+	private UserService userService;
 	
 	/**
 	 * 根据用户名获取用户权限等基本信息
 	 */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException, DataAccessException {
+    	registerService();
+        // 获取用户对象
+        User user = userService.getUserByUserName(username);
+        // 获取用户权限
+		List<Role> roles = roleService.getRoleByUserId(user.getId());
         List<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
-        GrantedAuthority grantedAuthority = null;
-
-//        if ("admin".equals(arg0)) {
-            grantedAuthority = new GrantedAuthorityImpl("ROLE_ADMIN");
-//        }
-//        else if ("manager".equals(arg0))
-//        {
-//            grantedAuthority = new GrantedAuthorityImpl("ROLE_MANAGER");
-//        }
-//        else
-//        {
-//            grantedAuthority = new GrantedAuthorityImpl("ROLE_USER");
-//        }
-        grantedAuthorities.add(grantedAuthority);
-
-        User user = new User(username, "123456", true, true, true, true, grantedAuthorities);
-
-        return user;
+        for(Role role : roles){
+            GrantedAuthority temp = new SimpleGrantedAuthority(role.getShortWord());
+            grantedAuthorities.add(temp);
+        }
+        // 生成SpringSecurity所需的UserDetail
+        MyUserDetail userDetail = new MyUserDetail(user.getUserName(), user.getPassword(), true, true, true, true, grantedAuthorities);
+        return userDetail;
     }
 
+    /**
+     * 注册service，没有采用注解是因为在初始化的时候，bean内容还未加载完毕，导致启动时有空指针抛出
+     */
+    private void registerService(){
+    	if(roleService==null){
+    		roleService = ContextUtil.getBean(RoleService.class);
+    	}
+    	if(userService==null){
+    		userService = ContextUtil.getBean(UserService.class);
+    	}
+    }
 }

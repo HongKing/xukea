@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -13,11 +14,16 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 
 import com.xukea.common.UserBasicInfo;
+import com.xukea.common.util.WebUtil;
 import com.xukea.common.util.cache.Config;
 import com.xukea.framework.util.ContextUtil;
+import com.xukea.framework.util.crypto.MD5;
 import com.xukea.main.role.model.Menu;
+import com.xukea.main.role.model.Role;
 import com.xukea.main.role.service.MenuService;
+import com.xukea.main.role.service.RoleService;
 import com.xukea.main.user.model.User;
+import com.xukea.main.user.service.UserService;
 
 
 /**
@@ -30,8 +36,11 @@ import com.xukea.main.user.model.User;
  *
  */
 public class SecurityLoginFilter extends AbstractAuthenticationProcessingFilter { //UsernamePasswordAuthenticationFilter
-
-	private MenuService menuService; 
+	private final Logger log = Logger.getLogger(getClass());
+	
+	private MenuService menuService;
+	private RoleService roleService; 
+	private UserService userService;
 	
 	public SecurityLoginFilter(){
 		super("/login/login");
@@ -43,17 +52,17 @@ public class SecurityLoginFilter extends AbstractAuthenticationProcessingFilter 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
     	if (!request.getMethod().equals("POST")) {
-            throw new AuthenticationServiceException("Authentication method not supported: " + request.getMethod());
+            throw new AuthenticationServiceException("");
         }
     	registerService();
 
-		//TODO get user info
-		User user = new User();
-		user.setId(0);
-		user.setUserName("admin");
-		user.setPassword("123456");
-		user.setRealName("系统用户");
-		user.setEmail("xuhz@broaderonline.com");
+    	// 验证码校验
+    	if(!validCaptchaValue(request)){
+    		throw new AuthenticationServiceException("验证码错误");
+    	}
+    	
+    	// 用户信息校验
+    	User user = validUserInfo(request);
 		
 		//set user to UserBasicInfo
 		UserBasicInfo userInfo = new UserBasicInfo();
@@ -67,10 +76,16 @@ public class SecurityLoginFilter extends AbstractAuthenticationProcessingFilter 
 		try {
 			userInfo.setAttribute("MENU", menus);
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.debug("set user's menu to userinfo: ", e);
 		}
 		
 		// get user's role
+		List<Role> roles = roleService.getRoleByUserId(user.getId());
+		try {
+			userInfo.setAttribute("ROLES", roles);
+		} catch (Exception e) {
+			log.debug("set user's role to userinfo: ", e);
+		}
 		
 		// save to session
 		UserBasicInfo.saveToSession(request, userInfo);
@@ -78,10 +93,53 @@ public class SecurityLoginFilter extends AbstractAuthenticationProcessingFilter 
         // UsernamePasswordAuthenticationToken实现 Authentication
         UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(user.getUserName(), user.getPassword());
         this.setDetails(request, authRequest);
-        
         // 运行UserDetailsService的loadUserByUsername，获取重新封装用户权限信息
         return this.getAuthenticationManager().authenticate(authRequest);
-
+    }
+    
+    /**
+     * 验证码校验
+     * @param request
+     * @return
+     */
+    private boolean validCaptchaValue(HttpServletRequest request){
+    	// TODO
+    	return true;
+    }
+    
+    /**
+     * 用户信息校验
+     * @param request
+     * @return
+     * @throws AuthenticationException
+     */
+    private User validUserInfo(HttpServletRequest request) throws AuthenticationException{
+    	// 获取request参数
+    	String username = WebUtil.getValueString(request, "username", "");
+    	String password = WebUtil.getValueString(request, "password", "");
+    	
+    	// 基本校验request参数
+    	if("".equals(username)){
+    		throw new AuthenticationServiceException("用户名不能为空");
+    	}
+    	if("".equals(password)){
+    		throw new AuthenticationServiceException("密码不能为空");
+    	}
+    	
+    	// 查询用户信息
+    	User user = userService.getUserByUserName(username); 
+    	if(user==null){
+    		throw new AuthenticationServiceException("用户不存在");
+    	}
+    	
+    	// 密码校验
+    	String newpswd = MD5.encrypt(password);
+    	newpswd = MD5.encrypt(newpswd+username);
+		if(!newpswd.equalsIgnoreCase(user.getPassword())){
+    		throw new AuthenticationServiceException("密码错误");
+		}
+		
+		return user;
     }
     
     /**
@@ -113,6 +171,12 @@ public class SecurityLoginFilter extends AbstractAuthenticationProcessingFilter 
     private void registerService(){
     	if(menuService==null){
     		menuService = ContextUtil.getBean(MenuService.class);
+    	}
+    	if(roleService==null){
+    		roleService = ContextUtil.getBean(RoleService.class);
+    	}
+    	if(userService==null){
+    		userService = ContextUtil.getBean(UserService.class);
     	}
     }
 }

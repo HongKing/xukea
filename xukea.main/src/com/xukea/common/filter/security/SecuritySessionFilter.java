@@ -1,10 +1,16 @@
 package com.xukea.common.filter.security;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.session.SessionInformation;
 import org.springframework.security.core.session.SessionRegistry;
+import org.springframework.security.web.authentication.logout.LogoutHandler;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.security.web.session.ConcurrentSessionFilter;
+import org.springframework.util.Assert;
 
 import com.xukea.common.util.cache.Config;
 
@@ -14,6 +20,7 @@ import com.xukea.common.util.cache.Config;
  *
  */
 public class SecuritySessionFilter extends ConcurrentSessionFilter {
+    private LogoutHandler[] handlers = new LogoutHandler[] {new SecurityContextLogoutHandler()};
 
     /**
      * @deprecated Use constructor which injects the <tt>SessionRegistry</tt>.
@@ -37,4 +44,26 @@ public class SecuritySessionFilter extends ConcurrentSessionFilter {
     protected String determineExpiredUrl(HttpServletRequest request, SessionInformation info) {
         return Config.getInstance().getString("security.url.login.formurl");
     }
+    
+    /**
+     * 退出处理
+     * @param request
+     * @param response
+     */
+    public void doLogout(HttpServletRequest request, HttpServletResponse response) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        for (LogoutHandler handler : handlers) {
+            handler.logout(request, response, auth);
+        }
+    }
+    
+    /**
+     * 注册logoutHandler
+     */
+    public void setLogoutHandlers(LogoutHandler[] handlers) {
+        Assert.notNull(handlers);
+        this.handlers = handlers;
+        super.setLogoutHandlers(handlers);
+    }
+
 }

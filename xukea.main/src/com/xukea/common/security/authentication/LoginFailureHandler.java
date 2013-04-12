@@ -23,7 +23,6 @@ public class LoginFailureHandler extends SimpleUrlAuthenticationFailureHandler {
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
     		AuthenticationException exception) throws IOException, ServletException {
-    	
     	//TODO 登录出错之后的日志记录等业务处理
     	
     	// 设置登录出错之后的跳转页面
