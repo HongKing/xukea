@@ -33,12 +33,25 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
     ]]>
     </delete>
     
-    <!-- 信息详情 -->
-    <select id="getList" resultMap="RoleMap" parameterType="map">
-        SELECT CODE, NAME, SHORT_WORD, REMARK, CAN_EDIT, CAN_DELET, ORDER_IDX
+    <!-- 根据用户ID获取用户拥有的权限 -->
+    <select id="getRoleByUserId" resultMap="RoleMap"  parameterType="java.lang.Long">
+        SELECT *
         FROM usr_role
+        WHERE CODE IN (
+            SELECT DISTINCT ROLE_CODE 
+            FROM usr_user_role 
+            WHERE user_id = #{value}
+        )
     </select>
     
+    <!-- 获取资源对应的角色信息 -->
+    <select id="getRoleByMenuCode" resultMap="RoleMap"  parameterType="java.lang.String">
+        SELECT DISTINCT r.*
+        FROM usr_role r, usr_mdl_group_role gr, usr_mdl_group_menu gm
+        WHERE r.CODE = gr.ROLE_CODE
+            AND gr.MDLG_CODE = gm.MDLG_CODE
+            AND gm.MENU_CODE = '001'
+    </select>
     
     
 </mapper>
