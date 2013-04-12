@@ -10,7 +10,8 @@ import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.web.context.ServletContextAware;
 
-import com.xukea.common.util.cache.SysSettingsCache;
+import com.xukea.common.util.cache.Config;
+import com.xukea.common.util.cache.MenuCache;
 import com.xukea.common.util.thread.ThreadManager;
 
 
@@ -30,7 +31,8 @@ public class SystemInitBean implements InitializingBean, DisposableBean, BeanFac
 	 */
 	public void afterPropertiesSet() throws Exception {
 		log.debug("系统初始化");
-		SysSettingsCache.getInstance().refresh();   //缓存系统设置
+		Config.getInstance().refresh();    //缓存系统设置
+		MenuCache.getInstance().refresh(); //缓存菜单目录
 //		
 //		ThreadManager.getInstance().startSendEmailThread(); //线程启动：异步发送邮件线程
 	}
