@@ -50,7 +50,6 @@ public class MenuCache extends BaseCache<Menu>{
 		}
 		return instance;
 	}
-
 	
 	/**
 	 * 根据URL查找数据库中对应的code
@@ -58,20 +57,36 @@ public class MenuCache extends BaseCache<Menu>{
 	 * @return
 	 */
 	public String getUrlCode(String url){
-		List<Menu> list = this.getList("ALL_MENU");
-		if(list==null) return "";
+		List<String> list = getUrlCodes(url, false);
+		// 返回找到的第一个code值
+		if(list!=null && list.size()>0){
+			return list.get(0);
+		}else{
+			return "";
+		}
+	}
 
-		String code = "";
+	/**
+	 * 根据URL查找数据库中所有匹配的code
+	 * @param url   待查询的URL
+	 * @param flag  是否遍历所有的menu
+	 * @return
+	 */
+	public List<String> getUrlCodes(String url, boolean flag){
+		List<String> list = new ArrayList<String>();
+		List<Menu> menus = this.getList("ALL_MENU");
+		if(menus==null) return list;
+
 		url = url.replaceAll("[/]+", "/");//将连续的多个/替换为一个/
-		for(Menu item : list){
+		for(Menu item : menus){
 			Pattern pattern = Pattern.compile(item.getUrl());
 			Matcher match = pattern.matcher(url);
 			if(match.matches()){
-				code = item.getCode();
-				break;
+				list.add(item.getCode());
+				if(!flag) break; // 不遍历所有的menu
 			}
 		}
-		return code;
+		return list;
 	}
 	
 	/**
