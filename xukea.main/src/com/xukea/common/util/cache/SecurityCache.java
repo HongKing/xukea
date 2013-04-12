@@ -2,6 +2,7 @@ package com.xukea.common.util.cache;
 
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import org.springframework.security.access.ConfigAttribute;
@@ -67,6 +68,11 @@ public class SecurityCache extends BaseCache<List<ConfigAttribute>>{
 			List<ConfigAttribute> temp = this.get(code);
 			result.addAll(temp);
 		}
+		// 去除重复元素(SET中数据不重复)
+		HashSet<ConfigAttribute> temp = new HashSet<ConfigAttribute>(result);
+		result.clear();
+		result.addAll(temp);
+		   
 		return result;
 	}
 	
