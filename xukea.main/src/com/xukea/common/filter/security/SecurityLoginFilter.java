@@ -103,7 +103,7 @@ public class SecurityLoginFilter extends AbstractAuthenticationProcessingFilter 
      * @return
      */
     private boolean validCaptchaValue(HttpServletRequest request){
-    	// TODO
+    	// TODO 验证码校验
     	return true;
     }
     
