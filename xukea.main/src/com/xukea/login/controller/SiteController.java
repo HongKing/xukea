@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -12,13 +13,13 @@ import com.xukea.framework.base.BaseRestSpringController;
 
 
 /**
- * 登录Controller
+ * 系统默认的controller处理
  * @author 石头
  *
  */
 @Controller
-@RequestMapping("/index")
-public class IndexController extends BaseRestSpringController<Object, Long>{
+@RequestMapping("/")
+public class SiteController extends BaseRestSpringController<Object, Long>{
 	
 	/**
 	 * 首页
@@ -28,6 +29,23 @@ public class IndexController extends BaseRestSpringController<Object, Long>{
 		ModelAndView result = new ModelAndView();
 		result.setViewName("/index");
 		return result;
+	}
+
+	/**
+	 * 错误页面
+	 * 
+	 * @param code
+	 * @return
+	 */
+	@RequestMapping(value="/error/{code}")
+	public String getPageLogin(@PathVariable String code) {
+		String errorPage = "/commons/error";
+		if("404".equals(code)){
+			errorPage = "/commons/404";
+		}else if("403".equals(code)){
+			errorPage = "/commons/403";
+		}
+		return errorPage;
 	}
 }
  
