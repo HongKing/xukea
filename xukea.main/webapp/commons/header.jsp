@@ -30,7 +30,7 @@
                 <span class="icon-bar"></span>
             </button>
              <!-- Be sure to leave the brand out there if you want it shown -->
-             <a class="brand" href="/">Project name</a>
+             <a class="brand" href="${ctx}">Project name</a>
             <!-- Everything you want hidden at 940px or less, place within here -->
             <div class="nav-collapse collapse">
                 <!-- main menu -->
@@ -57,7 +57,7 @@
 					            <li><a href="#"><i class="icon-pencil"></i> 资料修改</a></li>
 					            <li><a href="#"><i class="icon-cog"></i> 个性配置</a></li>
 					            <li class="divider"></li>
-					            <li><a href="#"><i class="icon-off"></i> 退出</a></li>
+					            <li><a href="${ctx}/login/logout"><i class="icon-off"></i> 退出</a></li>
 					        </ul>
 					    </li>
 					</ul>
