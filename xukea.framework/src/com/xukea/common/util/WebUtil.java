@@ -1,10 +1,15 @@
 package com.xukea.common.util;
 
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import net.sf.json.JSONObject;
 
 import com.xukea.framework.base.BaseConstants;
 
@@ -247,4 +252,87 @@ public final class WebUtil {
     		return defval;
     	}
     }
+
+    /**
+     * AJAX 输出
+     * 
+     * @param request
+     * @param response
+     * @param cntype
+     * @param data
+     */
+    public static  void output(HttpServletRequest request, HttpServletResponse response, String cntype, Object data){
+		try {
+			response.setContentType(cntype);
+			response.setCharacterEncoding("UTF-8");
+			response.setHeader("Pragma", "no-cache");
+			response.setHeader("Cache-Control", "no-cache");
+			response.setDateHeader("Expires", 0);
+			
+			PrintWriter out = new PrintWriter(new OutputStreamWriter(response.getOutputStream(), "UTF-8"));
+			out.println( data );
+			out.close();
+//			response.getWriter().write(data);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    }
+    
+    /**
+     * JSON输出
+     * 
+     * @param request
+     * @param response
+     * @param data
+     */
+    public static  void outputJSON(HttpServletRequest request, HttpServletResponse response, String data){
+		String jsoncb = request.getParameter("jsoncallback");
+		String cntype = "application/json; charset=utf-8";
+		if(jsoncb!=null && !"".equals(jsoncb) && !"?".equals(jsoncb)){
+			data = jsoncb +"("+ data +")";
+			cntype = "application/x-javascript; charset=utf-8";
+		}
+		WebUtil.output(request, response, cntype, data);
+	}
+	
+    /**
+     * JSON输出：成功状态
+     * 
+     * @param response
+     * @param data
+     */
+    public static  void outputSuccessJSON(HttpServletRequest request, HttpServletResponse response, String data){
+		JSONObject json = new JSONObject();
+		json.put("xukea_type"  , "success");
+		json.put("xukea_status", BaseConstants.HTTP_OK);
+		json.put("xukea_msg"   , "");
+		json.put("data"         , data);
+		WebUtil.outputJSON(request, response, json.toString());
+	}
+
+    /**
+     * JSON输出：出错状态
+     * 
+     * @param response
+     * @param msg
+     */
+    public static  void outputErrorJSON(HttpServletRequest request, HttpServletResponse response, String msg){
+    	WebUtil.outputErrorJSON(request, response, BaseConstants.HTTP_SERVER_ERROR, msg);
+	}
+	
+    /**
+     * JSON输出：出错状态
+     * 
+     * @param response
+     * @param code
+     * @param msg
+     */
+    public static  void outputErrorJSON(HttpServletRequest request, HttpServletResponse response, double code, String msg){
+		JSONObject json = new JSONObject();
+		json.put("xukea_type"  , "error");
+		json.put("xukea_status", code);
+		json.put("xukea_msg"   , msg);
+		json.put("data"         , "");
+		WebUtil.outputJSON(request, response, json.toString());
+	}
 }

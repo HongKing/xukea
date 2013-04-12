@@ -1,15 +1,11 @@
 package com.xukea.framework.base;
 
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import net.sf.json.JSONObject;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.propertyeditors.CharacterEditor;
@@ -21,6 +17,7 @@ import org.springframework.web.multipart.support.StringMultipartFileEditor;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
+import com.xukea.common.util.WebUtil;
 import com.xukea.framework.util.ConvertRegisterHelper;
 import com.xukea.framework.util.editor.BooleanEditor;
 import com.xukea.framework.util.editor.ByteEditor;
@@ -83,39 +80,23 @@ public class BaseSpringController extends MultiActionController {
 	
 	@Override
 	public ModelAndView handleRequestInternal(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("============================================ddddddddddddddddddddddddddd");
 		return super.handleRequestInternal(request, response);
 	}
 
 	@Override
-	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
-		System.out.println("============================================eeeeeeeeeeeeeeeeeeeeeeeeeeee");
+	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		return super.handleRequest(request, response);
 	}
 	
     /**
-     * 
+     * AJAX 输出
      * @param request
      * @param response
      * @param cntype
      * @param data
      */
     protected void output(HttpServletRequest request, HttpServletResponse response, String cntype, Object data){
-		try {
-			response.setContentType(cntype);
-			response.setCharacterEncoding("UTF-8");
-			response.setHeader("Pragma", "no-cache");
-			response.setHeader("Cache-Control", "no-cache");
-			response.setDateHeader("Expires", 0);
-			
-			PrintWriter out = new PrintWriter(new OutputStreamWriter(response.getOutputStream(), "UTF-8"));
-			out.println( data );
-			out.close();
-//			response.getWriter().write(data);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+    	WebUtil.output(request, response, cntype, data);
     }
     
     /**
@@ -126,13 +107,7 @@ public class BaseSpringController extends MultiActionController {
      * @param data
      */
 	protected void outputJSON(HttpServletRequest request, HttpServletResponse response, String data){
-		String jsoncb = request.getParameter("jsoncallback");
-		String cntype = "application/json; charset=utf-8";
-		if(jsoncb!=null && !"".equals(jsoncb) && !"?".equals(jsoncb)){
-			data = jsoncb +"("+ data +")";
-			cntype = "application/x-javascript; charset=utf-8";
-		}
-		output(request, response, cntype, data);
+		WebUtil.outputJSON(request, response, data);
 	}
 	
     /**
@@ -142,12 +117,7 @@ public class BaseSpringController extends MultiActionController {
      * @param data
      */
 	protected void outputSuccessJSON(HttpServletRequest request, HttpServletResponse response, String data){
-		JSONObject json = new JSONObject();
-		json.put("xukea_type"  , "success");
-		json.put("xukea_status", BaseConstants.HTTP_OK);
-		json.put("xukea_msg"   , "");
-		json.put("data"         , data);
-		outputJSON(request, response, json.toString());
+		WebUtil.outputSuccessJSON(request, response, data);
 	}
 
     /**
@@ -157,7 +127,7 @@ public class BaseSpringController extends MultiActionController {
      * @param msg
      */
 	protected void outputErrorJSON(HttpServletRequest request, HttpServletResponse response, String msg){
-		outputErrorJSON(request, response, BaseConstants.HTTP_SERVER_ERROR, msg);
+		WebUtil.outputErrorJSON(request, response, msg);
 	}
 	
     /**
@@ -168,11 +138,6 @@ public class BaseSpringController extends MultiActionController {
      * @param msg
      */
 	protected void outputErrorJSON(HttpServletRequest request, HttpServletResponse response, double code, String msg){
-		JSONObject json = new JSONObject();
-		json.put("xukea_type"  , "error");
-		json.put("xukea_status", code);
-		json.put("xukea_msg"   , msg);
-		json.put("data"         , "");
-		outputJSON(request, response, json.toString());
+		WebUtil.outputErrorJSON(request, response, code, msg);
 	}
 }
