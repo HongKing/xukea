@@ -4,7 +4,7 @@ package com.xukea.test;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.xukea.framework.test.BaseServiceTest;
+import com.xukea.framework.test.BaseDaoTest;
 import com.xukea.system.settings.dao.SysSettingsDao;
 
 /**
@@ -13,7 +13,7 @@ import com.xukea.system.settings.dao.SysSettingsDao;
  * @version 1.0
  * @date    2013-1-5
  */
-public class DemoDaoTest extends BaseServiceTest {
+public class DemoDaoTest extends BaseDaoTest {
 
 	@Autowired
 	private SysSettingsDao sysSettingsDao;

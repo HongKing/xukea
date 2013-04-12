@@ -21,7 +21,7 @@ public class DemoControllerTest extends BaseControllerTest {
         MockHttpServletRequest  request  = new MockHttpServletRequest();  
         MockHttpServletResponse response = new MockHttpServletResponse();
         
-        request.setServletPath("/demo/account/list/2"); 
+        request.setServletPath("/index"); 
         
         ModelAndView mav = this.excuteAction(request, response);  
         System.out.println(mav);
