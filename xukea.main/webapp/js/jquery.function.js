@@ -5,6 +5,9 @@
  * @version 1.0
  */
 ;(function($) {
+    window.log = function(msg){
+        window.console && console.log(msg)
+    }
 	/*********************************** 页面loading遮罩 *************************************/
 	$.loading = {
 		start : function(){
