@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.xukea.common.UserBasicInfo;
 import com.xukea.common.exception.PageNotFoundException;
@@ -46,6 +47,12 @@ public class AttachmentController extends BaseRestSpringController<Attachment, L
 	
 	@Resource
 	private AttachmentService attachmentService;
+
+	@Override
+	public ModelAndView index(HttpServletRequest request, HttpServletResponse response, Attachment model) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	/**
 	 * 文件上传
