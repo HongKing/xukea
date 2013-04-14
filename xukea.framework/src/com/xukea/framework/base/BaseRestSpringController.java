@@ -3,10 +3,7 @@ package com.xukea.framework.base;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -26,16 +23,14 @@ import org.springframework.web.servlet.ModelAndView;
  * /userinfo/delete DELETE  => batchDelete()  
  * </pre>
  */
-public class BaseRestSpringController<Entity, PK> extends BaseSpringController {
+public abstract class BaseRestSpringController<Entity, PK> extends BaseSpringController {
 	
 	//特别说明: 由于spring的方法参数映射太过于灵活,如果以下参数不适应你,请自己修改参数并修改代码生成器模板
 	// 如果你不喜欢 HttpServletRequest request,HttpServletResponse response作为方法参数，也请删除
 
 	/** 默认 */
 	@RequestMapping
-	public ModelAndView index(HttpServletRequest request, HttpServletResponse response, Entity model) {
-		throw new UnsupportedOperationException("not yet implement");
-	}
+	public abstract ModelAndView index(HttpServletRequest request, HttpServletResponse response, Entity model);
 
 	/** 首页 */
 	@RequestMapping(value="/index")
