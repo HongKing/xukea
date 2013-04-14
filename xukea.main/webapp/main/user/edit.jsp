@@ -4,7 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>用户管理：用户列表</title>
+    <title>用户管理</title>
     <%@ include file="/commons/meta.jsp" %>
     
 </head>
@@ -13,9 +13,10 @@
     
     <ul class="breadcrumb hr">
         <li>用户管理 <span class="divider">：</span></li>
-        <li class="active">用户列表</li>
+        <li><a href="${ctx}/main/user/list">用户列表</a> <span class="divider">/</span></li>
+        <li class="active">张三</li>
     </ul>
-          
+    
     <table class="table table-bordered table-striped table-condensed table-hover">
     <thead>
         <tr>
@@ -34,8 +35,8 @@
             <td>2011-12-28 10:28</td>
             <td>
                 <a class="btn" href="${ctx}/main/user/edit/1"><i class="icon-edit"></i> 编辑</a>
-                <a class="btn btn-success" href="#myModal" role="button" data-toggle="modal"><i class="icon-play"></i> 启用</a>
-                <a class="btn btn-danger" href="#myModal" role="button" data-toggle="modal"><i class="icon-stop"></i> 禁用</a>
+                <a class="btn btn-success" href="#"><i class="icon-play"></i> 启用</a>
+                <a class="btn btn-danger" href="#"><i class="icon-stop"></i> 禁用</a>
             </td>
         </tr>
         <tr>
@@ -45,8 +46,8 @@
             <td>2011-12-28 10:28</td>
             <td>
                 <a class="btn" href="${ctx}/main/user/edit/1"><i class="icon-edit"></i> 编辑</a>
-                <a class="btn btn-success" href="#myModal" role="button" data-toggle="modal"><i class="icon-play"></i> 启用</a>
-                <a class="btn btn-danger" href="#myModal" role="button" data-toggle="modal"><i class="icon-stop"></i> 禁用</a>
+                <a class="btn btn-success" href="#"><i class="icon-play"></i> 启用</a>
+                <a class="btn btn-danger" href="#"><i class="icon-stop"></i> 禁用</a>
             </td>
         </tr>
         <tr>
@@ -55,9 +56,9 @@
             <td>admin@xukea.com</td>
             <td>2011-12-28 10:28</td>
             <td>
-                <a class="btn" href="${ctx}/main/user/edit/2"><i class="icon-edit"></i> 编辑</a>
-                <a class="btn btn-success" href="#myModal" role="button" data-toggle="modal"><i class="icon-play"></i> 启用</a>
-                <a class="btn btn-danger" href="#myModal" role="button" data-toggle="modal"><i class="icon-stop"></i> 禁用</a>
+                <a class="btn" href="${ctx}/main/user/edit/1"><i class="icon-edit"></i> 编辑</a>
+                <a class="btn btn-success" href="#"><i class="icon-play"></i> 启用</a>
+                <a class="btn btn-danger" href="#"><i class="icon-stop"></i> 禁用</a>
             </td>
         </tr>
     </tbody>
@@ -73,21 +74,7 @@
 			<li><a href="#">Next</a></li>
 		</ul>
     </div>
- 
-<!-- Modal -->
-<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="myModalLabel">Modal header</h3>
-  </div>
-  <div class="modal-body">
-    <p>One fine body…</p>
-  </div>
-  <div class="modal-footer">
-    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-    <button class="btn btn-primary">Save changes</button>
-  </div>
-</div>
+
     <%@ include file="/commons/footer.jsp" %>
 </body>
 </html>
