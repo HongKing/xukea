@@ -3,4 +3,4 @@
 # Package Files #
 *.war
 *.ear
-/xukea.framework/webapp/WEB-INF/classes
+/**/webapp/WEB-INF/classes
