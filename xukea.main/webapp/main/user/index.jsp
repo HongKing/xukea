@@ -14,6 +14,13 @@
     <ul class="breadcrumb hr">
         <li>用户管理 <span class="divider">：</span></li>
         <li class="active">用户列表</li>
+        <li class="pull-right">
+            <a class="btn btn-primary" href="${ctx}/main/user/new">添加用户</a>
+            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                <i class="icon-search"></i> 搜索
+                <span class="caret"></span>
+            </a>
+        </li>
     </ul>
           
     <table class="table table-bordered table-striped table-condensed table-hover">
@@ -35,7 +42,6 @@
             <td>
                 <a class="btn" href="${ctx}/main/user/edit/1"><i class="icon-edit"></i> 编辑</a>
                 <a class="btn btn-success" href="#myModal" role="button" data-toggle="modal"><i class="icon-play"></i> 启用</a>
-                <a class="btn btn-danger" href="#myModal" role="button" data-toggle="modal"><i class="icon-stop"></i> 禁用</a>
             </td>
         </tr>
         <tr>
@@ -45,7 +51,6 @@
             <td>2011-12-28 10:28</td>
             <td>
                 <a class="btn" href="${ctx}/main/user/edit/1"><i class="icon-edit"></i> 编辑</a>
-                <a class="btn btn-success" href="#myModal" role="button" data-toggle="modal"><i class="icon-play"></i> 启用</a>
                 <a class="btn btn-danger" href="#myModal" role="button" data-toggle="modal"><i class="icon-stop"></i> 禁用</a>
             </td>
         </tr>
@@ -56,7 +61,6 @@
             <td>2011-12-28 10:28</td>
             <td>
                 <a class="btn" href="${ctx}/main/user/edit/2"><i class="icon-edit"></i> 编辑</a>
-                <a class="btn btn-success" href="#myModal" role="button" data-toggle="modal"><i class="icon-play"></i> 启用</a>
                 <a class="btn btn-danger" href="#myModal" role="button" data-toggle="modal"><i class="icon-stop"></i> 禁用</a>
             </td>
         </tr>

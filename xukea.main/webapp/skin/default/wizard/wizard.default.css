@@ -93,7 +93,7 @@ Version: 1.0
     text-align: left;
 }
 
-
+/*
 .btn_disabled{
     font:bold 12px Arial, Helvetica, sans-serif;
     color:#818181;
@@ -109,3 +109,4 @@ Version: 1.0
     border-bottom:1px solid #969696;
     opacity:1;}
 .btn_disabled:active{box-shadow: inset 0 0 0.5em #969696;}
+*/
