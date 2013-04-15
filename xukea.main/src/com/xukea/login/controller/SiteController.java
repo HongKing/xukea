@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.xukea.common.exception.ForbiddenException;
+import com.xukea.common.exception.PageNotFoundException;
+import com.xukea.common.exception.UnLoginException;
 import com.xukea.framework.base.BaseRestSpringController;
 
 
@@ -38,14 +41,18 @@ public class SiteController extends BaseRestSpringController<Object, Long>{
 	 * @return
 	 */
 	@RequestMapping(value="/error/{code}")
-	public String getPageLogin(@PathVariable String code) {
-		String errorPage = "/commons/error";
-		if("404".equals(code)){
-			errorPage = "/commons/404";
-		}else if("403".equals(code)){
-			errorPage = "/commons/403";
+	public void getPageLogin(@PathVariable String code) throws Exception {
+		if("403".equals(code)){
+			throw new ForbiddenException();
+		}else if("404".equals(code)){
+			throw new PageNotFoundException();
+		}else if("500".equals(code)){
+			throw new Exception("500 exception");
+		}else if("unlogin".equals(code)){
+			throw new UnLoginException();
+		}else{
+			throw new Exception("other exception");
 		}
-		return errorPage;
 	}
 }
  
