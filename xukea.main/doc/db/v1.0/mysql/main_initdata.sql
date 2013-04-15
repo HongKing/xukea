@@ -89,3 +89,14 @@ INSERT INTO `usr_mdl_menu` (`CODE`, `NAME`, `SHORT_WORD`, `URL`, `PLUGIN_CODE`) 
 INSERT INTO `usr_mdl_group_menu` (`MDLG_CODE`, `MENU_CODE`) VALUES ('001', '001001001003001');
 INSERT INTO `usr_mdl_group_menu` (`MDLG_CODE`, `MENU_CODE`) VALUES ('001', '001001001003002');
 INSERT INTO `usr_mdl_group_menu` (`MDLG_CODE`, `MENU_CODE`) VALUES ('001', '001001001003003');
+
+-- 角色管理子菜单设置
+INSERT INTO `usr_mdl_menu` (`CODE`, `NAME`, `SHORT_WORD`, `URL`, `PLUGIN_CODE`) VALUES ('001001002001', '角色管理子菜单',   'MAIN_SYS_ROLE_SUB', '', '001');
+INSERT INTO `usr_mdl_menu` (`CODE`, `NAME`, `SHORT_WORD`, `URL`, `PLUGIN_CODE`) VALUES ('001001002002', '角色管理快捷菜单', 'MAIN_SYS_ROLE_QUK', '', '001');
+INSERT INTO `usr_mdl_menu` (`CODE`, `NAME`, `SHORT_WORD`, `URL`, `PLUGIN_CODE`) VALUES ('001001002003', '角色管理相关资源', 'MAIN_SYS_ROLE_RSC', '', '001');
+INSERT INTO `usr_mdl_menu` (`CODE`, `NAME`, `SHORT_WORD`, `URL`, `PLUGIN_CODE`) VALUES ('001001002003001', '角色列表', 'MAIN_SYS_ROLE_RSC_LIST', '/main/role/list/{page}', '001');
+INSERT INTO `usr_mdl_menu` (`CODE`, `NAME`, `SHORT_WORD`, `URL`, `PLUGIN_CODE`) VALUES ('001001002003002', '角色新增', 'MAIN_SYS_ROLE_RSC_NEW',  '/main/role/new',         '001');
+INSERT INTO `usr_mdl_menu` (`CODE`, `NAME`, `SHORT_WORD`, `URL`, `PLUGIN_CODE`) VALUES ('001001002003003', '角色编辑', 'MAIN_SYS_ROLE_RSC_EDIT', '/main/role/edit/{uid}',  '001');
+INSERT INTO `usr_mdl_group_menu` (`MDLG_CODE`, `MENU_CODE`) VALUES ('001', '001001002003001');
+INSERT INTO `usr_mdl_group_menu` (`MDLG_CODE`, `MENU_CODE`) VALUES ('001', '001001002003002');
+INSERT INTO `usr_mdl_group_menu` (`MDLG_CODE`, `MENU_CODE`) VALUES ('001', '001001002003003');

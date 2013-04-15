@@ -29,10 +29,51 @@ public class RoleController extends BaseRestSpringController<Role, String>{
 		return result;
 	}
 
-}
- 
-
-	 
-
+	/**
+	 * 角色查询：列表（默认第一页）
+	 * 
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="/list")
+	public String getPage4List() {
+		return "redirect:/main/role/list/1";
+	}
 	
-
+	/**
+	 * 角色查询：列表
+	 * 
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="/list/{page}")
+	public String getPage4List(HttpServletRequest request, HttpServletResponse response) {
+		return "/main/role/index";
+	}
+	
+	/**
+	 * 添加角色：页面
+	 * 
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="/new")
+	public String getPage4Add(HttpServletRequest request, HttpServletResponse response) {
+		return "/main/role/add";
+	}
+	
+	/**
+	 * 编辑角色：页面
+	 * 
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="/edit/{rid}")
+	public String getPage4Edit(HttpServletRequest request, HttpServletResponse response) {
+		return "/main/role/edit";
+	}
+}
