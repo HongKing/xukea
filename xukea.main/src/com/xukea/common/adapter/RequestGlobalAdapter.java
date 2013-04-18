@@ -5,11 +5,15 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler;
+
+import sun.org.mozilla.javascript.internal.InterfaceAdapter;
 
 import com.xukea.common.exception.PageNotFoundException;
 import com.xukea.common.exception.UnauthorizedException;
 import com.xukea.common.util.cache.MenuCache;
 import com.xukea.framework.base.BaseRequestAdapter;
+import com.xukea.framework.base.BaseSpringController;
 import com.xukea.framework.util.LicenseSign;
 
 
@@ -63,10 +67,14 @@ public class RequestGlobalAdapter extends BaseRequestAdapter {
 			HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView)
 			throws Exception {
 		log.debug("postHandle");
+		// 只要不是由BaseSpringController子类处理的内容,都认为是无效处理,作为PageNotFoundException异常处理
+		if( !(handler instanceof BaseSpringController)){
+			throw new PageNotFoundException();
+		}
 	}
 
 	/**
-	 * 返回处理（已经渲染了页面）
+	 * 返回处理（已经渲染了页面,这里抛出的异常不影响前端的页面展现）
 	 */
 	@Override
 	public void afterCompletion(
