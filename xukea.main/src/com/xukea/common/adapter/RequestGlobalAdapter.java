@@ -4,7 +4,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
+import org.springframework.web.method.HandlerMethod;
+import org.springframework.web.servlet.HandlerExecutionChain;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping;
 import org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler;
 
 import sun.org.mozilla.javascript.internal.InterfaceAdapter;
@@ -67,10 +70,18 @@ public class RequestGlobalAdapter extends BaseRequestAdapter {
 			HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView)
 			throws Exception {
 		log.debug("postHandle");
-		// 只要不是由BaseSpringController子类处理的内容,都认为是无效处理,作为PageNotFoundException异常处理
-		if( !(handler instanceof BaseSpringController)){
-			throw new PageNotFoundException();
+		
+		if(handler instanceof HandlerMethod){
+			HandlerMethod temp = (HandlerMethod) handler;
+			// 只要不是由BaseSpringController子类处理的内容,都认为是无效处理,作为PageNotFoundException异常处理
+			if( temp.getBean() instanceof BaseSpringController){
+				return ;
+			}
 		}
+//		if(handler instanceof DefaultServletHttpRequestHandler){
+//			throw new PageNotFoundException();
+//		}
+		throw new PageNotFoundException();
 	}
 
 	/**
