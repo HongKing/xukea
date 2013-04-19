@@ -48,7 +48,7 @@
 	<classpathentry kind="lib" path="/xukea.framework/webapp/WEB-INF/lib/spring-test-3.2.0.RELEASE.jar"/>
 	<classpathentry kind="lib" path="/xukea.framework/webapp/WEB-INF/lib/spring-tx-3.2.0.RELEASE.jar" sourcepath="/xukea.framework/webapp/WEB-INF/lib/spring-tx-3.2.0.RELEASE-sources.jar"/>
 	<classpathentry kind="lib" path="/xukea.framework/webapp/WEB-INF/lib/spring-web-3.2.0.RELEASE.jar"/>
-	<classpathentry kind="lib" path="/xukea.framework/webapp/WEB-INF/lib/spring-webmvc-3.2.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="/xukea.framework/webapp/WEB-INF/lib/spring-webmvc-3.2.0.RELEASE.jar" sourcepath="/xukea.framework/webapp/WEB-INF/lib/spring-webmvc-3.2.0.RELEASE-sources.jar"/>
 	<classpathentry kind="lib" path="/xukea.framework/webapp/WEB-INF/lib/spring-webmvc-portlet-3.2.0.RELEASE.jar"/>
 	<classpathentry kind="lib" path="/xukea.framework/webapp/WEB-INF/lib/sqljdbc4.jar"/>
 	<classpathentry kind="lib" path="/xukea.framework/webapp/WEB-INF/lib/standard-1.1.2.jar"/>
