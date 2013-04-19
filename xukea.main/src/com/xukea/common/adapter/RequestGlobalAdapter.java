@@ -5,12 +5,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.springframework.web.method.HandlerMethod;
-import org.springframework.web.servlet.HandlerExecutionChain;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping;
 import org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler;
-
-import sun.org.mozilla.javascript.internal.InterfaceAdapter;
+import org.springframework.web.servlet.resource.ResourceHttpRequestHandler;
 
 import com.xukea.common.exception.PageNotFoundException;
 import com.xukea.common.exception.UnauthorizedException;
@@ -31,9 +28,7 @@ public class RequestGlobalAdapter extends BaseRequestAdapter {
 	 * 访问统计等
 	 */
 	@Override
-	public boolean preHandle(
-			HttpServletRequest request, HttpServletResponse response, Object handler)
-			throws Exception {
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		log.debug("preHandle");
 
 		// 授权控制
@@ -66,11 +61,14 @@ public class RequestGlobalAdapter extends BaseRequestAdapter {
 	 * 后处理（调用了Service并返回ModelAndView，但未进行页面渲染）
 	 */
 	@Override
-	public void postHandle(
-			HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView)
-			throws Exception {
+	public void postHandle( HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
 		log.debug("postHandle");
-		
+
+		// 如果是资源文件不做处理
+		if(handler instanceof ResourceHttpRequestHandler){
+			return;
+		}
+		// 有配置的URL Mapping处理时
 		if(handler instanceof HandlerMethod){
 			HandlerMethod temp = (HandlerMethod) handler;
 			// 只要不是由BaseSpringController子类处理的内容,都认为是无效处理,作为PageNotFoundException异常处理
@@ -78,19 +76,20 @@ public class RequestGlobalAdapter extends BaseRequestAdapter {
 				return ;
 			}
 		}
-//		if(handler instanceof DefaultServletHttpRequestHandler){
-//			throw new PageNotFoundException();
-//		}
-		throw new PageNotFoundException();
+		// 采用WEB容器默认的servlet处理时（一般是当访问的URL无对应的URL Mapping处理时，即404错误）
+		if(handler instanceof DefaultServletHttpRequestHandler){
+			// 此处抛出异常后，能被全局异常处理捕获
+			// 全局捕获异常后，主要目的是用来记录日志
+			// 但最终响应的页面则是web.xml里面配置的default servlet的error-page来处理
+			throw new PageNotFoundException("URL [ "+ request.getRequestURL() +" ]");
+		}
 	}
 
 	/**
 	 * 返回处理（已经渲染了页面,这里抛出的异常不影响前端的页面展现）
 	 */
 	@Override
-	public void afterCompletion(
-			HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
-			throws Exception {
+	public void afterCompletion( HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
 		log.debug("afterCompletion");
 		if(ex!=null){
 			log.error(ex);

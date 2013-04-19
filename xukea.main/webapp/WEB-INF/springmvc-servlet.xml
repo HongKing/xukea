@@ -34,8 +34,7 @@
     <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver" />
 
     <!-- 激活注解@RequestMapping annotation -->
-    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"/>
-    <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
         <property name="interceptors">
             <list>
                 <bean class="com.xukea.common.adapter.RequestBeforeMethodAdapter"/>
@@ -45,7 +44,7 @@
 
     <!-- 静态资源文件访问配置 -->
     <mvc:default-servlet-handler/>
-    <mvc:resources mapping="/static/**" location="/" />
+    <mvc:resources mapping="/static/**" location="/" cache-period="31556926"/>
     
     <!-- 静态变量保存applicationContext,方便全局调用 -->
     <bean class="com.xukea.framework.util.ApplicationContextRegister" />

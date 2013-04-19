@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler;
 
 import com.xukea.common.exception.ForbiddenException;
 import com.xukea.common.exception.PageNotFoundException;
@@ -30,10 +31,16 @@ public class GlobalExceptionResolver extends BaseExceptionResolver{
 	private static String ERROR_PAGE_login = Config.getInstance().getString("error.pageview.login");
 	
 	@Override
-    public ModelAndView resolveException(HttpServletRequest request,
-            HttpServletResponse response, Object handler, Exception ex) {
+    public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
 		log.error("全局异常捕获: " + ex);
-
+		
+		// 由WEB容器默认的servlet处理时抛出的异常（多数由：RequestGlobalAdapter的postHandle抛出）
+		if(handler instanceof DefaultServletHttpRequestHandler){
+			// 由于default servlet最终会根据配置的error-page来处理，所以此处只记录日志，不做其他处理
+			return null;
+		}
+		
+		// 业务处理过程中抛出的异常处理
 		if(ex instanceof UnLoginException){
 			return doUnLogin(request, response, ex);
 		}else if(ex instanceof ForbiddenException){

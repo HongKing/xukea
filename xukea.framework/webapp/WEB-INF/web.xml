@@ -20,7 +20,7 @@
 		<welcome-file>home.html</welcome-file>
 	</welcome-file-list>
 	
-	<!-- Error Page定义 -->
+    <!-- Error Page定义 -->
     <error-page>
         <error-code>404</error-code>
         <location>/commons/404.jsp</location>
@@ -33,7 +33,6 @@
         <error-code>500</error-code>
         <location>/commons/error.jsp</location>
     </error-page>
-	
 	
 	
 	
