@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <title>Dashboard</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link type="text/css" rel="stylesheet" href="./skin/default/bootstrap/css/bootstrap.css">
+    <link type="text/css" rel="stylesheet" href="./skin/default/bootstrap/css/bootstrap-responsive.css">
+    <link type="text/css" rel="stylesheet" href="./skin/default/main/main.css">
+    
+    <script type="text/javascript" src="./js/jquery.min.js"></script>
+    <script type="text/javascript" src="./js/bootstrap.min.js"></script>
+    
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    
+    <script type="text/javascript" src="./js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="./js/jquery.function.js"></script>
+
+<script language="javascript">
+	var JQ = jQuery.noConflict();
+	JQ(document).ready( function(){
+	});
+</script>
+    
+</head>
+<body>
+    
+<!--start: main menu bar -->
+<div class="navbar navbar-inverse  navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+             <!-- Be sure to leave the brand out there if you want it shown -->
+             <a class="brand" href="#">Project name</a>
+            <!-- Everything you want hidden at 940px or less, place within here -->
+            <div class="nav-collapse collapse">
+                <!-- main menu -->
+                <ul class="nav">
+		            <li class=""><a href="./index.html">首页</a></li>
+		            <li class="active"><a href="./index.html">页面模板</a></li>
+		        </ul>
+                <!-- user profile -->
+					<ul class="nav pull-right">
+					    <li class="dropdown">
+					        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user icon-white"></i>用户一<b class="caret"></b></a>
+					        <ul class="dropdown-menu">
+					            <li><a href="#"><i class="icon-pencil"></i> 资料修改</a></li>
+					            <li><a href="#"><i class="icon-cog"></i> 个性配置</a></li>
+					            <li class="divider"></li>
+					            <li><a href="./login.html"><i class="icon-off"></i> 退出</a></li>
+					        </ul>
+					    </li>
+					</ul>
+            </div>
+        </div><!-- end .container -->
+    </div>
+</div>
+<!--end: main menu bar -->
+
+
+<!--start: sub menu bar -->
+<div class="subnav subnav-fixed">
+    <ul class="nav nav-pills">
+            <li class=""><a href="./dashboard.html">Dashboard</a></li>
+            <li class=""><a href="./table.html">表格</a></li>
+            <li class=""><a href="./form.html">表单</a></li>
+            <li class=""><a href="./alert.html">弹出窗口</a></li>
+            <li class="active"><a href="./button.html">按钮</a></li>
+            <li class=""><a href="./icon.html">小图标</a></li>
+            <li class=""><a href="./error.html">提示信息</a></li>
+            <li class=""><a href="./laout.html">布局</a></li>
+    </ul>
+</div>
+<!--end: sub menu bar -->
+
+<!--start: .container -->
+<div class="container">
+    <div class="row">
+        <!-- sider menu bar  -->
+        <div class="span12">
+        
+
+          <h2>Default buttons</h2>
+          <p>Button styles can be applied to anything with the <code>.btn</code> class applied. However, typically you'll want to apply these to only <code>&lt;a&gt;</code> and <code>&lt;button&gt;</code> elements for the best rendering.</p>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th>Button</th>
+                <th>class=""</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><button type="button" class="btn">Default</button></td>
+                <td><code>btn</code></td>
+                <td>Standard gray button with gradient</td>
+              </tr>
+              <tr>
+                <td><button type="button" class="btn btn-primary">Primary</button></td>
+                <td><code>btn btn-primary</code></td>
+                <td>Provides extra visual weight and identifies the primary action in a set of buttons</td>
+              </tr>
+              <tr>
+                <td><button type="button" class="btn btn-info">Info</button></td>
+                <td><code>btn btn-info</code></td>
+                <td>Used as an alternative to the default styles</td>
+              </tr>
+              <tr>
+                <td><button type="button" class="btn btn-success">Success</button></td>
+                <td><code>btn btn-success</code></td>
+                <td>Indicates a successful or positive action</td>
+              </tr>
+              <tr>
+                <td><button type="button" class="btn btn-warning">Warning</button></td>
+                <td><code>btn btn-warning</code></td>
+                <td>Indicates caution should be taken with this action</td>
+              </tr>
+              <tr>
+                <td><button type="button" class="btn btn-danger">Danger</button></td>
+                <td><code>btn btn-danger</code></td>
+                <td>Indicates a dangerous or potentially negative action</td>
+              </tr>
+              <tr>
+                <td><button type="button" class="btn btn-inverse">Inverse</button></td>
+                <td><code>btn btn-inverse</code></td>
+                <td>Alternate dark gray button, not tied to a semantic action or use</td>
+              </tr>
+              <tr>
+                <td><button type="button" class="btn btn-link">Link</button></td>
+                <td><code>btn btn-link</code></td>
+                <td>Deemphasize a button by making it look like a link while maintaining button behavior</td>
+              </tr>
+            </tbody>
+          </table>
+          
+          <h2>Button sizes</h2>
+          <p>Fancy larger or smaller buttons? Add <code>.btn-large</code>, <code>.btn-small</code>, or <code>.btn-mini</code> for additional sizes.</p>
+          
+          <div class="module_box">
+            <div class="content">
+                <p>
+                  <button type="button" class="btn btn-large btn-primary">Large button</button>
+                  <button type="button" class="btn btn-large">Large button</button>
+                </p>
+                <p>
+                  <button type="button" class="btn btn-primary">Default button</button>
+                  <button type="button" class="btn">Default button</button>
+                </p>
+                <p>
+                  <button type="button" class="btn btn-small btn-primary">Small button</button>
+                  <button type="button" class="btn btn-small">Small button</button>
+                </p>
+                <p>
+                  <button type="button" class="btn btn-mini btn-primary">Mini button</button>
+                  <button type="button" class="btn btn-mini">Mini button</button>
+                </p>
+            </div>
+          </div>
+          
+          
+          <h2>Button icon</h2>
+          <div class="module_box">
+            <div class="content">
+                <a class="btn btn-primary" href="#"><i class="icon-user icon-white"></i> User</a>
+                <a class="btn btn-large" href="#"><i class="icon-star"></i> Star</a>
+                <a class="btn btn-small" href="#"><i class="icon-star"></i> Star</a>
+                <a class="btn btn-mini" href="#"><i class="icon-star"></i> Star</a>
+            </div>
+          </div>
+
+
+        </div>
+        <!-- end .main content -->
+    </div>
+    <!-- end .row -->
+</div>
+<!-- end .container -->
+
+<!-- Footer
+ ================================================== -->
+<div class="footer">
+    <div class="container">
+        <p class="pull-right"><a href="http://localhost:8088/main/main/user/list/1#">回到顶端</a></p>
+        <p>Icons取自 <a href="http://glyphicons.com/">Glyphicons Free</a>，授权依照 <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>。</p>
+        <ul class="footer-links">
+            <li><a href="http://blog.getbootstrap.com/">Blog</a></li>
+            <li class="muted">·</li>
+            <li><a href="https://github.com/twitter/bootstrap/issues?state=open">Issues</a></li>
+            <li class="muted">·</li>
+            <li><a href="https://github.com/twitter/bootstrap/wiki">Roadmap and changelog</a></li>
+        </ul>
+    </div>
+</div>
+
+</body></html>

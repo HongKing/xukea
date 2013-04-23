@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <title>表格</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link type="text/css" rel="stylesheet" href="./skin/default/bootstrap/css/bootstrap.css">
+    <link type="text/css" rel="stylesheet" href="./skin/default/bootstrap/css/bootstrap-responsive.css">
+    <link type="text/css" rel="stylesheet" href="./skin/default/main/main.css">
+    
+    <script type="text/javascript" src="./js/jquery.min.js"></script>
+    <script type="text/javascript" src="./js/bootstrap.min.js"></script>
+    
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    
+    <script type="text/javascript" src="./js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="./js/jquery.function.js"></script>
+
+<script language="javascript">
+	var JQ = jQuery.noConflict();
+	JQ(document).ready( function(){
+	});
+</script>
+    
+</head>
+<body>
+    
+<!--start: main menu bar -->
+<div class="navbar navbar-inverse  navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+             <!-- Be sure to leave the brand out there if you want it shown -->
+             <a class="brand" href="#">Project name</a>
+            <!-- Everything you want hidden at 940px or less, place within here -->
+            <div class="nav-collapse collapse">
+                <!-- main menu -->
+                <ul class="nav">
+		            <li class=""><a href="./index.html">首页</a></li>
+		            <li class="active"><a href="./index.html">页面模板</a></li>
+		        </ul>
+                <!-- user profile -->
+					<ul class="nav pull-right">
+					    <li class="dropdown">
+					        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user icon-white"></i>用户一<b class="caret"></b></a>
+					        <ul class="dropdown-menu">
+					            <li><a href="#"><i class="icon-pencil"></i> 资料修改</a></li>
+					            <li><a href="#"><i class="icon-cog"></i> 个性配置</a></li>
+					            <li class="divider"></li>
+					            <li><a href="./login.html"><i class="icon-off"></i> 退出</a></li>
+					        </ul>
+					    </li>
+					</ul>
+            </div>
+        </div><!-- end .container -->
+    </div>
+</div>
+<!--end: main menu bar -->
+
+
+<!--start: sub menu bar -->
+<div class="subnav subnav-fixed">
+    <ul class="nav nav-pills">
+            <li class=""><a href="./dashboard.html">Dashboard</a></li>
+            <li class="active"><a href="./table.html">表格</a></li>
+            <li class=""><a href="./form.html">表单</a></li>
+            <li class=""><a href="./alert.html">弹出窗口</a></li>
+            <li class=""><a href="./button.html">按钮</a></li>
+            <li class=""><a href="./icon.html">小图标</a></li>
+            <li class=""><a href="./error.html">提示信息</a></li>
+            <li class=""><a href="./laout.html">布局</a></li>
+    </ul>
+</div>
+<!--end: sub menu bar -->
+
+<!--start: .container -->
+<div class="container">
+    <div class="row">
+        <!-- sider menu bar  -->
+            <div class="span12">
+        
+
+    <h3>表格一</h3>
+    <table class="table table-bordered table-striped table-hover">
+    <thead>
+        <tr>
+	        <th><input type="checkbox" class="ids-control"/></th>
+	        <th>登录名</th>
+	        <th>姓名</th>
+	        <th>邮箱地址</th>
+	        <th>添加时间</th>
+	        <th>状态</th>
+	        <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><input type="checkbox" name="id[]" value="1" class="ids"/></td>
+            <td>admin</td>
+            <td>管理员</td>
+            <td>admin@xukea.com</td>
+            <td>2011-12-28 10:28</td>
+            <td><span class="label label-success">yes</span></td>
+            <td>
+                <a href="#" title="编辑"><i class="icon-black icon-edit"></i></a>
+                <a href="#" title="禁用"><i class="icon-black icon-stop"></i></a>
+            </td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" name="id[]" value="1" class="ids"/></td>
+            <td>admin</td>
+            <td>管理员</td>
+            <td>admin@xukea.com</td>
+            <td>2011-12-28 10:28</td>
+            <td><span class="label label-success">yes</span></td>
+            <td>
+                <a href="#" title="编辑"><i class="icon-black icon-edit"></i></a>
+                <a href="#" title="禁用"><i class="icon-black icon-stop"></i></a>
+            </td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" name="id[]" value="1" class="ids"/></td>
+            <td>admin</td>
+            <td>管理员</td>
+            <td>admin@xukea.com</td>
+            <td>2011-12-28 10:28</td>
+            <td><span class="label label-important">no</span></td>
+            <td>
+                <a href="#" title="编辑"><i class="icon-black icon-edit"></i></a>
+                <a href="#" title="启用"><i class="icon-black icon-play"></i></a>
+            </td>
+        </tr>
+    </tbody>
+    </table>
+    <div class="pagination pagination-centered">
+		<ul>
+			<li class="disabled"><span>Prev</span></li>
+			<li class="active"><span>1</span></li>
+			<li><a href="#">2</a></li>
+			<li><a href="#">3</a></li>
+			<li><a href="#">4</a></li>
+			<li><a href="#">Next</a></li>
+		</ul>
+    </div>
+    <!-- end table 1 -->
+ 
+
+    <h3>表格二</h3>
+    <table class="table table-bordered table-striped table-hover">
+    <thead>
+        <tr>
+	        <th>登录名</th>
+	        <th>姓名</th>
+	        <th>邮箱地址</th>
+	        <th>添加时间</th>
+	        <th>状态</th>
+	        <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="success">
+            <td>admin</td>
+            <td>管理员</td>
+            <td>admin@xukea.com</td>
+            <td>2011-12-28 10:28</td>
+            <td><span class="label label-success">yes</span></td>
+            <td>
+                <a href="#" title="编辑"><i class="icon-black icon-edit"></i></a>
+                <a href="#" title="禁用"><i class="icon-black icon-stop"></i></a>
+            </td>
+        </tr>
+        <tr class="error">
+            <td>admin</td>
+            <td>管理员</td>
+            <td>admin@xukea.com</td>
+            <td>2011-12-28 10:28</td>
+            <td><span class="label label-success">yes</span></td>
+            <td>
+                <a href="#" title="编辑"><i class="icon-black icon-edit"></i></a>
+                <a href="#" title="禁用"><i class="icon-black icon-stop"></i></a>
+            </td>
+        </tr>
+        <tr class="warning">
+            <td>admin</td>
+            <td>管理员</td>
+            <td>admin@xukea.com</td>
+            <td>2011-12-28 10:28</td>
+            <td><span class="label label-important">no</span></td>
+            <td>
+                <a href="#" title="编辑"><i class="icon-black icon-edit"></i></a>
+                <a href="#" title="启用"><i class="icon-black icon-play"></i></a>
+            </td>
+        </tr>
+        <tr class="info">
+            <td>admin</td>
+            <td>管理员</td>
+            <td>admin@xukea.com</td>
+            <td>2011-12-28 10:28</td>
+            <td><span class="label label-important">no</span></td>
+            <td>
+                <a href="#" title="编辑"><i class="icon-black icon-edit"></i></a>
+                <a href="#" title="启用"><i class="icon-black icon-play"></i></a>
+            </td>
+        </tr>
+    </tbody>
+    </table>
+    <!-- end table 2 -->
+ 
+    <div class="module_box">
+        <div class="header"><h3>表格三</h3></div>
+        <div class="tab_content">
+            <table class="table table-hover table-condensed">
+                <thead>
+                    <tr>
+            	        <th>登录名</th>
+            	        <th>姓名</th>
+            	        <th>邮箱地址</th>
+            	        <th>添加时间</th>
+            	        <th>状态</th>
+            	        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>admin</td>
+                        <td>管理员</td>
+                        <td>admin@xukea.com</td>
+                        <td>2011-12-28 10:28</td>
+                        <td><span class="label label-success">yes</span></td>
+                        <td>
+                            <a href="#" title="编辑"><i class="icon-black icon-edit"></i></a>
+                            <a href="#" title="禁用"><i class="icon-black icon-stop"></i></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>admin</td>
+                        <td>管理员</td>
+                        <td>admin@xukea.com</td>
+                        <td>2011-12-28 10:28</td>
+                        <td><span class="label label-success">yes</span></td>
+                        <td>
+                            <a href="#" title="编辑"><i class="icon-black icon-edit"></i></a>
+                            <a href="#" title="禁用"><i class="icon-black icon-stop"></i></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>admin</td>
+                        <td>管理员</td>
+                        <td>admin@xukea.com</td>
+                        <td>2011-12-28 10:28</td>
+                        <td><span class="label label-important">no</span></td>
+                        <td>
+                            <a href="#" title="编辑"><i class="icon-black icon-edit"></i></a>
+                            <a href="#" title="启用"><i class="icon-black icon-play"></i></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div><!-- end of styles article -->
+ 
+ 
+
+        </div>
+        <!-- end .main content -->
+    </div>
+    <!-- end .row -->
+</div>
+<!-- end .container -->
+
+<!-- Footer
+ ================================================== -->
+<div class="footer">
+    <div class="container">
+        <p class="pull-right"><a href="http://localhost:8088/main/main/user/list/1#">回到顶端</a></p>
+        <p>Icons取自 <a href="http://glyphicons.com/">Glyphicons Free</a>，授权依照 <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>。</p>
+        <ul class="footer-links">
+            <li><a href="http://blog.getbootstrap.com/">Blog</a></li>
+            <li class="muted">·</li>
+            <li><a href="https://github.com/twitter/bootstrap/issues?state=open">Issues</a></li>
+            <li class="muted">·</li>
+            <li><a href="https://github.com/twitter/bootstrap/wiki">Roadmap and changelog</a></li>
+        </ul>
+    </div>
+</div>
+
+</body></html>

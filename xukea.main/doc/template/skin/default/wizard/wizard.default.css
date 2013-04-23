@@ -1,0 +1,112 @@
+/*
+
+Wizard Theme: Wizard Default
+Version: 1.0
+*/
+
+/* Global Declaration */
+
+
+/*** Wizard Form ***/
+
+.wizard {
+    position: relative;
+}
+.wizard .button_bar {
+    position: relative;
+    padding: 10px;
+}
+.wizard_content .step {
+    display: none;
+}
+.wizard_content {
+    display: block;
+    padding: 20px;
+}
+.wizard_steps {
+    display: block;
+}
+
+.wizard .wizard_steps ul{
+    background:url(./images/pagewrapbg.png) repeat-x bottom;
+    border-top:1px solid #CBDAE8;
+    border-bottom:1px solid #CBDAE8;
+    font-size:12px;
+    color:#859099;
+    padding-left:5px;
+    height:39px;
+}
+.wizard .wizard_steps ul li{
+    background:url(./images/wizard.png) no-repeat  0px -40px transparent;
+    display: inline;
+    list-style: none;
+    font-weight: bold;
+    line-height: 38px;
+    margin-left: -22px;
+    padding:12px 30px;
+    color: #555555;
+}
+.wizard .wizard_steps ul li.current {
+    background:url(./images/wizard.png) no-repeat 0px 0px transparent;
+    color:#FFFFFF;
+}
+.wizard .wizard_steps ul li.disable {
+    background:url(./images/wizard.png) no-repeat 0px -80px transparent;
+    color:#A0A0A0;
+}
+.wizard .wizard_steps ul li.first{
+     margin-left: -5px;
+}
+
+.wizard .button_bar{
+    background: url("./images/page-footer-bg.png") repeat-x scroll center -5px transparent;
+    border-top:1px solid #D1D3D3;
+    height:40px;}
+.wizard .button_bar .in{
+    width:250px;
+    float:right;
+    padding-top:2px;}
+    
+
+.wizard_progressbar {
+    display: block;
+    position: absolute;
+    right: 20px;
+    top: -40px;
+    width: 223px;
+    z-index: 9999;
+    -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.5) inset;
+    -moz-box-shadow: 0 0 2px rgba(0, 0, 0, 0.5) inset;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.5) inset;
+}
+.wizard_progressbar > div {
+    border-width: 0px;
+    margin: 0px !important;
+}
+.ui-progressbar-value.ui-widget-header.ui-corner-left {
+    background: url("./images/stripe_bar.png") repeat scroll 0 0 #EEEEEE;
+    box-shadow: 0 0 !important;
+}
+.ui-progressbar {
+    background: none repeat scroll 0 0 transparent;
+    height: 12px;
+    text-align: left;
+}
+
+/*
+.btn_disabled{
+    font:bold 12px Arial, Helvetica, sans-serif;
+    color:#818181;
+    border:1px solid #C5C5C5;
+    border-bottom:1px solid #969696;
+    border-radius:2px;
+    padding:7px 10px;
+    margin:0px 3px;
+    text-shadow: 0px -1px #818181;}
+.btn_disabled:hover{ 
+    color:#818181;
+    border:1px solid #C5C5C5;
+    border-bottom:1px solid #969696;
+    opacity:1;}
+.btn_disabled:active{box-shadow: inset 0 0 0.5em #969696;}
+*/
