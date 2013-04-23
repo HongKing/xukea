@@ -13,7 +13,7 @@ body {
   padding: 90px 0 0;
   height: 100%;
   background-color: #fff;
-  background-image: url(../img/grid-18px-masked.png);
+  background-image: url(../bootstrap/img/grid-18px-masked.png);
   background-repeat: repeat-x;
   background-position: 0 40px;
 }
@@ -263,6 +263,157 @@ body {
      -moz-box-shadow: none;
           box-shadow: none;
 }
+
+/* module box
+------------------------- */
+.module_box {
+	border: 1px solid #9BA0AF;
+	width: 100%;
+	margin: 20px 3% 0 3%;
+	margin-top: 20px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	background: #ffffff;
+}
+.module_box .header {
+	height: 38px;
+	width: 100%;
+	background: #F1F1F4 url(./images/secondary_bar.png) repeat-x;
+	-webkit-border-top-left-radius: 5px; -webkit-border-top-right-radius: 5px;
+	-moz-border-radius-topleft: 5px; -moz-border-radius-topright: 5px;
+	border-top-left-radius: 5px; border-top-right-radius: 5px;
+}
+.module_box .header h3 {
+	display: block;
+	width: 90%;
+	float: left;
+	color: #1F1F20;
+    font-size: 13px;
+    margin: 8px 20px;
+    line-height: 20px;
+    text-shadow: 0 1px 0 #FFFFFF;
+    text-transform: uppercase;
+}
+.module_box .content {
+    margin: 10px 20px;
+    color: #666;
+}
+.module_box .footer {
+	height: 32px;
+	width: 100%;
+	margin: 0px;
+	padding: 0px;
+	border-top: 1px solid #9CA1B0;
+	background: #F1F1F4 url(./images/module_footer_bg.png) repeat-x;
+	-webkit-border-bottom-left-radius: 5px; -webkit-border-bottom-right-radius: 5px;
+	-moz-border-radius-bottomleft: 5px; -moz-border-radius-bottomright: 5px;
+	-webkit-border-bottom-left-radius: 5px; -webkit-border-bottom-right-radius: 5px;
+}
+
+
+section#secondary_bar {
+height: 38px;
+width: 100%;
+background: #F1F1F4 url(./images/secondary_bar.png) repeat-x;
+}
+
+section#secondary_bar .user {
+float: left;
+width: 23%;
+height: 38px;
+}
+
+.user p {
+margin: 0;
+padding: 0;
+color: #666666;
+font-weight: bold;
+display: block;
+float: left;
+width: 85%;
+height: 35px;
+line-height: 35px;
+text-indent: 25px;
+text-shadow: 0 1px 0 #fff;
+background: url(./images/icn_user.png) no-repeat center left;
+margin-left: 6%;
+}
+
+.user a {
+text-decoration: none;
+color: #666666}
+
+.user a:hover {
+color: #77BACE;
+}
+
+.user a.logout_user {
+float: left;
+display: block;
+width: 16px;
+height: 35px;
+text-indent: -5000px;
+background: url(./images/icn_logout.png) center no-repeat;
+}
+
+/* Breadcrumbs */
+
+section#secondary_bar .breadcrumbs_container {
+float: left;
+width: 77%;
+background: url(./images/secondary_bar_shadow.png) no-repeat left top;
+height: 38px;
+}
+
+article.breadcrumbs {
+float: left;
+padding: 0 10px;
+border: 1px solid #ccc;
+-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+border-radius: 5px;
+-webkit-box-shadow: 0 1px 0 #fff;
+-moz-box-shadow: 0 1px 0 #fff;
+box-shadow: 0 1px 0 #fff;
+height: 23px;
+margin: 4px 3%;
+}
+
+.breadcrumbs a {
+display: inline-block;
+float: left;
+height: 24px;
+line-height: 23px;
+}
+
+.breadcrumbs a.current, .breadcrumbs a.current:hover {
+color: #9E9E9E;
+font-weight: bold;
+text-shadow: 0 1px 0 #fff;
+text-decoration: none;
+}
+
+.breadcrumbs a:link, .breadcrumbs a:visited {
+color: #44474F;
+text-decoration: none;
+text-shadow: 0 1px 0 #fff;
+font-weight: bold;}
+
+.breadcrumbs a:hover {
+color: #222222;
+}
+
+.breadcrumb_divider {
+display: inline-block;
+width: 12px;
+height: 24px;
+background: url(./images/breadcrumb_divider.png) no-repeat;
+float: left;
+margin: 0 5px;
+}
+
+
 
 /* Fixed subnav on scroll, but only for 980px and up (sorry IE!) */
 @media (min-width: 980px) {

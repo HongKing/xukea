@@ -9,7 +9,7 @@
 
 <!-- Footer
  ================================================== -->
-<footer class="footer">
+<div class="footer">
     <div class="container">
         <p class="pull-right"><a href="#">回到顶端</a></p>
         <p>Icons取自 <a href="http://glyphicons.com">Glyphicons Free</a>，授权依照 <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>。</p>
@@ -21,4 +21,4 @@
             <li><a href="https://github.com/twitter/bootstrap/wiki">Roadmap and changelog</a></li>
         </ul>
     </div>
-</footer>
+</div>

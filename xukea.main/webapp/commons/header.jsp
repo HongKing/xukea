@@ -94,8 +94,8 @@
     <div class="row">
         <!-- sider menu bar  -->
         <% if(subMenu3!=null && subMenu3.size()>0){ %>
-            <div class="span2">
-                <ul class="nav nav-list bs-docs-sidenav">
+            <div class="span2 sidebar">
+                <ul class="nav nav-list sidenav">
                 <%  
 		            for(Menu item : subMenu3){
 		                String active = "";

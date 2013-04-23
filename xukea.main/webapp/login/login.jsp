@@ -2,7 +2,7 @@
 <%@ include file="/commons/taglibs.jsp" %>
 
 <!DOCTYPE html>
-<html >
+<html lang="zh-CN">
 <head>
     <title>系统登录</title>
     <%@ include file="/commons/meta.jsp" %>

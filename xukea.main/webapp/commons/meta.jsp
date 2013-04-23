@@ -24,5 +24,6 @@
 <script language="javascript">
 	var JQ = jQuery.noConflict();
 	JQ(document).ready( function(){
+        JQ(".sidenav").affix();
 	});
 </script>
