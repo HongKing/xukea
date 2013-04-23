@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+<head>
+    <title>500 ERROR PAGE</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link type="text/css" rel="stylesheet" href="./skin/default/main/error.css">
+    <script type="text/javascript" src="./js/jquery.min.js"></script>
+
+<script language="javascript">
+	var JQ = jQuery.noConflict();
+	JQ(document).ready( function(){
+	    JQ("a.show_error_info").click(function(){
+	        JQ("pre").slideToggle("slow");
+	    });
+	});
+</script>
+</head>
+<body>
+    <div id="gradiant"></div>
+    <div id="content">
+        <h1>ERR<img src="./skin/default/main/images/ouh.png">R</h1>
+        <h3>Oooooops… 客官，您的干煸辣子鸡爆锅了，我们给您重做，请稍等。。。。</h3>
+        <p class="text">错误精简信息<a href="#" class="show_error_info">详情</a></p>
+		<pre style="display:none;">ERROR MESSAGE详细信息</pre>
+		<p class="links">
+		    <a href="./index.html">首页</a>
+		    <a href="#">站点地图</a>
+		    <a href="javascript: history.go(-1)">返回</a>
+		</p>
+	</div>
+</body>
+</html>

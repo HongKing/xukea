@@ -13,9 +13,6 @@ body {
   padding: 90px 0 0;
   height: 100%;
   background-color: #fff;
-  background-image: url(../bootstrap/img/grid-18px-masked.png);
-  background-repeat: repeat-x;
-  background-position: 0 40px;
 }
 
 /* Footer
@@ -114,9 +111,10 @@ body {
 /* Sidenav for Docs
 -------------------------------------------------- */
 
-.bs-docs-sidenav {
+.sidenav {
   margin: 30px 0 0;
   padding: 0;
+  width: 170px;
   background-color: #fff;
   -webkit-border-radius: 6px;
      -moz-border-radius: 6px;
@@ -125,23 +123,23 @@ body {
      -moz-box-shadow: 0 1px 4px rgba(0,0,0,.065);
           box-shadow: 0 1px 4px rgba(0,0,0,.065);
 }
-.bs-docs-sidenav > li > a {
+.sidenav > li > a {
   display: block;
   margin: 0 0 -1px;
   padding: 8px 14px;
   border: 1px solid #e5e5e5;
 }
-.bs-docs-sidenav > li:first-child > a {
+.sidenav > li:first-child > a {
   -webkit-border-radius: 6px 6px 0 0;
      -moz-border-radius: 6px 6px 0 0;
           border-radius: 6px 6px 0 0;
 }
-.bs-docs-sidenav > li:last-child > a {
+.sidenav > li:last-child > a {
   -webkit-border-radius: 0 0 6px 6px;
      -moz-border-radius: 0 0 6px 6px;
           border-radius: 0 0 6px 6px;
 }
-.bs-docs-sidenav > .active > a {
+.sidenav > .active > a {
   position: relative;
   z-index: 2;
   padding: 9px 15px;
@@ -152,27 +150,24 @@ body {
           box-shadow: inset 1px 0 0 rgba(0,0,0,.1), inset -1px 0 0 rgba(0,0,0,.1);
 }
 /* Chevrons */
-.bs-docs-sidenav .icon-chevron-right {
+.sidenav .icon-chevron-right {
   float: right;
   margin-top: 2px;
   margin-right: -6px;
   opacity: .25;
 }
-.bs-docs-sidenav > li > a:hover {
+.sidenav > li > a:hover {
   background-color: #f5f5f5;
 }
-.bs-docs-sidenav a:hover .icon-chevron-right {
+.sidenav a:hover .icon-chevron-right {
   opacity: .5;
 }
-.bs-docs-sidenav .active .icon-chevron-right,
-.bs-docs-sidenav .active a:hover .icon-chevron-right {
+.sidenav .active .icon-chevron-right,
+.sidenav .active a:hover .icon-chevron-right {
   background-image: url(../bootstrap/img/glyphicons-halflings-white.png);
   opacity: 1;
 }
-.bs-docs-sidenav.affix {
-  top: 40px;
-}
-.bs-docs-sidenav.affix-bottom {
+.sidenav.affix-bottom {
   position: absolute;
   top: auto;
   bottom: 270px;
@@ -269,7 +264,6 @@ body {
 .module_box {
 	border: 1px solid #9BA0AF;
 	width: 100%;
-	margin: 20px 3% 0 3%;
 	margin-top: 20px;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
@@ -289,7 +283,7 @@ body {
 	width: 90%;
 	float: left;
 	color: #1F1F20;
-    font-size: 13px;
+    font-size: 15px;
     margin: 8px 20px;
     line-height: 20px;
     text-shadow: 0 1px 0 #FFFFFF;
@@ -298,6 +292,14 @@ body {
 .module_box .content {
     margin: 10px 20px;
     color: #666;
+}
+.module_box .tab_content {
+    color: #666;
+}
+.module_box .over_content {
+    height: 250px;
+    overflow-x: hidden;
+    overflow-y: scroll;
 }
 .module_box .footer {
 	height: 32px;
@@ -310,107 +312,19 @@ body {
 	-moz-border-radius-bottomleft: 5px; -moz-border-radius-bottomright: 5px;
 	-webkit-border-bottom-left-radius: 5px; -webkit-border-bottom-right-radius: 5px;
 }
-
-
-section#secondary_bar {
-height: 38px;
-width: 100%;
-background: #F1F1F4 url(./images/secondary_bar.png) repeat-x;
+.module_box .tab_content table{
+    margin: 0;
 }
 
-section#secondary_bar .user {
-float: left;
-width: 23%;
-height: 38px;
+.table thead tr {
+    background: url("./images/table_sorter_header.png") repeat-x scroll 0 0 transparent;
+    cursor: pointer;
+    height: 34px;
+    text-align: left;
+    text-indent: 10px;
 }
-
-.user p {
-margin: 0;
-padding: 0;
-color: #666666;
-font-weight: bold;
-display: block;
-float: left;
-width: 85%;
-height: 35px;
-line-height: 35px;
-text-indent: 25px;
-text-shadow: 0 1px 0 #fff;
-background: url(./images/icn_user.png) no-repeat center left;
-margin-left: 6%;
-}
-
-.user a {
-text-decoration: none;
-color: #666666}
-
-.user a:hover {
-color: #77BACE;
-}
-
-.user a.logout_user {
-float: left;
-display: block;
-width: 16px;
-height: 35px;
-text-indent: -5000px;
-background: url(./images/icn_logout.png) center no-repeat;
-}
-
-/* Breadcrumbs */
-
-section#secondary_bar .breadcrumbs_container {
-float: left;
-width: 77%;
-background: url(./images/secondary_bar_shadow.png) no-repeat left top;
-height: 38px;
-}
-
-article.breadcrumbs {
-float: left;
-padding: 0 10px;
-border: 1px solid #ccc;
--webkit-border-radius: 5px;
--moz-border-radius: 5px;
-border-radius: 5px;
--webkit-box-shadow: 0 1px 0 #fff;
--moz-box-shadow: 0 1px 0 #fff;
-box-shadow: 0 1px 0 #fff;
-height: 23px;
-margin: 4px 3%;
-}
-
-.breadcrumbs a {
-display: inline-block;
-float: left;
-height: 24px;
-line-height: 23px;
-}
-
-.breadcrumbs a.current, .breadcrumbs a.current:hover {
-color: #9E9E9E;
-font-weight: bold;
-text-shadow: 0 1px 0 #fff;
-text-decoration: none;
-}
-
-.breadcrumbs a:link, .breadcrumbs a:visited {
-color: #44474F;
-text-decoration: none;
-text-shadow: 0 1px 0 #fff;
-font-weight: bold;}
-
-.breadcrumbs a:hover {
-color: #222222;
-}
-
-.breadcrumb_divider {
-display: inline-block;
-width: 12px;
-height: 24px;
-background: url(./images/breadcrumb_divider.png) no-repeat;
-float: left;
-margin: 0 5px;
+.table thead th {
+    padding: 7px;   
 }
 
 
