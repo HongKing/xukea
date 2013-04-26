@@ -4,13 +4,19 @@
  * @author FishBoy
  * @version 1.0
  */
+
 ;(function($) {
-    window.log = function(msg){
+	/***********************************     日志记录    *************************************/
+    $.log = function(msg){
         window.console && console.log(msg)
     }
+    window.log = $.log;
+    
 	/*********************************** 页面loading遮罩 *************************************/
 	$.loading = {
 		start : function(){
+		    return;
+		    /*
 			if($("#loading_overlay").attr("id")!=undefined){
 				$("#loading_overlay").show();
 				return;
@@ -28,97 +34,179 @@
 				             + '  </div>'
 				             + '</div>';
 			$(loading_html).appendTo("body");
+			*/
 		},
 		stop  : function(){
+		    return;
+		    /*
 			$("#loading_overlay").hide();
+			*/
 		}
 	}
 
 	/*********************************** 消息提示 *************************************/
+	var messager = {
+		succes : function(obj, msg){
+			messager._message(obj, "成功", msg, 'alert-success');
+		},
+		info : function(obj, msg){
+			messager._message(obj, "通知", msg, 'alert-info');
+		},
+		warning : function(obj, msg){
+			messager._message(obj, "警告", msg, '');
+		},
+		error : function(obj, msg){
+			messager._message(obj, "错误", msg, 'alert-error');
+		},
+		_message : function(msg_box, title, msg, mtype){
+    		// 消息内容处理
+    		if(typeof msg === 'object'){
+    		    msg = $.fillArgs.apply(this, msg);
+    		}
+    	    try{
+    			msg = msg==undefined ? "未知错误" : msg;
+                msg = msg.replace(/\r\n/g, '<br/>');
+                msg = msg.replace(/\r/g, '<br/>');
+                msg = msg.replace(/\n/g, '<br/>');
+            }catch(e){}
+            // 消息提示内容
+            var content = $('<div class="alert " >').addClass(mtype)
+                           .append('<strong>'+ title +'：</strong>') 
+                           .append('<span>'+ msg +'</span>')
+                           .append('<button type="button" class="close" data-dismiss="alert">&times;</button>');
+            // show msg
+            msg_box.empty();
+    		msg_box.append( content );
+    	}
+	}
+	// ================ 全局函数，于默认位置展现消息信息
 	$.messager = {
-		succes : function(msg){
-			$.messager.message("成功", msg, 'succesbox');
+		succes : function(){
+		    var msg_box = $.messager._get_msg_box();
+			messager['succes'].call(this, msg_box, arguments);
 		},
-		info : function(msg){
-			$.messager.message("通知", msg, 'informationbox');
+		info : function(){
+		    var msg_box = $.messager._get_msg_box();
+			messager['info'].call(this, msg_box, arguments);
 		},
-		warn : function(msg){
-			$.messager.message("警告", msg, 'warningbox');
+		warning : function(){
+		    var msg_box = $.messager._get_msg_box();
+			messager['warning'].call(this, msg_box, arguments);
 		},
-		error : function(msg){
-			$.messager.message("错误", msg, 'errorbox');
+		error : function(){
+		    var msg_box = $.messager._get_msg_box();
+			messager['error'].call(this, msg_box, arguments);
 		},
-		message : function(title, msg, mtype){
-			msg = msg==undefined ? "未知错误" : msg;
-            msg = msg.replace(/\r\n/g, '<br/>');
-            msg = msg.replace(/\r/g, '<br/>');
-            msg = msg.replace(/\n/g, '<br/>');
-            
-			var content = '<div class="albox '+ mtype +'" ><b>'+ title +'：</b>'+ msg +'<a href="#" class="close tips" title="关闭">close</a></div>';
-
-            $("#messager_box").empty();
-			$('#messager_box').append( content );
+		_get_msg_box : function(){
+		    // 消息提示框对象
+    		var msg_box = $("#messager_box");
+			if(msg_box==null || msg_box==undefined || msg_box.length==0){
+			    // 消息提示框对象不存在，则创建
+			    $("div.container > div.row > div:not('.sidebar'):first").prepend('<div id="messager_box"></div>');
+			    msg_box = $("#messager_box");
+			}
+			return msg_box;
 		}
+	}
+	// ================ 对象函数，于指定位置展现消息信息
+	$.fn.messager = function(){
+	    var method = arguments[0];
+        if ( messager[method] ) {
+            //arguments[0] = this;
+            //return messager[method].apply( this, arguments);
+            return messager[method].call( this, this, Array.prototype.slice.call( arguments, 1 ));
+        } else {
+            $.error( 'Method ' +  method + ' does not exist on $(selector).messager of jQuery.function.js' );
+        }
 	}
 	
 	/*********************************** 弹出提示,弹出窗口 *************************************/
-	$.xukea = {
-		alert : function(msg, calbak){
-			$.xukea.warning(msg, calbak);
+	$.alert = {
+		succes : function(msg, calbak){
+			calbak = $.isFunction( calbak ) ? calbak : function(){};
+			var btns = [{
+			    text : "确定",
+			    class: "btn-primary",
+				func : function(){
+        					calbak.call(this, true);
+        				}
+    			}];
+			$.alert._message(msg, 'alert-success', btns);
 		},
 		warning  : function(msg, calbak){
 			calbak = $.isFunction( calbak ) ? calbak : function(){};
-			var btns = {
-				"确定": function(){
-					$(this).dialog("close");
-					calbak.call(this, true);
-				}
-			};
-			$.xukea._message(msg, 'warningbox', btns);
+			var btns = [{
+			    text : "确定",
+			    class: "btn-primary",
+				func : function(){
+    					    calbak.call(this, true);
+        				}
+    			}];
+			$.alert._message(msg, '', btns);
 		},
 		error : function(msg, calbak){
 			calbak = $.isFunction( calbak ) ? calbak : function(){};
-			var btns = {
-				"确定": function(){
-					$(this).dialog("close");
-					calbak.call(this, true);
-				}
-			};
-			$.xukea._message(msg, 'errorbox', btns);
+			var btns = [{
+			    text : "确定",
+			    class: "btn-primary",
+				func : function(){
+    					    calbak.call(this, true);
+        				}
+    			}];
+			$.alert._message(msg, 'alert-error', btns);
 		},
 		confirm : function(msg, sucs_cal, cacl_cal){
 			sucs_cal = $.isFunction( sucs_cal ) ? sucs_cal : function(){};
 			cacl_cal = $.isFunction( cacl_cal ) ? cacl_cal : sucs_cal;
-			var btns = {
-				"确定": function(){
-					$(this).dialog("close");
-					sucs_cal.call(this, true);
-				},"取消": function(){
-					$(this).dialog("close");
-					sucs_cal.call(this, false);
-				}
-			};
-			$.xukea._message(msg, 'informationbox', btns);
+			var btns = [{
+			    text : "确定",
+			    class: "btn-primary",
+				func : function(){
+        					sucs_cal.call(this, true);
+        				}
+				},{
+			    text : "取消",
+			    class: "",
+				func : function(){
+        					cacl_cal.call(this, false);
+        				}
+			    }];
+			$.alert._message(msg, 'alert-info', btns);
 		},
 		_message : function(msg, mtype, btns){
-            msg = msg.replace(/\r\n/g, '<br/>');
-            msg = msg.replace(/\r/g, '<br/>');
-            msg = msg.replace(/\n/g, '<br/>');
-
-			var content = '<div title="系统提示">';
-			content += '<div class="albox '+ mtype +'">';
-			content += msg;
-			content += '</div></div>';
-
-            $( content ).dialog({
-    			height: 200,
-    			width: 400,
-    			modal: true,
-    			buttons: btns,
-    			close: function(){
-    				$(content).empty();
-    			}
-    		});
+		    try{
+    			msg = msg==undefined ? "未知错误" : msg;
+                msg = msg.replace(/\r\n/g, '<br/>');
+                msg = msg.replace(/\r/g, '<br/>');
+                msg = msg.replace(/\n/g, '<br/>');
+            }catch(e){}
+            // msg window
+            var msgWin = $('<div tabindex="-1" role="dialog" aria-hidden="true">').addClass("modal hide fade");
+			// header
+			$('<div class="modal-header">')
+             .append('<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>')
+             .append('<h3>系统提示</h3>')
+             .appendTo(msgWin);
+            // body
+            var msgCotnt = $('<div class="modal-body" style="padding: 20px 20px 0;">');
+            $('<div class="alert " >')
+             .addClass(mtype)
+             .append('<span>'+ msg +'</span>')
+             .appendTo(msgCotnt);
+            msgWin.append(msgCotnt);
+            // btns
+			var msgBtns = $('<div class="modal-footer">');
+			$.each( btns, function( idx, props ) {
+			     $('<button class="btn">').addClass(props.class).html(props.text).bind('click', function(){
+			        props.func.call();
+			        msgWin.modal('hide'); // hide this modal
+			    }).appendTo(msgBtns);
+			});
+            msgWin.append(msgBtns);
+			// show modal
+			msgWin.modal('show').on('hidden', function () {
+			    msgWin.remove(); // remove this modal
+            });
 		}
 	}
 	
@@ -189,6 +277,7 @@
 		});
 	}
 	
+	/*********************************** 常用工具 *************************************/
 	/**
 	 * 将对象转为string
 	 * implement JSON.stringify serialization
@@ -222,11 +311,23 @@
 	 */
 	$.fillArgs = $.fillArgs || function(){
 		var formated = arguments[0];
-	    for( var i=1; i<arguments.length; i++ ){
-	        var param = "\{"+ (i-1) +"\}";  
-	        formated = formated.replace(param, arguments[i]);
-	    }
-	    return formated;
+		/*
+		if(typeof args ==="object"){
+		    return arguments.callee(args);
+		    //return $.fillArgs(formated);
+		}else if(typeof args ==="string"){
+		*/
+    	    for( var i=1; i<arguments.length; i++ ){
+    	        var param = "\\{"+ (i-1) +"\\}";
+    	        var val = !arguments[i] ? "" : arguments[i];
+    	        formated = formated.replace(new RegExp(param, "gm"), val);
+    	    }
+	        return formated;
+	    /*
+		}else{
+		    return "";
+		}
+		*/
 	};
 })(jQuery);
 

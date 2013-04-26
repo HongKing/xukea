@@ -106,47 +106,144 @@
         </div>
         <div class="span10">
         
-            <h2 id="info">Default alert</h2>
-              <p>Wrap any text and an optional dismiss button in <code>.alert</code> for a basic warning alert message.</p>
-              
-            <div class="alert">
-              <button type="button" class="close" data-dismiss="alert">&times;</button>
-              <strong>Warning!</strong> 
-              <span>Best check yo self, you're not looking too good.<code>.alert</code></span>
-            </div>
-            <div class="alert alert-success">
-              <button type="button" class="close" data-dismiss="alert">&times;</button>
-              <strong>Well done!</strong> You successfully read this important alert message.<code>.alert-success</code>
-            </div>
-            <div class="alert alert-info">
-              <button type="button" class="close" data-dismiss="alert">&times;</button>
-              <strong>Heads up!</strong> This alert needs your attention, but it's not super important.<code>.alert-info</code>
-            </div>
-            <div class="alert alert-error">
-              <button type="button" class="close" data-dismiss="alert">&times;</button>
-              <strong>Oh snap!</strong> Change a few things up and try submitting again.<code>.alert-error</code>
-            </div>
-            <div class="alert alert-error alert-block">
-              <button type="button" class="close" data-dismiss="alert">&times;</button>
-              <h4>Warning!</h4>
-              <p>Best check yo self, you're not looking too good. Nulla vitae elit libero, a pharetra augue. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</p>
-            </div>
             
-            <div id="tooltip" class="module_box">
-                <div class="header"><h3>Tool tips</h3></div>
-                <div class="content">
-                    <ul class="tooltip-examples">
-                      <li><a href="#" data-toggle="tooltip" data-placement="top" title="Tooltip on top">Tooltip on top</a></li>
-                      <li><a href="#" data-toggle="tooltip" data-placement="right" title="Tooltip on right">Tooltip on right</a></li>
-                      <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom">Tooltip on bottom</a></li>
-                      <li><a href="#" data-toggle="tooltip" data-placement="left" title="Tooltip on left">Tooltip on left</a></li>
-                    </ul>
-                </div>
-                <div class="footer"></div>
-            </div>
-            <script>
-                JQ('*[data-toggle="tooltip"]').tooltip();
-            </script>
+    <div class="module_box">
+        <div class="header"><h3>默认位置消息提示</h3></div>
+        <div class="content">
+            <button type="button" class="btn btn-success" onclick="showMsg('success')">Success</button>
+            <button type="button" class="btn btn-info"    onclick="showMsg('info')">Info</button>
+            <button type="button" class="btn btn-warning" onclick="showMsg('warning')">Warning</button>
+            <button type="button" class="btn btn-danger"  onclick="showMsg('error')">Error</button>
+        </div>
+    </div>
+    <script language="javascript">
+    	function showMsg(mtype){
+    	    if(mtype=="success"){
+    	        JQ.messager.succes('这里是SUCCESS提示信息');
+    	    }else if(mtype=="info"){
+    	        // 支持{[0-9]}的字符替换
+    	        JQ.messager.info('这里是INFO提示{0}信息{0}','aaa');// 替换
+    	    }else if(mtype=="warning"){
+    	        JQ.messager.warning('这里是WARNING提{0}示信{1}息','aaa','bbb');// 替换
+    	    }else if(mtype=="error"){
+    	        JQ.messager.error('这里是ERROR提示信息','dd');// 不替换
+    	    }
+    	}
+    </script>
+    
+    
+    <div class="module_box">
+        <div class="header"><h3>指定位置消息提示</h3></div>
+        <div class="content">
+            <div id="my_msg_box"></div>
+            
+            <button type="button" class="btn btn-success" onclick="showMyMsg('success')">Success</button>
+            <button type="button" class="btn btn-info"    onclick="showMyMsg('info')">Info</button>
+            <button type="button" class="btn btn-warning" onclick="showMyMsg('warning')">Warning</button>
+            <button type="button" class="btn btn-danger"  onclick="showMyMsg('error')">Error</button>
+        </div>
+    </div>
+    <script language="javascript">
+    	function showMyMsg(mtype){
+    	    if(mtype=="success"){
+    	        JQ("#my_msg_box").messager('succes', '这里是SUCCESS提示信息');
+    	    }else if(mtype=="info"){
+    	        // 支持{[0-9]}的字符替换
+    	        JQ("#my_msg_box").messager('info', '这里是INFO提示{0}信息{0}','aaa');// 替换
+    	    }else if(mtype=="warning"){
+    	        JQ("#my_msg_box").messager('warning', '这里是WARNING提{0}示信{1}息','aaa','bbb');// 替换
+    	    }else if(mtype=="error"){
+    	        JQ("#my_msg_box").messager('error', '这里是ERROR提示信息','dd');// 不替换
+    	    }
+    	}
+    </script>
+    
+    <div class="module_box">
+        <div class="header"><h3>弹出Modal提示</h3></div>
+        <div class="content">
+            <button type="button" class="btn btn-success" onclick="showModalMsg('success1')">Success（无回调）</button>
+            <button type="button" class="btn btn-success" onclick="showModalMsg('success2')">Success（回调处理）</button>
+            
+            <button type="button" class="btn btn-info"    onclick="showModalMsg('confirm1')">Confirm（无回调）</button>
+            <button type="button" class="btn btn-info"    onclick="showModalMsg('confirm2')">Confirm（回调处理1）</button>
+            <button type="button" class="btn btn-info"    onclick="showModalMsg('confirm3')">Confirm（回调处理2）</button>
+            
+            <p></p>
+            
+            <button type="button" class="btn btn-warning" onclick="showModalMsg('warning1')">Warning（无回调）</button>
+            <button type="button" class="btn btn-warning" onclick="showModalMsg('warning2')">Warning（回调处理）</button>
+            
+            <button type="button" class="btn btn-danger"  onclick="showModalMsg('error1')">Error（无回调）</button>
+            <button type="button" class="btn btn-danger"  onclick="showModalMsg('error2')">Error（回调处理）</button>
+        </div>
+    </div>
+    <script language="javascript">
+    	function showModalMsg(mtype){
+    	    if(mtype=="success1"){
+    	        JQ.alert.succes('这里是SUCCESS提示信息');
+    	    }else if(mtype=="success2"){
+    	        JQ.alert.succes('这里是SUCCESS提示信息', function(){
+    	            alert("点击SUCCESS“确定”按钮后的回调处理");
+    	        });
+    	    }else if(mtype=="confirm1"){
+    	        JQ.alert.confirm('这里是CONFIRM提示信息');
+    	    }else if(mtype=="confirm2"){
+    	        JQ.alert.confirm('这里是CONFIRM提示信息', function(flag){
+    	            alert("点击CONFIRM的按钮后的回调处理");
+    	            if(flag){
+    	                alert("返回结果：TRUE");
+    	            }else{
+    	                alert("返回结果：FALSE");
+    	            }
+    	        });
+    	    }else if(mtype=="confirm3"){
+    	        JQ.alert.confirm('这里是CONFIRM提示信息', function(){
+    	            alert("点击CONFIRM“确定”按钮后的回调处理");
+    	        }, function(){
+    	            alert("点击CONFIRM“取消”按钮后的回调处理");
+    	        });
+    	    }else if(mtype=="warning1"){
+    	        JQ.alert.warning('这里是WARNING提示信息');
+    	    }else if(mtype=="warning2"){
+    	        JQ.alert.warning('这里是WARNING提示信息', function(){
+    	            alert("点击WARNING“确定”按钮后的回调处理");
+    	        });
+    	    }else if(mtype=="error1"){
+    	        JQ.alert.error('这里是ERROR提示信息');
+    	    }else if(mtype=="error2"){
+    	        JQ.alert.error('这里是ERROR提示信息', function(){
+    	            alert("点击ERROR“确定”按钮后的回调处理");
+    	        });
+    	    }
+    	}
+    </script>
+    
+    <div style="margin-top:20px;">
+        <div class="alert alert-block">
+            <h4>注意!</h4>
+            <ul>
+                <li>aaaaaaaa</li>
+                <li>bbbbbbbb</li>
+                <li>cccccccc</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div id="tooltip" class="module_box">
+        <div class="header"><h3>Tool tips</h3></div>
+        <div class="content">
+            <ul class="tooltip-examples">
+              <li><a href="#" data-toggle="tooltip" data-placement="top" title="Tooltip on top">Tooltip on top</a></li>
+              <li><a href="#" data-toggle="tooltip" data-placement="right" title="Tooltip on right">Tooltip on right</a></li>
+              <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom">Tooltip on bottom</a></li>
+              <li><a href="#" data-toggle="tooltip" data-placement="left" title="Tooltip on left">Tooltip on left</a></li>
+            </ul>
+        </div>
+        <div class="footer"></div>
+    </div>
+    <script language="javascript">
+        JQ('*[data-toggle="tooltip"]').tooltip();
+    </script>
 
 
         </div>
