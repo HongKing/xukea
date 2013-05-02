@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <title>Wizard</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link type="text/css" rel="stylesheet" href="./skin/default/bootstrap/css/bootstrap.css">
+    <link type="text/css" rel="stylesheet" href="./skin/default/bootstrap/css/bootstrap-responsive.css">
+    <link type="text/css" rel="stylesheet" href="./skin/default/main/main.css">
+    
+    <script type="text/javascript" src="./js/jquery.min.js"></script>
+    <script type="text/javascript" src="./js/bootstrap.min.js"></script>
+    
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    
+    <script type="text/javascript" src="./js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="./js/jquery.function.js"></script>
+    <script type="text/javascript" src="./js/jquery.settings.js"></script>
+
+    <!-- multi select -->
+    <link type="text/css" rel="stylesheet" href="./skin/default/wizard/wizard.default.css">
+    <script type="text/javascript" src="./js/jquery.wizard.js"></script>
+    
+<style >
+.tooltip-examples {
+    list-style: none outside none;
+    margin: 0 0 10px;
+    text-align: center;
+}
+.tooltip-examples li {
+    display: inline;
+    padding: 0 10px;
+}
+</style>
+<script language="javascript">
+	var JQ = jQuery.noConflict();
+</script>
+    
+</head>
+<body data-spy="scroll" data-target=".sidebar">
+    
+<!--start: main menu bar -->
+<div class="navbar navbar-inverse  navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+             <!-- Be sure to leave the brand out there if you want it shown -->
+             <a class="brand" href="#">Project name</a>
+            <!-- Everything you want hidden at 940px or less, place within here -->
+            <div class="nav-collapse collapse">
+                <!-- main menu -->
+                <ul class="nav">
+		            <li class=""><a href="./index.html">首页</a></li>
+		            <li class="active"><a href="./index.html">页面模板</a></li>
+		        </ul>
+                <!-- user profile -->
+					<ul class="nav pull-right">
+					    <li class="dropdown">
+					        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user icon-white"></i>用户一<b class="caret"></b></a>
+					        <ul class="dropdown-menu">
+					            <li><a href="#"><i class="icon-pencil"></i> 资料修改</a></li>
+					            <li><a href="#"><i class="icon-cog"></i> 个性配置</a></li>
+					            <li class="divider"></li>
+					            <li><a href="./login.html"><i class="icon-off"></i> 退出</a></li>
+					        </ul>
+					    </li>
+					</ul>
+            </div>
+        </div><!-- end .container -->
+    </div>
+</div>
+<!--end: main menu bar -->
+
+
+<!--start: sub menu bar -->
+<div class="subnav subnav-fixed">
+    <ul class="nav nav-pills">
+            <li class=""><a href="./dashboard.html">Dashboard</a></li>
+            <li class=""><a href="./table.html">表格</a></li>
+            <li class=""><a href="./form.html">表单</a></li>
+            <li class=""><a href="./alert.html">弹出窗口</a></li>
+            <li class=""><a href="./button.html">按钮</a></li>
+            <li class=""><a href="./icon.html">小图标</a></li>
+            <li class=""><a href="./error.html">提示信息</a></li>
+            <li class=""><a href="./laout.html">布局</a></li>
+            <li class="active"><a href="./laout.html">Wizard</a></li>
+    </ul>
+</div>
+<!--end: sub menu bar -->
+
+<!--start: .container -->
+<div class="container">
+    <div class="row">
+        <!-- sider menu bar  -->
+        <div class="span12">
+        
+            
+
+    <div class="wizard" id="wizard-1">
+        <div class="wizard_progressbar"></div>
+        <div class="wizard_steps">
+            <ul>
+                <li url="#tab_1" >1. 基本信息</li>
+                <li url="#tab_2" class="disable">2. 禁用 this step</li>
+                <li url="#tab_3" >3. 角色权限</li>
+                <li url="#tab_4" >4. Ajax URL 加载</li>
+                <li url="#tab_5" >5. 角色权限</li>
+            </ul>
+        </div>   
+        <div class="wizard_content" style="height: 290px; overflow-y: auto;">
+           <form class="form-horizontal" action="" method="post">
+             <div class="steps_page">
+                <div id="tab_1" class="step">
+                    step 1 content, if <code>next_handle</code> attribute return true,then show next step page, else stay this step page
+                    <button type="button" class="btn" onclick="disable_step2(this, true)">disable step 2</button>
+                    <button type="button" class="btn" onclick="disable_step2(this, false)">enable step 2</button>
+                    <button type="button" class="btn" onclick="set_step3_parms(1)">set step 3 params1</button>
+                    <button type="button" class="btn" onclick="set_step3_parms(2)">set step 3 params2</button>
+                </div><!-- /#tab_1 -->
+                <div id="tab_2" class="step">
+                    step 2 content
+                </div><!-- /#tab_2 -->
+                <div id="tab_3" class="step">
+                    step 3 content
+                    <button type="button" class="btn" onclick="set_step4_url(1)">set step 4 url1</button>
+                    <button type="button" class="btn" onclick="set_step4_url(2)">set step 4 url2</button>
+                    <button type="button" class="btn" onclick="set_step4_url(3)">set step 4 url3</button>
+                    <button type="button" class="btn" onclick="set_step4_url(4)">set step 4 url4</button>
+                </div><!-- /#tab_3 -->
+                <div id="tab_5" class="step">
+                    step 5 content
+                    <button type="button" class="btn" onclick="get_step3_parms()">get step 3 parms</button>
+                    <button type="button" class="btn" onclick="get_step4_parms()">get step 4 parms</button>
+                </div><!-- /#tab_5 -->
+             </div>
+           </form>
+        </div>
+        <div class="button_bar">
+            <div class="in">
+                <a type="button" class="btn btn-info    btn_prev" >上一步</a>
+                <a type="button" class="btn btn-success btn_next" >下一步</a>
+                <a type="button" class="btn btn-primary btn_complete" >提 &nbsp; 交</a>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" language="javascript">
+        // 设置请求参数
+        function set_step3_parms(type){
+            var $wizard = JQ("#wizard-1");
+            if(type==1){
+                $wizard.wizard('setParms', 2, {'a':'aaaa'});
+            }else if(type==2){
+                $wizard.wizard('setParms', {'idx':3, 'params':{'a':'aaaa'} });
+            }
+        }
+        // 设置URL
+        function set_step4_url(type){
+            var $wizard = JQ("#wizard-1");
+            if(type==1){
+                $wizard.wizard('setUrl', 3, './wizard_step_4.txt');
+            }else if(type==2){
+                $wizard.wizard('setUrl', 3, './wizard_step_4.txt', {'a':'aaaa'} );
+            }else if(type==3){
+                $wizard.wizard('setUrl', {'idx':3, 'url':'./wizard_step_4.txt'} );
+            }else if(type==4){
+                $wizard.wizard('setUrl', {'idx':3, 'url':'./wizard_step_4.txt', 'params':{'a':'aaaa'} });
+            }
+        }
+        // 获取参数
+        function get_step3_parms(){
+            var $wizard = JQ("#wizard-1");
+            var params  = $wizard.wizard('getParms', 2);
+            alert(params);
+        }
+        function get_step4_parms(){
+            var $wizard = JQ("#wizard-1");
+            var params  = $wizard.wizard('getParms', 3);
+            alert(params);
+        }
+        
+        // 设置某步是否可用
+        function disable_step2($this, flag){
+            var $wizard = JQ($this).parentsUntil(".wizard").parent();
+            if(flag){
+                $wizard.wizard('disable', {'idx':1, 'disabled':flag});
+            }else{
+                $wizard.wizard('disable', 1, flag);
+            }
+        }
+    </script>
+
+
+    <div class="wizard">
+        <div class="wizard_progressbar"></div>
+        <div class="wizard_steps">
+            <ul>
+                <li url="#tab_21" next_handle="my_check" >1. 基本信息</li>
+                <li url="#tab_22"  >2. 角色权限</li>
+                <li url="#tab_23"  class="disable">3. 禁用 this step</li>
+                <li url="./wizard_step_4.txt"  >4. Ajax URL 加载</li>
+                <li url="#tab_25"  >5. 角色权限</li>
+            </ul>
+        </div>   
+        <div class="wizard_content" style="height: 290px; overflow-y: auto;">
+           <form class="form-horizontal" action="" method="post">
+             <div class="steps_page">
+                <div id="tab_21" class="step">
+                    step 1 content, if <code>next_handle</code> attribute return true,then show next step page, else stay this step page
+                </div><!-- /#tab_1 -->
+                <div id="tab_22" class="step">
+                    step 2 content
+                </div><!-- /#tab_2 -->
+                <div id="tab_23" class="step">
+                    step 3 content
+                </div><!-- /#tab_3 -->
+                <div id="tab_25" class="step">
+                    step 5 content
+                </div><!-- /#tab_5 -->
+             </div>
+           </form>
+        </div>
+        <div class="button_bar">
+            <div class="in">
+                <a type="button" class="btn btn-info  btn_prev" >上一步</a>
+                <a type="button" class="btn btn-success btn_next" >下一步</a>
+                <a type="button" class="btn btn-primary   btn_complete" >提 &nbsp; 交</a>
+            </div>
+        </div>
+    </div>
+    
+    
+        </div>
+        <!-- end .main content -->
+    </div>
+    <!-- end .row -->
+</div>
+<!-- end .container -->
+
+<!-- Footer
+ ================================================== -->
+<div class="footer">
+    <div class="container">
+        <p class="pull-right"><a href="http://localhost:8088/main/main/user/list/1#">回到顶端</a></p>
+        <p>Icons取自 <a href="http://glyphicons.com/">Glyphicons Free</a>，授权依照 <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>。</p>
+        <ul class="footer-links">
+            <li><a href="http://blog.getbootstrap.com/">Blog</a></li>
+            <li class="muted">·</li>
+            <li><a href="https://github.com/twitter/bootstrap/issues?state=open">Issues</a></li>
+            <li class="muted">·</li>
+            <li><a href="https://github.com/twitter/bootstrap/wiki">Roadmap and changelog</a></li>
+        </ul>
+    </div>
+</div>
+
+</body></html>

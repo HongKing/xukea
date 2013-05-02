@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <title>表单</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link type="text/css" rel="stylesheet" href="./skin/default/bootstrap/css/bootstrap.css">
+    <link type="text/css" rel="stylesheet" href="./skin/default/bootstrap/css/bootstrap-responsive.css">
+    <link type="text/css" rel="stylesheet" href="./skin/default/main/main.css">
+    
+    <!-- base js -->
+    <script type="text/javascript" src="./js/jquery.min.js"></script>
+    <script type="text/javascript" src="./js/bootstrap.min.js"></script>
+    
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    
+    <!-- application js -->
+    <script type="text/javascript" src="./js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="./js/jquery.function.js"></script>
+    <script type="text/javascript" src="./js/jquery.settings.js"></script>
+
+    <!-- multi select -->
+    <link type="text/css" rel="stylesheet" href="./skin/default/main/multi-select.css">
+    <script type="text/javascript" src="./js/jquery.multi-select.js"></script>
+    
+<script language="javascript">
+	var JQ = jQuery.noConflict();
+</script>
+    
+</head>
+<body data-spy="scroll" data-target=".sidebar">
+    
+<!--start: main menu bar -->
+<div class="navbar navbar-inverse  navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+             <!-- Be sure to leave the brand out there if you want it shown -->
+             <a class="brand" href="#">Project name</a>
+            <!-- Everything you want hidden at 940px or less, place within here -->
+            <div class="nav-collapse collapse">
+                <!-- main menu -->
+                <ul class="nav">
+		            <li class=""><a href="./index.html">首页</a></li>
+		            <li class="active"><a href="./index.html">页面模板</a></li>
+		        </ul>
+                <!-- user profile -->
+					<ul class="nav pull-right">
+					    <li class="dropdown">
+					        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user icon-white"></i>用户一<b class="caret"></b></a>
+					        <ul class="dropdown-menu">
+					            <li><a href="#"><i class="icon-pencil"></i> 资料修改</a></li>
+					            <li><a href="#"><i class="icon-cog"></i> 个性配置</a></li>
+					            <li class="divider"></li>
+					            <li><a href="./login.html"><i class="icon-off"></i> 退出</a></li>
+					        </ul>
+					    </li>
+					</ul>
+            </div>
+        </div><!-- end .container -->
+    </div>
+</div>
+<!--end: main menu bar -->
+
+
+<!--start: sub menu bar -->
+<div class="subnav subnav-fixed">
+    <ul class="nav nav-pills">
+            <li class=""><a href="./dashboard.html">Dashboard</a></li>
+            <li class=""><a href="./table.html">表格</a></li>
+            <li class="active"><a href="./form.html">表单</a></li>
+            <li class=""><a href="./alert.html">弹出窗口</a></li>
+            <li class=""><a href="./button.html">按钮</a></li>
+            <li class=""><a href="./icon.html">小图标</a></li>
+            <li class=""><a href="./error.html">提示信息</a></li>
+            <li class=""><a href="./laout.html">布局</a></li>
+    </ul>
+</div>
+<!--end: sub menu bar -->
+
+<!--start: .container -->
+<div class="container">
+    <div class="row">
+        <!-- sider menu bar  -->
+        <div class="span2 sidebar">
+            <ul class="nav nav-list sidenav">
+	            <li class=""><a href="#hori-form"><i class="icon-chevron-right"></i> Horizontal Form</a></li>
+	            <li class=""><a href="#grid-size"><i class="icon-chevron-right"></i> Grid sizing</a></li>
+	            <li class=""><a href="#srch-form"><i class="icon-chevron-right"></i> Search form</a></li>
+	            <li class=""><a href="#inli-form"><i class="icon-chevron-right"></i> Inline form</a></li>
+	            <li class=""><a href="#mult-slct"><i class="icon-chevron-right"></i> Multi Select</a></li>
+	            <li class=""><a href="#tag-input"><i class="icon-chevron-right"></i> Tag Input</a></li>
+            </ul>
+        </div>
+        <div class="span10">
+
+<form class="form-horizontal" id="hori-form">
+  <fieldset>
+    <legend>Horizontal Form</legend>
+      
+      <div class="control-group">
+        <label class="control-label" for="inputEmail">Email</label>
+        <div class="controls">
+          <input type="text" id="inputEmail" placeholder="Email">
+          <span class="help-inline">后面提示信息</span>
+        </div>
+      </div>
+      
+      <div class="control-group">
+        <label class="control-label" for="inputEmail">Email</label>
+        <div class="controls">
+          <input type="text" id="inputEmail" placeholder="Email">
+          <span class="help-block">下面提示信息</span>
+        </div>
+      </div>
+      
+      <div class="control-group">
+        <label class="control-label" for="inputPassword">Password</label>
+        <div class="controls">
+          <input type="password" id="inputPassword" placeholder="Password">
+        </div>
+      </div>
+      <div class="control-group warning">
+          <label class="control-label" for="inputWarning">Input with warning</label>
+          <div class="controls">
+            <input type="text" id="inputWarning">
+            <span class="help-inline">Something may have gone wrong</span>
+          </div>
+        </div>
+         
+        <div class="control-group error">
+          <label class="control-label" for="inputError">Input with error</label>
+          <div class="controls">
+            <input type="text" id="inputError">
+            <span class="help-inline">Please correct the error</span>
+          </div>
+        </div>
+         
+        <div class="control-group info">
+          <label class="control-label" for="inputInfo">Input with info</label>
+          <div class="controls">
+            <input type="text" id="inputInfo">
+            <span class="help-inline">Username is already taken</span>
+          </div>
+        </div>
+         
+        <div class="control-group success">
+          <label class="control-label" for="inputSuccess">Input with success</label>
+          <div class="controls">
+            <input type="text" id="inputSuccess">
+            <span class="help-inline">Woohoo!</span>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="inputSuccess">Input with disabled</label>
+          <div class="controls">
+            <input type="text" id="inputSuccess" placeholder="Disabled input here..." disabled>
+            <span class="help-inline">Woohoo!</span>
+          </div>
+        </div>
+        
+        <div class="control-group">
+          <label class="control-label" for="inputSuccess">Select with signler</label>
+          <div class="controls">
+            <select >
+              <option>1</option>
+              <option>2</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="control-group">
+          <label class="control-label" for="inputSuccess">Select with multiple</label>
+          <div class="controls">
+            <select multiple="multiple">
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="control-group">
+          <label class="control-label" for="inputSuccess">Select with disabled</label>
+          <div class="controls">
+            <select disabled>
+              <option>1</option>
+              <option>2</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="control-group">
+          <label class="control-label" for="inputSuccess">textarea</label>
+          <div class="controls">
+            <textarea class="input-xxlarge" row="5"></textarea>
+          </div>
+        </div>
+        
+        <div class="control-group">
+          <div class="controls">
+            <label class="checkbox">
+              <input type="checkbox" value="">
+              Option one is this and that—be sure to include why it's great
+            </label>
+          </div>
+        </div>
+         
+        <div class="control-group">
+          <div class="controls">
+            <label class="radio">
+              <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+              Option one is this and that—be sure to include why it's great
+            </label>
+            <label class="radio">
+              <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+              Option two can be something else and selecting it will deselect option one
+            </label>
+          </div>
+        </div>
+        
+        <div class="control-group">
+          <label class="control-label" >Inline checkbox</label>
+          <div class="controls">
+            <label class="checkbox inline">
+              <input type="checkbox" id="inlineCheckbox1" value="option1"> 1
+            </label>
+            <label class="checkbox inline">
+              <input type="checkbox" id="inlineCheckbox2" value="option2"> 2
+            </label>
+            <label class="checkbox inline">
+              <input type="checkbox" id="inlineCheckbox3" value="option3"> 3
+            </label>
+          </div>
+        </div>
+        
+      <div class="control-group">
+        <div class="controls">
+          <label class="checkbox">
+            <input type="checkbox"> Remember me
+          </label>
+          <button type="submit" class="btn">Sign in</button>
+        </div>
+      </div>
+      
+  </fieldset>
+</form>
+
+    <div class="row-fluid" id="grid-size">
+        <div class="module_box">
+            <div class="header"><h3>Grid sizing</h3></div>
+            <div class="content">
+                <strong>use the <code>.controls-row</code> modifier class for proper spacing, this mast under class <code>.row-fluid</code></strong>
+                <form>
+                    <div class="controls">
+                      <input class="span12 " type="text" placeholder=".span12">
+                    </div>
+                    <div class="controls">
+                      <input class="input-block-level" type="text" placeholder=".input-block-level">
+                    </div>
+                    <div class="controls controls-row">
+                      <input class="span6 " type="text" placeholder=".span6">
+                      <input class="span6 " type="text" placeholder=".span6">
+                    </div>
+                    <div class="controls">
+                      <input class="span5 " type="text" placeholder=".span5">
+                    </div>
+                    <div class="controls controls-row">
+                      <input class="span4" type="text" placeholder=".span4">
+                      <input class="span1" type="text" placeholder=".span1">
+                    </div>
+                    <div class="controls controls-row">
+                      <input class="span3" type="text" placeholder=".span3">
+                      <input class="span2" type="text" placeholder=".span2">
+                    </div>
+                    <div class="controls controls-row">
+                      <input class="span2" type="text" placeholder=".span2">
+                      <input class="span3" type="text" placeholder=".span3">
+                    </div>
+                    <div class="controls controls-row">
+                      <input class="span1" type="text" placeholder=".span1">
+                      <input class="span4" type="text" placeholder=".span4">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="row-fluid" id="srch-form">
+        <div class="span6">
+            <div class="module_box">
+                <div class="header"><h3>Grid sizing</h3></div>
+                <div class="content">
+                    <strong>use the <code>.controls-row</code> modifier class for proper spacing</strong>
+                    <form>
+                        <div class="controls">
+                          <input class="span12 " type="text" placeholder=".span12">
+                        </div>
+                        <div class="controls controls-row">
+                          <input class="span6 " type="text" placeholder=".span6">
+                          <input class="span6 " type="text" placeholder=".span6">
+                        </div>
+                        <div class="controls">
+                            <input class="input-mini" type="text" placeholder=".input-mini">
+                        </div>
+                        <div class="controls">
+                            <input class="input-small" type="text" placeholder=".input-small">
+                        </div>
+                        <div class="controls">
+                            <input class="input-medium" type="text" placeholder=".input-medium">
+                        </div>
+                        <div class="controls">
+                            <input class="input-large" type="text" placeholder=".input-large">
+                        </div>
+                        <div class="controls">
+                            <input class="input-xlarge" type="text" placeholder=".input-xlarge">
+                        </div>
+                        <div class="controls">
+                            <input class="input-xxlarge" type="text" placeholder=".input-xxlarge">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="span6">
+            <div class="module_box">
+                <div class="header"><h3>Search form</h3></div>
+                <div class="content">
+                  <form class="form-search">
+                    <div class="input-prepend">
+                      <button type="submit" class="btn">Search</button>
+                      <input type="text" class="span8 search-query">
+                    </div>
+                  </form>
+                  <form class="form-search">
+                    <div class="input-append">
+                      <input type="text" class="search-query">
+                      <button type="button" class="btn">Search</button>
+                    </div>
+                  </form>
+                  <form>
+                      <div class="input-append">
+                          <input type="text" id="appendedInputButton">
+                          <button class="btn" type="button">Go!</button>
+                      </div>
+                  </form>
+                  <form>
+                    <div class="input-append">
+                      <input type="text" id="appendedDropdownButton">
+                      <div class="btn-group">
+                        <button class="btn dropdown-toggle" data-toggle="dropdown">Action <span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                          <li><a href="#">Action</a></li>
+                          <li><a href="#">Another action</a></li>
+                          <li><a href="#">Something else here</a></li>
+                          <li class="divider"></li>
+                          <li><a href="#">Separated link</a></li>
+                        </ul>
+                      </div><!-- /btn-group -->
+                    </div><!-- /input-append -->
+                  </form>
+                </div>
+                <div class="footer"></div>
+            </div>
+        </div>
+    </div>
+ 
+    
+    <div class="row-fluid" id="inli-form">
+        <div class="span6">
+            <div class="module_box">
+                <div class="header"><h3>Inline form</h3></div>
+                <div class="content">
+                    <p>Add <code>.form-inline</code> for left-aligned labels and inline-block controls for a compact layout.</p>
+          <form class="form-inline">
+            <input type="text" class="input-small" placeholder="Email">
+            <input type="password" class="input-small" placeholder="Password">
+            <label class="checkbox">
+              <input type="checkbox"> Remember me
+            </label>
+            <button type="submit" class="btn">Sign in</button>
+          </form>
+<pre class="prettyprint linenums">
+&lt;form class="form-inline"&gt;
+  &lt;input type="text" class="input-small" placeholder="Email"&gt;
+  &lt;input type="password" class="input-small" placeholder="Password"&gt;
+  &lt;label class="checkbox"&gt;
+    &lt;input type="checkbox"&gt; Remember me
+  &lt;/label&gt;
+  &lt;button type="submit" class="btn"&gt;Sign in&lt;/button&gt;
+&lt;/form&gt;
+</pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row-fluid" id="mult-slct">
+        <div class="span6">
+            <div class="module_box">
+                <div class="header"><h3>Multi Select</h3></div>
+                <div class="content">
+                    <select id='optgroup' multiple='multiple'>
+                      <optgroup label='Friends'>
+                        <option value='1'>Yoda</option>
+                        <option value='2'>Obiwan</option>
+                      </optgroup>
+                      <optgroup label='Enemies'>
+                        <option value='3'>Palpatine</option>
+                        <option value='4'>Darth Vader</option>
+                      </optgroup>
+                    </select>
+                    <script type="text/javascript" language="javascript">
+                    JQ('#optgroup').multiSelect({ 
+                        selectableOptgroup: true,
+                        selectableHeader: "<div class='multi-select-header'>待选项</div>",
+                        selectionHeader:  "<div class='multi-select-header'>选中项</div>",
+                        afterSelect: function(values){
+                            alert("Select value: "+values);
+                        },
+                        afterDeselect: function(values){
+                            alert("Deselect value: "+values);
+                        }
+                    });
+                    </script>
+                </div>
+            </div>
+        </div>
+        <div class="span6">
+            <div class="module_box">
+                <div class="header"><h3>Multi Select</h3></div>
+                <div class="content">
+                    <select id='optgroup2' multiple='multiple'>
+                      <optgroup label='Friends'>
+                        <option value='1'>Yoda</option>
+                        <option value='2' disabled>Obiwan</option>
+                      </optgroup>
+                      <optgroup label='Enemies'>
+                        <option value='3'>Palpatine</option>
+                        <option value='4'>Darth Vader</option>
+                      </optgroup>
+                    </select>
+                    <script language="javascript">
+                    JQ('#optgroup2').multiSelect({ 
+                        selectableOptgroup: true,
+                        selectableHeader: "<div class='multi-select-header'>待选项</div>",
+                        selectionHeader:  "<div class='multi-select-header'>选中项</div>",
+                        afterSelect: function(values){
+                            alert("Select value: "+values);
+                        },
+                        afterDeselect: function(values){
+                            alert("Deselect value: "+values);
+                        }
+                    });
+                    </script>
+                </div>
+            </div>
+        </div>
+        <div class="span6">
+            <div class="module_box">
+                <div class="header"><h3>Multi Select</h3></div>
+                <div class="content">
+                    <select id='optgroup3' multiple='multiple' disabled='disabled' >
+                      <optgroup label='Friends'>
+                        <option value='1'>Yoda</option>
+                        <option value='2'>Obiwan</option>
+                      </optgroup>
+                      <optgroup label='Enemies'>
+                        <option value='3'>Palpatine</option>
+                        <option value='4'>Darth Vader</option>
+                      </optgroup>
+                    </select>
+                    <script language="javascript">
+                    JQ('#optgroup3').multiSelect({ 
+                        selectableOptgroup: true,
+                        selectableHeader: "<div class='multi-select-header'>待选项</div>",
+                        selectionHeader:  "<div class='multi-select-header'>选中项</div>",
+                        afterSelect: function(values){
+                            alert("Select value: "+values);
+                        },
+                        afterDeselect: function(values){
+                            alert("Deselect value: "+values);
+                        }
+                    });
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row-fluid" id="tag-input">
+        <div class="span12">
+            <div class="module_box">
+                <div class="header"><h3>Tag Input</h3></div>
+                <div class="content">
+    
+                </div>
+            </div><!-- /.module_box -->
+        </div><!-- /.span* -->
+        
+    </div><!-- /.row-fluid -->
+    
+        </div>
+        <!-- end .main content -->
+    </div>
+    <!-- end .row -->
+</div>
+<!-- end .container -->
+
+<!-- Footer
+ ================================================== -->
+<div class="footer">
+    <div class="container">
+        <p class="pull-right"><a href="http://localhost:8088/main/main/user/list/1#">回到顶端</a></p>
+        <p>Icons取自 <a href="http://glyphicons.com/">Glyphicons Free</a>，授权依照 <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>。</p>
+        <ul class="footer-links">
+            <li><a href="http://blog.getbootstrap.com/">Blog</a></li>
+            <li class="muted">·</li>
+            <li><a href="https://github.com/twitter/bootstrap/issues?state=open">Issues</a></li>
+            <li class="muted">·</li>
+            <li><a href="https://github.com/twitter/bootstrap/wiki">Roadmap and changelog</a></li>
+        </ul>
+    </div>
+</div>
+
+</body></html>

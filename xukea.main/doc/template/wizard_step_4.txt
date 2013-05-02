@@ -1,0 +1,11 @@
+<p>
+ this content get from ajax url
+                    <button type="button" class="btn" onclick="clear_this_content()">clear step 4 content</button>
+</p>
+    <script type="text/javascript" language="javascript">
+        // 设置请求参数
+        function clear_this_content(){
+            var $wizard = JQ("#wizard-1");
+            $wizard.wizard('clear', 3);
+        }
+    </script>

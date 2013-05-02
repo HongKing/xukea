@@ -159,18 +159,18 @@
 			sucs_cal = $.isFunction( sucs_cal ) ? sucs_cal : function(){};
 			cacl_cal = $.isFunction( cacl_cal ) ? cacl_cal : sucs_cal;
 			var btns = [{
-			    text : "确定",
-			    class: "btn-primary",
-				func : function(){
-        					sucs_cal.call(this, true);
-        				}
-				},{
 			    text : "取消",
 			    class: "",
 				func : function(){
         					cacl_cal.call(this, false);
         				}
-			    }];
+			    },{
+			    text : "确定",
+			    class: "btn-primary",
+				func : function(){
+        					sucs_cal.call(this, true);
+        				}
+				}];
 			$.alert._message(msg, 'alert-info', btns);
 		},
 		_message : function(msg, mtype, btns){
