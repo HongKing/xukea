@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 加载顺序：listener >> filter >> servlet >> spring  -->
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.4"
+		 xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+	
+	
+    <!-- ===================================================== -->  
+    <!--                       以下不可修改                                                       -->  
+    <!-- ===================================================== -->
+
+    <!-- spring security  start-->
+    <!-- spring security 过滤器授权代理，会产生一个过滤器链，来处理security中的过滤器  命名一定要是springSecurityFilterChain -->
+    <filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <!-- 此监听器会在session创建和销毁的时候通知Spring Security,如果要限制用户登录个数，这里就要配置. -->
+    <listener>
+         <listener-class>org.springframework.security.web.session.HttpSessionEventPublisher</listener-class>
+    </listener> 
+    <!-- spring security  end -->
+
+</web-app>
+
