@@ -1,10 +1,7 @@
 package com.xukea.framework.util;
 
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
-import java.net.URISyntaxException;
-import java.security.KeyPair;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -13,7 +10,6 @@ import java.util.Properties;
 import org.apache.log4j.Logger;
 
 import com.xukea.framework.base.BaseConstants;
-import com.xukea.framework.util.crypto.RSAUtil;
 import com.xukea.framework.util.crypto.SignatureData;
 
 /**
@@ -35,13 +31,13 @@ public final class LicenseSign {
 		return instance;
 	}
 	
-	public LicenseSign(){
+	private LicenseSign(){
 		InputStream inputStrem = Thread.currentThread().getContextClassLoader().getResourceAsStream(configName);
 //		inputStrem = this.getClass().getClassLoader().getResourceAsStream(configName);
 		try {
 			propertie.load(inputStrem);
 		}catch (Exception e) {
-			e.printStackTrace();
+			log.error("load license config ["+ configName +"] error: ", e);
 		}
 	}
 
@@ -64,7 +60,7 @@ public final class LicenseSign {
 			FileOutputStream out = new FileOutputStream(filePath);
 			propertie.store(out, "");
 		}catch (Exception e) {
-			log.error(e);
+			log.error("save license config ["+ configName +"] error: ", e);
 		}
 	}
 	

@@ -2,7 +2,12 @@ package com.xukea.framework.util;
 
 import java.util.List;
 
-
+/**
+ * 分页处理
+ * @author FishBoy
+ *
+ * @param <E>
+ */
 public class PageList<E> {
 	public static int DEFAULT_PAGE_SIZE = 10;
 	
