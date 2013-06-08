@@ -6,7 +6,6 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Random;
 
@@ -14,6 +13,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.core.io.ClassPathResource;
 
 import com.sun.image.codec.jpeg.JPEGCodec;
 import com.sun.image.codec.jpeg.JPEGEncodeParam;
@@ -50,17 +51,17 @@ public class JpegServlet extends HttpServlet {
 		 "A","B","C","D","E","F","G","H","J","K","M","N","P","Q","R","S","T","U","V","W","X","Y","Z",
          "a","b","c","d","e","f","g","h","i","j","k","m","n","p","q","r","s","t","u","v","w","x","y","z"};
 	
-	private static String fontPath = "";     // 字体路径
+//	private static String fontPath = "";     // 字体路径
 	private static String fontNum  = "";     // 字体编号
 	private static String sname    = "vnum"; // session名称
 	private static int    length   = 4;      // 验证码位数
 	static {
-		if("weblogic".equalsIgnoreCase(Config.getInstance().getString("server.type"))){
-			fontPath = Thread.currentThread().getContextClassLoader().getResource("/") + "ttfs/";
-		}else{// tomcat
-			fontPath = JpegServlet.class.getClassLoader().getResource("/") + "ttfs/";
-		}
-		fontPath = fontPath.substring( "file:".length() );
+//		if("weblogic".equalsIgnoreCase(Config.getInstance().getString("server.type"))){
+//			fontPath = Thread.currentThread().getContextClassLoader().getResource("/") + "ttfs/";
+//		}else{// tomcat
+//			fontPath = JpegServlet.class.getClassLoader().getResource("/") + "ttfs/";
+//		}
+//		fontPath = fontPath.substring( "file:".length() );
 		fontNum  = Config.getInstance().getString("captcha.strfont");
 		imgW     = Config.getInstance().getInt("captcha.width");
 		imgH     = Config.getInstance().getInt("captcha.height");
@@ -106,11 +107,15 @@ public class JpegServlet extends HttpServlet {
 			String fontFileName = "";
 			if("auto".equals(fontNum)){
 				int ftemp = useNoise ? randomInt(1, 7) : randomInt(1, 10);
-				fontFileName = fontPath + ftemp + ".ttf";
+//				fontFileName = fontPath + ftemp + ".ttf";
+				fontFileName = "ttfs/" + ftemp + ".ttf";
 			}else{
-				fontFileName = fontPath + fontNum + ".ttf";
+//				fontFileName = fontPath + fontNum + ".ttf";
+				fontFileName = "ttfs/" + fontNum + ".ttf";
 			}
-			font = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream( fontFileName ));
+//			font = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream( fontFileName ));
+			ClassPathResource resource = new ClassPathResource(fontFileName);
+			font = Font.createFont(Font.TRUETYPE_FONT, resource.getInputStream());
 			font = font.deriveFont(Font.PLAIN, fontSize);
 		}catch(Exception e){
 			font = new Font("Times New Roman", Font.PLAIN, fontSize);
