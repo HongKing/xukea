@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.apache.log4j.Logger;
+import org.springframework.util.ClassUtils;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -31,12 +32,15 @@ public class FileUploadUtil {
 	private static boolean saveAsDate = false;    // 是否按日期存储
 	
 	static {
-		if("weblogic".equalsIgnoreCase(Config.getInstance().getString("server.type"))){
-			basePath = Thread.currentThread().getContextClassLoader().getResource("/") + "";
-		}else{// tomcat
-			basePath = FileUploadUtil.class.getClassLoader().getResource("/") + "";
+		basePath = ClassUtils.getDefaultClassLoader().getResource("/").toString();
+//		if("weblogic".equalsIgnoreCase(Config.getInstance().getString("server.type"))){
+//			basePath = Thread.currentThread().getContextClassLoader().getResource("/") + "";
+//		}else{// tomcat
+//			basePath = FileUploadUtil.class.getClassLoader().getResource("/") + "";
+//		}
+		if(basePath.startsWith("file:")){
+			basePath = basePath.substring( "file:".length() );
 		}
-		basePath = basePath.substring( "file:".length() );
 		basePath = basePath.substring(0, basePath.indexOf("WEB-INF"));
 		basePath = basePath.endsWith(DS) ? basePath.substring(0, basePath.length()-1) : basePath;
 

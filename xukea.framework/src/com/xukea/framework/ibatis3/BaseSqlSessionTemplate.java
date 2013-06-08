@@ -79,7 +79,6 @@ public class BaseSqlSessionTemplate extends SqlSessionTemplate {
 	    Configuration configuration = this.getSqlSessionFactory().getConfiguration();
     	MappedStatement ms = configuration.getMappedStatement(statement);
     	BoundSql boundSql  = ms.getBoundSql(parameter);
-    	BaseSqlSession session = (BaseSqlSession)this.getSqlSessionFactory().openSession();
     	
     	// 创建查询总数的MappedStatement对象
     	// a. 拼接查询总记录数的SQL
@@ -99,7 +98,9 @@ public class BaseSqlSessionTemplate extends SqlSessionTemplate {
 		msBuilder.resultMaps(resultMaps);
 		
 		// 执行查询总记录数语句
+    	BaseSqlSession session = (BaseSqlSession)this.getSqlSessionFactory().openSession();
 		List<Integer> countList = session.selectList(msBuilder.build(), parameter, RowBounds.DEFAULT);
+		session.close();
 		// 给PageList对象设置总记录数
 		pageList.setTotalCount(countList.get(0));
 		// 设置分页对象
