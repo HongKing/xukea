@@ -1,6 +1,5 @@
 package com.xukea.framework.base;
 
-
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -11,9 +10,10 @@ import com.opensymphony.oscache.general.GeneralCacheAdministrator;
 /**
  * 缓存基类
  * 
- * @author FishBoy
- *
- * @param <T>
+ * @author 木木大叔
+ * @QQ     285198830
+ * @version 1.0
+ * @date    2012-12-27
  */
 public abstract class BaseCache<T> extends GeneralCacheAdministrator {
 	protected final Logger log = Logger.getLogger(getClass());

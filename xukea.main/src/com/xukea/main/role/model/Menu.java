@@ -1,15 +1,16 @@
 package com.xukea.main.role.model;
 
-
 import java.util.List;
 
 import com.xukea.framework.base.BaseEntity;
 
-
 /**
+ * 菜单资源Bean
  * 
- * @author 
- * @version
+ * @author 木木大叔
+ * @QQ     285198830
+ * @version 1.0
+ * @date    2012-12-27
  */
 public class Menu extends BaseEntity {
 	

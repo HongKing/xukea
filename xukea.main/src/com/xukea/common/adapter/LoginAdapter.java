@@ -14,10 +14,14 @@ import com.xukea.common.exception.UnLoginException;
 import com.xukea.common.util.WebUtil;
 import com.xukea.framework.base.BaseRequestAdapter;
 
-
 /**
  * 拦截器：需登录才能访问<br>
  * SpringSecruity的拦截器将优先执行
+ * 
+ * @author 木木大叔
+ * @QQ     285198830
+ * @version 1.0
+ * @date    2012-12-27
  */
 public class LoginAdapter extends BaseRequestAdapter {
 	private final Logger log = Logger.getLogger(getClass());

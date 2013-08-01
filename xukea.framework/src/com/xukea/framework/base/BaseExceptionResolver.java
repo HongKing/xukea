@@ -8,6 +8,14 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.xukea.common.util.WebUtil;
 
+/**
+ * 异常处理基类
+ * 
+ * @author 木木大叔
+ * @QQ     285198830
+ * @version 1.0
+ * @date    2012-12-27
+ */
 public class BaseExceptionResolver implements HandlerExceptionResolver {//extends SimpleMappingExceptionResolver
 
     public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {

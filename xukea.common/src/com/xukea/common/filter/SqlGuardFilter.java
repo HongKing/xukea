@@ -15,9 +15,13 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 
-
 /**
- * SQL 防注入过滤器
+ * 过滤器：SQL 防注入
+ * 
+ * @author 木木大叔
+ * @QQ     285198830
+ * @version 1.0
+ * @date    2012-12-27
  */
 public class SqlGuardFilter implements Filter {
 	private final Logger log = Logger.getLogger(getClass());
@@ -27,7 +31,9 @@ public class SqlGuardFilter implements Filter {
 
 	private Pattern SQL_PATTERN    = Pattern.compile("\\b("+ SQL_KEY_WORDS +")\\b", Pattern.CASE_INSENSITIVE);
 
-	
+	/**
+	 * 初始化
+	 */
 	public void init(FilterConfig config) throws ServletException {
 		log.debug("init");
 		String keywords = config.getInitParameter("keywords");
@@ -36,13 +42,20 @@ public class SqlGuardFilter implements Filter {
 		}
 	}
 	
+	/**
+	 * 销毁
+	 */
 	public void destroy() {
 		log.debug("destroy");
 	}
 
+	/**
+	 * 执行
+	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)throws IOException, ServletException{
 		log.debug("doFilter");
 		Matcher match = null;
+		//TODO 跳过某些URL
 		
 		HttpServletRequest  req = (HttpServletRequest)request;
 		Iterator values = req.getParameterMap().values().iterator();//获取所有的表单参数

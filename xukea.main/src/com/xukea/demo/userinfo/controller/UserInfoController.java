@@ -20,10 +20,17 @@ import com.xukea.demo.userinfo.service.UserInfoService;
 import com.xukea.framework.base.BaseRestSpringController;
 import com.xukea.framework.util.PageList;
 
-
+/**
+ * 演示：用户管理
+ * 
+ * @author 木木大叔
+ * @QQ     285198830
+ * @version 1.0
+ * @date    2012-12-27
+ */
 @Controller
 @RequestMapping("/demo/userinfo")
-public class UserInfoController extends BaseRestSpringController<UserInfo, Long>{
+public class UserInfoController extends BaseRestSpringController {
 
 	// URL基础路径
 	private final String ACT_URL = "/demo/userinfo";
@@ -46,7 +53,7 @@ public class UserInfoController extends BaseRestSpringController<UserInfo, Long>
 	
 	/** 首页 */
 	@Override
-	public ModelAndView index(HttpServletRequest request, HttpServletResponse response, UserInfo userInfo) {
+	public ModelAndView index(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView result = new ModelAndView();
 		result.setViewName("redirect:" + ACT_URL + "/list");
 		return result;

@@ -10,7 +10,14 @@ import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
-
+/**
+ * 创建 Excel
+ * 
+ * @author 木木大叔
+ * @QQ     285198830
+ * @version 1.0
+ * @date    2012-02-16
+ */
 public class CreateExcel {
 
 	/**

@@ -1,7 +1,12 @@
 package com.xukea.framework.ibatis3.plugin.dialect;
+
 /**
- * 类似hibernate的Dialect,但只精简出分页部分
- * @author badqiu
+ * 分页基类
+ * 
+ * @author 木木大叔
+ * @QQ     285198830
+ * @version 1.0
+ * @date    2012-12-27
  */
 public class Dialect {
 	

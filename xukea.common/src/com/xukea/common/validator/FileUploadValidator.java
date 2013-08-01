@@ -9,11 +9,13 @@ import com.xukea.common.util.FileUploadUtil;
 import com.xukea.common.util.cache.Config;
 import com.xukea.framework.base.BaseValidator;
 
-
 /**
  * 文件上传验证类
- * @author FishBoy
- * @version
+ * 
+ * @author 木木大叔
+ * @QQ     285198830
+ * @version 1.0
+ * @date    2012-02-16
  */
 public class FileUploadValidator extends BaseValidator{
 	private static int     maxSize   = 1024; // 文件大小（KB）

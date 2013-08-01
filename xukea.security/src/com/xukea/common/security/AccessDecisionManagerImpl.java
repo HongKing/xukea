@@ -11,11 +11,13 @@ import org.springframework.security.authentication.InsufficientAuthenticationExc
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 
-
 /**
  * 决策管理器
- * @author Administrator
- *
+ * 
+ * @author 木木大叔
+ * @QQ     285198830
+ * @version 1.0
+ * @date    2012-12-27
  */
 public class AccessDecisionManagerImpl implements AccessDecisionManager {
     

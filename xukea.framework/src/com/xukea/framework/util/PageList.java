@@ -4,9 +4,11 @@ import java.util.List;
 
 /**
  * 分页处理
- * @author FishBoy
- *
- * @param <E>
+ * 
+ * @author 木木大叔
+ * @QQ     285198830
+ * @version 1.0
+ * @date    2012.02.09
  */
 public class PageList<E> {
 	public static int DEFAULT_PAGE_SIZE = 10;

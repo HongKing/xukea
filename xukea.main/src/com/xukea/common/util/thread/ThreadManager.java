@@ -2,13 +2,13 @@ package com.xukea.common.util.thread;
 
 import org.apache.log4j.Logger;
 
-
 /**
  * 线程管理类
  * 
- * @author   FishBoy
- * @version  1.0
- * @date     2012.02.16
+ * @author 木木大叔
+ * @QQ     285198830
+ * @version 1.0
+ * @date    2012-12-27
  */
 public class ThreadManager {
 	private static Logger log  = Logger.getLogger(ThreadManager.class);

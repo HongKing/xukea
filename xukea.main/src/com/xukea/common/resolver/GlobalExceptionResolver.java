@@ -21,6 +21,11 @@ import com.xukea.framework.base.BaseExceptionResolver;
 
 /**
  * 全局异常处理
+ * 
+ * @author 木木大叔
+ * @QQ     285198830
+ * @version 1.0
+ * @date    2012-12-27
  */
 public class GlobalExceptionResolver extends BaseExceptionResolver{
 	private final Logger log = Logger.getLogger(getClass());
@@ -148,9 +153,9 @@ public class GlobalExceptionResolver extends BaseExceptionResolver{
 		data.append("    <div class=\"simple-tips\" >");
 		data.append("        <h2>系统错误，请联系我们</h2>");
 		data.append("        <ul>");
-		data.append("            <li>1. 电话咨询：400-606-5630</li>");
-		data.append("            <li>2. 邮件咨询：service@xukeaonline.com</li>");
-		data.append("            <li>3. 公司地址：北京市海淀区西四环北路125号德润科技大厦713室</li>");
+		data.append("            <li>1. 电话咨询：</li>");
+		data.append("            <li>2. 邮件咨询：</li>");
+		data.append("            <li>3. 公司地址：</li>");
 		data.append("        </ul>");
 		data.append("    </div>");
 		data.append("</div>");

@@ -5,9 +5,11 @@ import java.net.URI;
 
 /**
  * 邮件附件
- * @author FishBoy
- * @version
- * @date   2012.02.09
+ *
+ * @author 木木大叔
+ * @QQ     285198830
+ * @version 1.0
+ * @date    2012.02.09
  */
 public class MailAttachment extends File{
 	private static final long serialVersionUID = -6162496934460350687L;

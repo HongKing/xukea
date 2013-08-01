@@ -20,6 +20,14 @@ import org.apache.commons.beanutils.converters.SqlTimeConverter;
 import org.apache.commons.beanutils.converters.SqlTimestampConverter;
 import org.apache.commons.beanutils.converters.StringConverter;
 
+/**
+ * 对象注册
+ * 
+ * @author 木木大叔
+ * @QQ     285198830
+ * @version 1.0
+ * @date    2012.02.09
+ */
 public class ConvertRegisterHelper {
 
 	private ConvertRegisterHelper(){}

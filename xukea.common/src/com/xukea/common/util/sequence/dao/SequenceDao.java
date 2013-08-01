@@ -1,6 +1,5 @@
 package com.xukea.common.util.sequence.dao;
 
-
 import java.util.HashMap;
 
 import org.springframework.stereotype.Repository;
@@ -8,11 +7,13 @@ import org.springframework.stereotype.Repository;
 import com.xukea.common.util.sequence.model.Sequence;
 import com.xukea.framework.base.BaseDao;
 
-
 /**
- * 手动序列控制
- * @author 石头
- *
+ * 手动序列DAO
+ * 
+ * @author 木木大叔
+ * @QQ     285198830
+ * @version 1.0
+ * @date    2012-02-16
  */
 @Repository
 public class SequenceDao extends BaseDao{

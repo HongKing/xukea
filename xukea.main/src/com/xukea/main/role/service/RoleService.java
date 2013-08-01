@@ -1,6 +1,5 @@
 package com.xukea.main.role.service;
 
-
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -13,8 +12,11 @@ import com.xukea.main.role.model.Role;
 
 /**
  * 角色Service
- * @author 石头
- *
+ * 
+ * @author 木木大叔
+ * @QQ     285198830
+ * @version 1.0
+ * @date    2012-12-27
  */
 @Service
 public class RoleService extends BaseService {

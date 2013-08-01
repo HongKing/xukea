@@ -17,8 +17,11 @@ import org.springframework.security.web.access.intercept.FilterInvocationSecurit
 
 /**
  * 该抽象类包含了AccessDecisionManager(决策管理器)、AuthenticationManager(身份认证管理器)的setter， 可以通过Spring自动注入，另外，资源角色授权器需要单独自定义注入
- * @author Administrator
- *
+ * 
+ * @author 木木大叔
+ * @QQ     285198830
+ * @version 1.0
+ * @date    2012-12-27
  */
 public class SecurityFilter extends AbstractSecurityInterceptor implements Filter {
     private FilterInvocationSecurityMetadataSource securityMetadataSource;

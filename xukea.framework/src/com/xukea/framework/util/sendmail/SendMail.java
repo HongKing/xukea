@@ -7,13 +7,13 @@ import org.apache.log4j.Logger;
 
 import com.xukea.common.util.cache.Config;
 
-
-
 /**
  * 发送邮件功能，支持群发
- * @author FishBoy
- * @version
- * @date   2012.02.09
+ * 
+ * @author 木木大叔
+ * @QQ     285198830
+ * @version 1.0
+ * @date    2012.02.09
  */
 public class SendMail {
 	private final Logger log = Logger.getLogger(getClass());

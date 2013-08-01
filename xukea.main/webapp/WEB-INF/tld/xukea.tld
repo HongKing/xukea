@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+    version="2.0">
+    
+    <description>xukea tag 1.0 library</description>
+    <display-name>xukea tag core</display-name>
+    <tlib-version>1.0</tlib-version>
+    <short-name>xukea</short-name>
+    <uri>/WEB-INF/tld/xukea.tld</uri>
+    
+    <tag>
+        <name>pager</name>
+        <tag-class>com.xukea.common.util.jsptag.PagerTag</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>pager</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>url</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+    
+    <tag>
+        <name>equipTR</name>
+        <tag-class>com.xukea.common.util.jsptag.TableEquipTRTag</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>pager</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>cols</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+    
+    <tag>
+        <name>hasRole</name>
+        <tag-class>com.xukea.common.util.jsptag.HasRoleTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <name>url</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+</taglib>

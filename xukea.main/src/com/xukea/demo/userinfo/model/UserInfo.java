@@ -4,6 +4,14 @@ import java.util.Date;
 
 import com.xukea.framework.base.BaseEntity;
 
+/**
+ * 
+ * 
+ * @author 木木大叔
+ * @QQ     285198830
+ * @version 1.0
+ * @date    2012-12-27
+ */
 public class UserInfo extends BaseEntity {
 	private static final long serialVersionUID = -4109586893438723856L;
 

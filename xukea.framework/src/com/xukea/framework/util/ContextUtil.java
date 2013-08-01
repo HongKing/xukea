@@ -1,20 +1,27 @@
 package com.xukea.framework.util;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 
 /**
- * Spring 的 applicationContext 静态变量
+ * 注册 Spring 的 applicationContext 静态变量
  * 
- * @author  FishBoy
+ * @author 木木大叔
+ * @QQ     285198830
  * @version 1.0
- * @date    2012-01-05
+ * @date    2012.02.09
  */
 public class ContextUtil {
 	private static ApplicationContext applicationContext;
 	
 	private static Logger log = Logger.getLogger(ContextUtil.class);
 	
+	/**
+	 * 注册application对象
+	 * @param applicationContext
+	 */
+	@Autowired
 	public static void setApplicationContext(ApplicationContext applicationContext) {
 		synchronized (ContextUtil.class) {
 			log.debug("setApplicationContext, notifyAll");
@@ -22,7 +29,11 @@ public class ContextUtil {
 			ContextUtil.class.notifyAll();
 		}
 	}
-	 
+	
+	/**
+	 * 获取application对象
+	 * @return
+	 */
 	public static ApplicationContext getApplicationContext() {
 		synchronized (ContextUtil.class) {
 		while (applicationContext == null) {

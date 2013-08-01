@@ -7,11 +7,13 @@ import org.springframework.validation.Errors;
 import com.xukea.common.util.cache.Config;
 import com.xukea.framework.base.BaseValidator;
 
-
 /**
  * 验证码验证类
- * @author FishBoy
- * @version
+ * 
+ * @author 木木大叔
+ * @QQ     285198830
+ * @version 1.0
+ * @date    2012-02-16
  */
 public class CapthcaValidator extends BaseValidator{
 	

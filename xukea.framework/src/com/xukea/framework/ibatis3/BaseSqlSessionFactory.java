@@ -1,6 +1,5 @@
 package com.xukea.framework.ibatis3;
 
-
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -17,12 +16,13 @@ import org.apache.ibatis.transaction.Transaction;
 import org.apache.ibatis.transaction.TransactionFactory;
 import org.apache.ibatis.transaction.managed.ManagedTransactionFactory;
 
-
 /**
  * SqlSession实例化工厂类
- * @author  石头
+ *
+ * @author 木木大叔
+ * @QQ     285198830
  * @version 1.0
- * @date    2012-12-28
+ * @date    2012-12-27
  */
 public class BaseSqlSessionFactory extends DefaultSqlSessionFactory {
 

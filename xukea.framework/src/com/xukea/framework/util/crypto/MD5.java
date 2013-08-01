@@ -8,9 +8,10 @@ import org.apache.log4j.Logger;
 /**
  * MD5加密算法类
  * 
- * @author    FishBoy
- * @version   v1.0
- * @date      2011.12.26
+ * @author 木木大叔
+ * @QQ     285198830
+ * @version 1.0
+ * @date    2011.12.26
  */
 public class MD5 {
 	// 日志

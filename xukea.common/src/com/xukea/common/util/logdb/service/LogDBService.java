@@ -1,6 +1,5 @@
 package com.xukea.common.util.logdb.service;
 
-
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Date;
@@ -14,23 +13,19 @@ import com.xukea.common.util.logdb.dao.LogDBDao;
 import com.xukea.common.util.logdb.model.SysErrorLog;
 import com.xukea.framework.base.BaseService;
 
-
 /**
- * 日志记录
- * @author 石头
- *
+ * 系统日志Service
+ * 
+ * @author 木木大叔
+ * @QQ     285198830
+ * @version 1.0
+ * @date    2012-02-16
  */
 @Service
 public class LogDBService extends BaseService{
-	private Logger log = Logger.getLogger(this.getClass());
 	
 	@Resource
 	private LogDBDao logDBDao;
-	
-	
-	
-	
-	
 	
 	/**
 	 * 记录系统运行错误日志

@@ -13,16 +13,15 @@ import org.springframework.web.context.ServletContextAware;
 import com.xukea.common.util.cache.Config;
 import com.xukea.common.util.cache.MenuCache;
 import com.xukea.common.util.cache.SecurityCache;
-import com.xukea.common.util.thread.ThreadManager;
-
 
 /**
  * 系统初始化代码
  * 注：该类的名字不可变更
  * 
- * @author   FishBoy
- * @version  1.0
- * @date     2012.01.06
+ * @author 木木大叔
+ * @QQ     285198830
+ * @version 1.0
+ * @date    2012-12-27
  */
 public class SystemInitBean implements InitializingBean, DisposableBean, BeanFactoryAware, ServletContextAware{ 
 	private Logger log = Logger.getLogger(SystemInitBean.class);

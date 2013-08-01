@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.BeanUtils;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -25,15 +26,16 @@ import com.xukea.main.role.service.RoleService;
 import com.xukea.main.user.model.User;
 import com.xukea.main.user.service.UserService;
 
-
 /**
  * Spring Security 登录验证<br>
  * 本类只在attemptAuthentication中做用户信息验证<br>
  * 登录成功的后续处理见{@link com.xukea.common.security.authentication.LoginSuccessHandler}<br>
  * 登录失败的后续处理见{@link com.xukea.common.security.authentication.LoginFailureHandler}<br>
  * 
- * @author Administrator
- *
+ * @author 木木大叔
+ * @QQ     285198830
+ * @version 1.0
+ * @date    2012-12-27
  */
 public class SecurityLoginFilter extends AbstractAuthenticationProcessingFilter { //UsernamePasswordAuthenticationFilter
 	private final Logger log = Logger.getLogger(getClass());
@@ -66,10 +68,8 @@ public class SecurityLoginFilter extends AbstractAuthenticationProcessingFilter 
 		
 		//set user to UserBasicInfo
 		UserBasicInfo userInfo = new UserBasicInfo();
-		userInfo.setUserId(user.getId());
-		userInfo.setUserName(user.getUserName());
-		userInfo.setRealName(user.getRealName());
-		userInfo.setEmail(user.getEmail());
+		// 复制user对象的属性值到userInfo中
+		BeanUtils.copyProperties(user, userInfo);
 		
 		// get user's menu
 		List<Menu> menus = menuService.getSubMenuByUID(user.getId(), "");

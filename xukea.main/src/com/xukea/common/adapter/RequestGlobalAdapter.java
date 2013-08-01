@@ -16,9 +16,13 @@ import com.xukea.framework.base.BaseRequestAdapter;
 import com.xukea.framework.base.BaseSpringController;
 import com.xukea.framework.util.LicenseSign;
 
-
 /**
  * 拦截器：所有请求均会执行（包括静态请求）
+ * 
+ * @author 木木大叔
+ * @QQ     285198830
+ * @version 1.0
+ * @date    2012-12-27
  */
 public class RequestGlobalAdapter extends BaseRequestAdapter {
 	private final Logger log = Logger.getLogger(getClass());
@@ -28,7 +32,8 @@ public class RequestGlobalAdapter extends BaseRequestAdapter {
 	 * 访问统计等
 	 */
 	@Override
-	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) 
+			throws Exception {
 		log.debug("preHandle");
 
 		// 授权控制
@@ -61,7 +66,8 @@ public class RequestGlobalAdapter extends BaseRequestAdapter {
 	 * 后处理（调用了Service并返回ModelAndView，但未进行页面渲染）
 	 */
 	@Override
-	public void postHandle( HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+	public void postHandle( HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) 
+			throws Exception {
 		log.debug("postHandle");
 
 		// 如果是资源文件不做处理
@@ -89,7 +95,8 @@ public class RequestGlobalAdapter extends BaseRequestAdapter {
 	 * 返回处理（已经渲染了页面,这里抛出的异常不影响前端的页面展现）
 	 */
 	@Override
-	public void afterCompletion( HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+	public void afterCompletion( HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) 
+			throws Exception {
 		log.debug("afterCompletion");
 		if(ex!=null){
 			log.error(ex);

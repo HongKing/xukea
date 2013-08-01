@@ -13,9 +13,12 @@ import com.xukea.framework.base.BaseConstants;
 import com.xukea.framework.util.crypto.SignatureData;
 
 /**
- * 配置文件处理
- * @author FishBoy
- * @version
+ * 授权文件处理
+ * 
+ * @author 木木大叔
+ * @QQ     285198830
+ * @version 1.0
+ * @date    2012.02.09
  */
 public final class LicenseSign {
 	private Logger log = Logger.getLogger(LicenseSign.class);

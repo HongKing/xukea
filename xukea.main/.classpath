@@ -2,56 +2,56 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="test"/>
-	<classpathentry kind="lib" path="/xukea.security/webapp/WEB-INF/lib/spring-security-config-3.2.0.M1.jar"/>
-	<classpathentry kind="lib" path="/xukea.security/webapp/WEB-INF/lib/spring-security-core-3.2.0.M1.jar"/>
-	<classpathentry kind="lib" path="/xukea.security/webapp/WEB-INF/lib/spring-security-web-3.2.0.M1.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/aopalliance.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/aspectjrt-1.6.9.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/aspectjweaver-1.6.9.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/bouncycastle-jdk15-133.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/cglib-nodep-2.2.3.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/classes12.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/com.springsource.javax.annotation-1.0.0.jar"/>
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/com.xukea.common.1.0.0.jar"/>
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/com.xukea.framework.1.0.0.jar"/>
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/com.xukea.security.1.0.0.jar"/>
-	<classpathentry kind="lib" path="/xukea.framework/webapp/WEB-INF/lib/aopalliance.jar"/>
-	<classpathentry kind="lib" path="/xukea.framework/webapp/WEB-INF/lib/aspectjrt-1.6.9.jar"/>
-	<classpathentry kind="lib" path="/xukea.framework/webapp/WEB-INF/lib/aspectjweaver-1.6.9.jar"/>
-	<classpathentry kind="lib" path="/xukea.framework/webapp/WEB-INF/lib/bouncycastle-jdk15-133.jar"/>
-	<classpathentry kind="lib" path="/xukea.framework/webapp/WEB-INF/lib/cglib-nodep-2.2.3.jar"/>
-	<classpathentry kind="lib" path="/xukea.framework/webapp/WEB-INF/lib/classes12.jar"/>
-	<classpathentry kind="lib" path="/xukea.framework/webapp/WEB-INF/lib/com.springsource.javax.annotation-1.0.0.jar"/>
-	<classpathentry kind="lib" path="/xukea.framework/webapp/WEB-INF/lib/commons-beanutils-1.8.3.jar"/>
-	<classpathentry kind="lib" path="/xukea.framework/webapp/WEB-INF/lib/commons-collections-3.2.1.jar"/>
-	<classpathentry kind="lib" path="/xukea.framework/webapp/WEB-INF/lib/commons-dbcp.jar"/>
-	<classpathentry kind="lib" path="/xukea.framework/webapp/WEB-INF/lib/commons-fileupload-1.2.2.jar"/>
-	<classpathentry kind="lib" path="/xukea.framework/webapp/WEB-INF/lib/commons-io-2.0.1.jar"/>
-	<classpathentry kind="lib" path="/xukea.framework/webapp/WEB-INF/lib/commons-lang-2.6.jar"/>
-	<classpathentry kind="lib" path="/xukea.framework/webapp/WEB-INF/lib/commons-logging.jar"/>
-	<classpathentry kind="lib" path="/xukea.framework/webapp/WEB-INF/lib/commons-pool.jar"/>
-	<classpathentry kind="lib" path="/xukea.framework/webapp/WEB-INF/lib/ezmorph-1.0.6.jar"/>
-	<classpathentry kind="lib" path="/xukea.framework/webapp/WEB-INF/lib/json-lib-2.4-jdk15.jar"/>
-	<classpathentry kind="lib" path="/xukea.framework/webapp/WEB-INF/lib/jstl-1.1.2.jar"/>
-	<classpathentry kind="lib" path="/xukea.framework/webapp/WEB-INF/lib/junit-4.8.2.jar"/>
-	<classpathentry kind="lib" path="/xukea.framework/webapp/WEB-INF/lib/log4j-1.2.15.jar"/>
-	<classpathentry kind="lib" path="/xukea.framework/webapp/WEB-INF/lib/mail.jar"/>
-	<classpathentry kind="lib" path="/xukea.framework/webapp/WEB-INF/lib/mailapi.jar"/>
-	<classpathentry kind="lib" path="/xukea.framework/webapp/WEB-INF/lib/mybatis-3.1.1.jar" sourcepath="/xukea.framework/webapp/WEB-INF/lib/mybatis-3.1.1-sources.jar"/>
-	<classpathentry kind="lib" path="/xukea.framework/webapp/WEB-INF/lib/mybatis-spring-1.1.1.jar" sourcepath="/xukea.framework/webapp/WEB-INF/lib/mybatis-spring-1.1.1-sources.jar"/>
-	<classpathentry kind="lib" path="/xukea.framework/webapp/WEB-INF/lib/mysql-connector-java-3.1.12-bin.jar"/>
-	<classpathentry kind="lib" path="/xukea.framework/webapp/WEB-INF/lib/oscache-2.4.1.jar"/>
-	<classpathentry kind="lib" path="/xukea.framework/webapp/WEB-INF/lib/poi-2.5.1.jar"/>
-	<classpathentry kind="lib" path="/xukea.framework/webapp/WEB-INF/lib/servlet-api-2.4.jar"/>
-	<classpathentry kind="lib" path="/xukea.framework/webapp/WEB-INF/lib/spring-aop-3.2.0.RELEASE.jar"/>
-	<classpathentry kind="lib" path="/xukea.framework/webapp/WEB-INF/lib/spring-aspects-3.2.0.RELEASE.jar"/>
-	<classpathentry kind="lib" path="/xukea.framework/webapp/WEB-INF/lib/spring-beans-3.2.0.RELEASE.jar" sourcepath="/xukea.framework/webapp/WEB-INF/lib/spring-beans-3.2.0.RELEASE-sources.jar"/>
-	<classpathentry kind="lib" path="/xukea.framework/webapp/WEB-INF/lib/spring-context-3.2.0.RELEASE.jar" sourcepath="/xukea.framework/webapp/WEB-INF/lib/spring-context-3.2.0.RELEASE-sources.jar"/>
-	<classpathentry kind="lib" path="/xukea.framework/webapp/WEB-INF/lib/spring-context-support-3.2.0.RELEASE.jar"/>
-	<classpathentry kind="lib" path="/xukea.framework/webapp/WEB-INF/lib/spring-core-3.2.0.RELEASE.jar" sourcepath="/xukea.framework/webapp/WEB-INF/lib/spring-core-3.2.0.RELEASE-sources.jar"/>
-	<classpathentry kind="lib" path="/xukea.framework/webapp/WEB-INF/lib/spring-expression-3.2.0.RELEASE.jar"/>
-	<classpathentry kind="lib" path="/xukea.framework/webapp/WEB-INF/lib/spring-jdbc-3.2.0.RELEASE.jar" sourcepath="/xukea.framework/webapp/WEB-INF/lib/spring-jdbc-3.2.0.RELEASE-sources.jar"/>
-	<classpathentry kind="lib" path="/xukea.framework/webapp/WEB-INF/lib/spring-orm-3.2.0.RELEASE.jar"/>
-	<classpathentry kind="lib" path="/xukea.framework/webapp/WEB-INF/lib/spring-test-3.2.0.RELEASE.jar"/>
-	<classpathentry kind="lib" path="/xukea.framework/webapp/WEB-INF/lib/spring-tx-3.2.0.RELEASE.jar" sourcepath="/xukea.framework/webapp/WEB-INF/lib/spring-tx-3.2.0.RELEASE-sources.jar"/>
-	<classpathentry kind="lib" path="/xukea.framework/webapp/WEB-INF/lib/spring-web-3.2.0.RELEASE.jar" sourcepath="/xukea.framework/webapp/WEB-INF/lib/spring-web-3.2.0.RELEASE-sources.jar"/>
-	<classpathentry kind="lib" path="/xukea.framework/webapp/WEB-INF/lib/spring-webmvc-3.2.0.RELEASE.jar"/>
-	<classpathentry kind="lib" path="/xukea.framework/webapp/WEB-INF/lib/spring-webmvc-portlet-3.2.0.RELEASE.jar"/>
-	<classpathentry kind="lib" path="/xukea.framework/webapp/WEB-INF/lib/sqljdbc4.jar"/>
-	<classpathentry kind="lib" path="/xukea.framework/webapp/WEB-INF/lib/standard-1.1.2.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/commons-beanutils-1.8.3.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/commons-collections-3.2.1.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/commons-dbcp.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/commons-fileupload-1.2.2.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/commons-io-2.0.1.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/commons-lang-2.6.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/commons-logging.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/commons-pool.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/ezmorph-1.0.6.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/json-lib-2.4-jdk15.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/jstl-1.1.2.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/junit-4.8.2.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/log4j-1.2.15.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/mail.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/mailapi.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/mybatis-3.1.1.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/mybatis-spring-1.1.1.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/mysql-connector-java-3.1.12-bin.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/oscache-2.4.1.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/poi-2.5.1.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/servlet-api-2.4.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/spring-aop-3.2.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/spring-aspects-3.2.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/spring-beans-3.2.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/spring-context-3.2.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/spring-context-support-3.2.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/spring-core-3.2.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/spring-expression-3.2.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/spring-jdbc-3.2.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/spring-orm-3.2.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/spring-test-3.2.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/spring-tx-3.2.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/spring-web-3.2.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/spring-webmvc-3.2.0.RELEASE.jar" sourcepath="webapp/WEB-INF/lib/spring-webmvc-3.2.0.RELEASE-sources.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/spring-webmvc-portlet-3.2.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/sqljdbc4.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/standard-1.1.2.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/spring-security-config-3.2.0.M1.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/spring-security-core-3.2.0.M1.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/spring-security-web-3.2.0.M1.jar"/>
 	<classpathentry kind="output" path="webapp/WEB-INF/classes"/>
 </classpath>

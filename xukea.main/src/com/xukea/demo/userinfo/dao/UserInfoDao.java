@@ -1,6 +1,5 @@
 package com.xukea.demo.userinfo.dao;
 
-
 import java.util.HashMap;
 
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -10,6 +9,14 @@ import com.xukea.demo.userinfo.model.UserInfo;
 import com.xukea.framework.base.BaseDao;
 import com.xukea.framework.util.PageList;
 
+/**
+ * 
+ * 
+ * @author 木木大叔
+ * @QQ     285198830
+ * @version 1.0
+ * @date    2012-12-27
+ */
 @Repository
 public class UserInfoDao extends BaseDao{
 	private String namespace = "com.xukea.demo.userinfo.model.UserInfo";

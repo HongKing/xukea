@@ -16,10 +16,10 @@
     
     <!-- 数据源定义,使用Apache DBCP 连接池 -->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-        <property name="driverClassName" value="${jdbc.driver}"/>
-        <property name="url" value="${jdbc.url}"/>
-        <property name="username" value="${jdbc.username}"/>
-        <property name="password" value="${jdbc.password}"/>
+        <property name="driverClassName" value="${default.driver}"/>
+        <property name="url" value="${default.url}"/>
+        <property name="username" value="${default.username}"/>
+        <property name="password" value="${default.password}"/>
     </bean>
     <!--  
     <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">

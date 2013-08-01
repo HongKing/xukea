@@ -18,15 +18,21 @@ import com.xukea.common.exception.ForbiddenException;
 import com.xukea.common.exception.PageNotFoundException;
 import com.xukea.common.exception.UnLoginException;
 import com.xukea.common.util.FileUploadUtil;
-import com.xukea.common.util.WebUtil;
 import com.xukea.common.validator.CapthcaValidator;
 import com.xukea.common.validator.FileUploadValidator;
 import com.xukea.framework.base.BaseRestSpringController;
 
-
+/**
+ * 演示Controller
+ * 
+ * @author 木木大叔
+ * @QQ     285198830
+ * @version 1.0
+ * @date    2012-12-27
+ */
 @Controller
 @RequestMapping("/demo")
-public class DemoController extends BaseRestSpringController<Object, String>{
+public class DemoController extends BaseRestSpringController {
 
 	// URL基础路径
 	private final String ACT_URL = "/demo";
@@ -38,7 +44,7 @@ public class DemoController extends BaseRestSpringController<Object, String>{
 	 * 首页
 	 */
 	@Override
-	public ModelAndView index(HttpServletRequest request, HttpServletResponse response, Object obj) {
+	public ModelAndView index(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView result = new ModelAndView();
 		result.setViewName( JSP_DIR + "/index" );
 		return result;

@@ -1,6 +1,5 @@
 package com.xukea.common.util.cache;
 
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -14,13 +13,13 @@ import com.xukea.main.role.model.Menu;
 import com.xukea.main.role.model.Role;
 import com.xukea.main.role.service.RoleService;
 
-
 /**
  * URL资源访问权限信息缓存<br>
  * 
- * @author  FishBoy
+ * @author 木木大叔
+ * @QQ     285198830
  * @version 1.0
- * @date    2012-02-16
+ * @date    2012-12-27
  */
 public class SecurityCache extends BaseCache<List<ConfigAttribute>>{
 	private static String GROUP_NAME     = "security";

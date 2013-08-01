@@ -88,7 +88,7 @@
 	        <property name="paramName" value="locale" />
 	    </bean>
 	    
-        <!-- 全局登录拦截 -->
+        <!-- 全局登录拦截，已交由spring security控制 -->
 	    <!--  
         <bean class="com.xukea.common.adapter.LoginAdapter" />
         <mvc:interceptor>

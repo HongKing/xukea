@@ -8,11 +8,13 @@ import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.Random;
 
-
 /**
- * 授权信息
- * @author 石头
- *
+ * 授权签字
+ * 
+ * @author 木木大叔
+ * @QQ     285198830
+ * @version 1.0
+ * @date    2011.12.26
  */
 public class SignatureData {
 	// 随机码字符集

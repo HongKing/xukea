@@ -12,7 +12,14 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-
+/**
+ * HTTP METHOD 转换
+ * 
+ * @author 木木大叔
+ * @QQ     285198830
+ * @version 1.0
+ * @date    2012-12-27
+ */
 public class HiddenHttpMethodFilter extends OncePerRequestFilter {
 
 	/** Default method parameter: <code>_method</code> */

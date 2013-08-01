@@ -3,7 +3,14 @@ package com.xukea.common.util.crypto;
 import javax.crypto.*;
 import javax.crypto.spec.*;
 
-
+/**
+ * AES加密
+ * 
+ * @author 木木大叔
+ * @QQ     285198830
+ * @version 1.0
+ * @date    2012-02-16
+ */
 public class AES {
 //    public static void main(String[] args) throws Exception {
 //        /*

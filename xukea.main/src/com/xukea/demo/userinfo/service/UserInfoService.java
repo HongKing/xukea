@@ -1,6 +1,5 @@
 package com.xukea.demo.userinfo.service;
 
-
 import java.util.HashMap;
 
 import javax.annotation.Resource;
@@ -18,8 +17,16 @@ import com.xukea.demo.userinfo.model.UserInfo;
 import com.xukea.framework.base.BaseService;
 import com.xukea.framework.util.PageList;
 
+/**
+ * 用户Service
+ * 
+ * @author 木木大叔
+ * @QQ     285198830
+ * @version 1.0
+ * @date    2012-12-27
+ */
 @Service
-public class UserInfoService extends BaseService{
+public class UserInfoService extends BaseService {
 
 	@Resource
 	private SequenceService sequenceService; //序号自动生成的Service

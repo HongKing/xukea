@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-
 /**
  * 用于rest URL和重写,以便构造出没有扩展名的restURL
  * 
@@ -54,7 +53,6 @@ import org.springframework.web.filter.OncePerRequestFilter;
  *	</filter-mapping>
  * </code>
  * </pre>
- *
  */
 public class RestUrlRewriteFilter extends OncePerRequestFilter implements Filter{
 	private static final String DEFAULT_EXECUDE_EXTENTIONS = "";

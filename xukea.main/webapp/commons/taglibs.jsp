@@ -7,13 +7,9 @@
 <%@ taglib prefix="fn"     uri="/tags/jstl-functions" %>
 <%@ taglib prefix="form"   uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="xukea"  uri="/tags/xukea" %>
 
 <%
-    pageContext.setAttribute("ctx",        request.getContextPath());
-    pageContext.setAttribute("SKIN",       "default");
-    pageContext.setAttribute("ctx_static", request.getContextPath()+"/static");
-    pageContext.setAttribute("ctx_skin",   request.getContextPath()+"/static/skin/default");
-
     // 从SESSION中获取当前语言
     Locale sessionLocale = (Locale)session.getAttribute(SessionLocaleResolver.LOCALE_SESSION_ATTRIBUTE_NAME);
     if(sessionLocale==null){
@@ -21,4 +17,9 @@
     }
     // 定义语言常量
     pageContext.setAttribute("lang",       sessionLocale.getLanguage());
+    pageContext.setAttribute("ctx",        request.getContextPath());
+    pageContext.setAttribute("skin",       "default");
+    pageContext.setAttribute("ctx_static", request.getContextPath()+"/static");
+    pageContext.setAttribute("ctx_skin",   request.getContextPath()+"/static/skin/default");
+
 %>

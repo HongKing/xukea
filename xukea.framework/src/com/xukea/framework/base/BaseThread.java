@@ -4,9 +4,10 @@ package com.xukea.framework.base;
 /**
  * 线程基类
  * 
- * @author   FishBoy
- * @version  1.0
- * @date     2012.02.16
+ * @author 木木大叔
+ * @QQ     285198830
+ * @version 1.0
+ * @date    2012-12-27
  */
 public abstract class BaseThread extends Thread{
 	public static final int NEW      = 0; //新建

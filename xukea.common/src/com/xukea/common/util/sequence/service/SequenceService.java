@@ -1,6 +1,5 @@
 package com.xukea.common.util.sequence.service;
 
-
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -11,8 +10,11 @@ import com.xukea.framework.base.BaseService;
 
 /**
  * 序列处理
- * @author 石头
- *
+ * 
+ * @author 木木大叔
+ * @QQ     285198830
+ * @version 1.0
+ * @date    2012-02-16
  */
 @Service
 public class SequenceService extends BaseService{
@@ -69,6 +71,5 @@ public class SequenceService extends BaseService{
 		}
 		return code;
 	}
-	
 	
 }

@@ -4,9 +4,10 @@ package com.xukea.common.util.crypto;
 /**
  * BASE64编码算法类
  * 
- * @author    FishBoy
- * @version   v1.0
- * @date      2011.12.26
+ * @author 木木大叔
+ * @QQ     285198830
+ * @version 1.0
+ * @date    2011.12.26
  */
 public class Base64 {
 

@@ -3,11 +3,27 @@ package com.xukea.framework.base;
 import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.dao.support.DaoSupport;
 
+/**
+ * Entity对象基类
+ * 
+ * @author 木木大叔
+ * @QQ     285198830
+ * @version 1.0
+ * @date    2012-12-27
+ */
 public class BaseEntity implements Serializable {
-	private Logger log = Logger.getLogger(this.getClass());
+	protected Logger log = Logger.getLogger(this.getClass());
 	
 	private SimpleDateFormat dateFormat = new SimpleDateFormat(BaseConstants.FORMAT_TIMESTAMP);
 	
@@ -15,9 +31,17 @@ public class BaseEntity implements Serializable {
 	 * 重写toString方法，便于Bean对象的日志存放
 	 */
 	public String toString(){
-		StringBuffer sb = new StringBuffer();
-		sb.append(this.getClass());
+        return this.toJson().toString();
+	}
+	
+	/**
+	 * 转换为JSON对象
+	 * @return
+	 */
+	public JSONObject toJson(){
+		JSONObject json = null;
 		try {
+			json = new JSONObject();
             Field[] fieldlist = this.getClass().getDeclaredFields();
             for (int i = 0; i < fieldlist.length; i++) {
                 Field fld = fieldlist[i];
@@ -27,21 +51,46 @@ public class BaseEntity implements Serializable {
                 Class  type = fld.getType();
                 Object val  = fld.get(this);
                 
-                // 如果是日期格式，则将其格式化
-                if( val!=null 
-                	&& (    "class java.util.Date".equals(type.toString()) 
-                		 || "class java.sql.Date".equals(type.toString())
-                	   )
-                ){
-                	val = dateFormat.format(val);
+                // 如果值为空，则不处理
+                if(val==null){
+                	json.put(key, null);
+                	continue;
                 }
                 
-                sb.append("\r\n"+ key +"\t:\t"+ val);
+                if(    "class java.util.Date".equalsIgnoreCase(type.toString()) 
+                	|| "class java.sql.Date".equals(type.toString())
+                ){
+                    // 如果是日期格式，则将其格式化
+                	val = dateFormat.format(val);
+                }else if(Collection.class.isAssignableFrom(type)){
+                    // 如果是集合
+                	val = JSONArray.fromObject(val);
+                }
+                json.put(key, val);
             }
+    		return json;
         } catch (Exception e) {
         	log.error(e);
+        	return null;
         }
-        
-        return sb.toString();
 	}
+
+		 // 一个判断son是否直接继承自father的简单函数
+		 public static boolean genericCheck(Class<?> son, Object fathera) {
+			 return InitializingBean.class.isAssignableFrom(son);//(son.getSuperclass() .getGenericSuperclass() instanceof Collection);
+		 }
+
+		 public static void main(String[] args) {
+//		  System.out.println(genericCheck(String.class, Object.class));
+		  System.out.println(genericCheck(BaseDao.class, Object.class));
+		  System.out.println(genericCheck(DaoSupport.class, DaoSupport.class));
+		  System.out.println(genericCheck(InitializingBean.class, InitializingBean.class));
+		  System.out.println(genericCheck(Object.class, Object.class));
+		  System.out.println(genericCheck(List.class, List.class));
+		  System.out.println(genericCheck(ArrayList.class, Collection.class));
+		  //你在你的程序里,这样输出一下就知道了,A是否直接继承了B.
+		  //System.out.println(ClassTest.genericCheck(A.class, B.class));
+		 }
+
+
 }

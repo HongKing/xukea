@@ -12,16 +12,18 @@ import com.xukea.framework.base.BaseRestSpringController;
 /**
  * 插件平台Controller
  * 
- * @author 石头
- *
+ * @author 木木大叔
+ * @QQ     285198830
+ * @version 1.0
+ * @date    2012-12-27
  */
 @Controller
 @RequestMapping("/main")
-public class MainController extends BaseRestSpringController<Object, Long>{
+public class MainController extends BaseRestSpringController {
 	
 	/** 首页 */
 	@Override
-	public ModelAndView index(HttpServletRequest request, HttpServletResponse response, Object obj) {
+	public ModelAndView index(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView result = new ModelAndView();
 		result.setViewName("/main/index");
 		return result;

@@ -1,6 +1,5 @@
 package com.xukea.framework.test;
 
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -13,9 +12,10 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 /**
  * Controller测试基类
  * 
- * @author  石头
+ * @author 木木大叔
+ * @QQ     285198830
  * @version 1.0
- * @date    2013-1-5
+ * @date    2013-01-05
  */
 public class BaseControllerTest extends BaseTest {
 	

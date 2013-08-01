@@ -25,13 +25,14 @@ import javax.crypto.Cipher;
 
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
-  
-  
-  
 /**  
  * RSA 工具类。提供加密，解密，生成密钥对等方法。  
- * 需要到http://www.bouncycastle.org下载bcprov-jdk14-123.jar。  
- *   
+ * 需要到http://www.bouncycastle.org下载bcprov-jdk14-123.jar。
+ * 
+ * @author 木木大叔
+ * @QQ     285198830
+ * @version 1.0
+ * @date    2011.12.26
  */  
 public class RSAUtil {
 	

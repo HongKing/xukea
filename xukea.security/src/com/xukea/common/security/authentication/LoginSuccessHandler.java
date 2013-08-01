@@ -12,12 +12,13 @@ import org.springframework.security.web.authentication.SavedRequestAwareAuthenti
 import com.xukea.common.util.WebUtil;
 import com.xukea.common.util.cache.Config;
 
-
 /**
  * Spring Security 登录成功处理
  * 
- * @author Administrator
- *
+ * @author 木木大叔
+ * @QQ     285198830
+ * @version 1.0
+ * @date    2012-12-27
  */
 public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
 
@@ -31,7 +32,7 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
         } else {
         	// 设置登陆成功之后的跳转页面
         	String targetUrl = Config.getInstance().getString("security.url.login.success");
-        	this.setTargetUrlParameter(targetUrl);
+        	this.setDefaultTargetUrl(targetUrl);
         	super.onAuthenticationSuccess(request, response, authentication);
         }
     	

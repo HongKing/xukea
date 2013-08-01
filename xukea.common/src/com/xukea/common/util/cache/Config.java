@@ -1,8 +1,6 @@
 package com.xukea.common.util.cache;
 
-
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Properties;
@@ -12,11 +10,11 @@ import com.xukea.framework.util.ContextUtil;
 import com.xukea.system.settings.model.SysSettings;
 import com.xukea.system.settings.service.SysSettingsService;
 
-
 /**
  * 系统设置缓存<br>
  * 
- * @author  FishBoy
+ * @author 木木大叔
+ * @QQ     285198830
  * @version 1.0
  * @date    2012-02-16
  */
@@ -51,7 +49,6 @@ public class Config extends BaseCache<SysSettings>{
 		}
 		return instance;
 	}
-
 	
 	/**
 	 * 获取值

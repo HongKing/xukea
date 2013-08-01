@@ -13,12 +13,14 @@ import org.springframework.security.web.access.intercept.FilterInvocationSecurit
 
 import com.xukea.common.util.cache.SecurityCache;
 
-
 /**
  * 权限资源加载管理<br>
  * 默认所有资源具有ROLE_ANONYMOUS角色
- * @author Administrator
- *
+ * 
+ * @author 木木大叔
+ * @QQ     285198830
+ * @version 1.0
+ * @date    2012-12-27
  */
 public class SecurityMetadataSource implements FilterInvocationSecurityMetadataSource {
 	private Collection<ConfigAttribute> DEFAULT_ROLE;

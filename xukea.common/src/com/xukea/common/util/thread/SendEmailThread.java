@@ -1,6 +1,5 @@
 package com.xukea.common.util.thread;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,13 +14,13 @@ import com.xukea.system.attachment.service.AttachmentService;
 import com.xukea.system.message.model.EmailWait;
 import com.xukea.system.message.service.SendEmailService;
 
-
 /**
  * 邮件自动发送
  * 
- * @author   FishBoy
- * @version  1.0
- * @date     2012.02.16
+ * @author 木木大叔
+ * @QQ     285198830
+ * @version 1.0
+ * @date    2012-02-16
  */
 public class SendEmailThread extends BaseThread {
 	private final Logger log = Logger.getLogger(getClass());

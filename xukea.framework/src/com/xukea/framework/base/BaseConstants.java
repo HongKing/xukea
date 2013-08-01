@@ -1,10 +1,12 @@
 package com.xukea.framework.base;
 
-
 /**
  * 系统常量
- * @author FishBoy
- * @version
+ * 
+ * @author 木木大叔
+ * @QQ     285198830
+ * @version 1.0
+ * @date    2012-12-27
  */
 public class BaseConstants {
 	
@@ -21,6 +23,7 @@ public class BaseConstants {
 	/******************************************
 	 * 日期格式
 	 ******************************************/
+	public final static String FORMAT_MONTH     = "yyyy-MM";
 	public final static String FORMAT_DATE      = "yyyy-MM-dd";
 	public final static String FORMAT_TIME      = "HH:mm:ss";
 	public final static String FORMAT_TIME_HM   = "HH:mm";

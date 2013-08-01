@@ -6,9 +6,11 @@ import java.util.Properties;
 
 /**
  * 发送邮件需要使用的基本信息  
- * @author FishBoy
- * @version
- * @date   2012.02.09
+ * 
+ * @author 木木大叔
+ * @QQ     285198830
+ * @version 1.0
+ * @date    2012.02.09
  */
 public class MailSenderInfo {
 	

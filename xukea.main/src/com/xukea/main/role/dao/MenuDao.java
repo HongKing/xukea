@@ -9,11 +9,13 @@ import com.xukea.common.util.MainConstants;
 import com.xukea.framework.base.BaseDao;
 import com.xukea.main.role.model.Menu;
 
-
 /**
- * 菜单处理
- * @author 
- * @version
+ * 菜单处理Dao
+ * 
+ * @author 木木大叔
+ * @QQ     285198830
+ * @version 1.0
+ * @date    2012-12-27
  */
 @Repository
 public class MenuDao  extends BaseDao{

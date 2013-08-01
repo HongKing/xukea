@@ -21,7 +21,14 @@ import com.sun.image.codec.jpeg.JPEGEncodeParam;
 import com.sun.image.codec.jpeg.JPEGImageEncoder;
 import com.xukea.common.util.cache.Config;
 
-
+/**
+ * JPEG验证码
+ * 
+ * @author 木木大叔
+ * @QQ     285198830
+ * @version 1.0
+ * @date    2012-12-27
+ */
 public class JpegServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;

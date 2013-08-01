@@ -4,8 +4,10 @@ package com.xukea.framework.ibatis3.plugin.dialect;
  * SQL Server分页<br>
  * 注：仅支持2005以上的版本
  * 
- * @author 石头
- *
+ * @author 木木大叔
+ * @QQ     285198830
+ * @version 1.0
+ * @date    2012-12-27
  */
 public class SQLServerDialect extends Dialect{
 

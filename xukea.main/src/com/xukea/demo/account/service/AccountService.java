@@ -1,6 +1,5 @@
 package com.xukea.demo.account.service;
 
-
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -11,6 +10,14 @@ import com.xukea.demo.userinfo.dao.UserInfoDao;
 import com.xukea.framework.base.BaseService;
 import com.xukea.framework.util.PageList;
 
+/**
+ * 用户Service
+ * 
+ * @author 木木大叔
+ * @QQ     285198830
+ * @version 1.0
+ * @date    2012-12-27
+ */
 @Service
 public class AccountService extends BaseService{
 

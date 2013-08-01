@@ -3,11 +3,13 @@ package com.xukea.main.user.model;
 import java.util.Date;
 import com.xukea.framework.base.BaseEntity;
 
-
 /**
+ * 用户Bean
  * 
- * @author 
- * @version
+ * @author 木木大叔
+ * @QQ     285198830
+ * @version 1.0
+ * @date    2012-12-27
  */
 public class User extends BaseEntity {
 	

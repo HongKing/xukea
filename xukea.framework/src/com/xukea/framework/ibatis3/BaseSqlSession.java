@@ -12,9 +12,10 @@ import java.util.List;
 /**
  * SqlSession
  * 
- * @author  石头
+ * @author 木木大叔
+ * @QQ     285198830
  * @version 1.0
- * @date    2012-12-28
+ * @date    2012-12-27
  */
 public class BaseSqlSession extends DefaultSqlSession {
 

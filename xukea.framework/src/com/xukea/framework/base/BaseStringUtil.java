@@ -7,7 +7,14 @@ import java.util.StringTokenizer;
 
 import org.springframework.util.StringUtils;
 
-
+/**
+ * 字符串处理基类
+ * 
+ * @author 木木大叔
+ * @QQ     285198830
+ * @version 1.0
+ * @date    2012-12-27
+ */
 public class BaseStringUtil extends StringUtils
 {
 	/**

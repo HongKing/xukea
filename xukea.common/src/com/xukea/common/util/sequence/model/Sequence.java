@@ -2,7 +2,14 @@ package com.xukea.common.util.sequence.model;
 
 import com.xukea.framework.base.BaseEntity;
 
-
+/**
+ * 手动序列
+ * 
+ * @author 木木大叔
+ * @QQ     285198830
+ * @version 1.0
+ * @date    2012-02-16
+ */
 public class Sequence extends BaseEntity {
 	private String tabName;
 	private long nextId;

@@ -222,6 +222,10 @@
             <taglib-uri>/tags/oscache</taglib-uri>
             <taglib-location>/WEB-INF/tld/oscache.tld</taglib-location>
         </taglib>
+        <taglib>
+            <taglib-uri>/tags/xukea</taglib-uri>
+            <taglib-location>/WEB-INF/tld/xukea.tld</taglib-location>
+        </taglib>
     </jsp-config>
 </web-app>
 

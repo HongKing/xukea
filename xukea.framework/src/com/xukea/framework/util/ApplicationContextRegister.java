@@ -8,9 +8,10 @@ import org.springframework.context.ApplicationContextAware;
 /**
  * 注册 Spring 的 applicationContext 
  * 
- * @author  FishBoy
+ * @author 木木大叔
+ * @QQ     285198830
  * @version 1.0
- * @date    2012-01-05
+ * @date    2012.02.09
  */
 public class ApplicationContextRegister implements ApplicationContextAware {
 

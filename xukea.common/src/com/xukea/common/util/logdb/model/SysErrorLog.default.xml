@@ -9,7 +9,6 @@
         <result column="ERR_VALUE"   property="errValue"  javaType="java.lang.String"/>
 		<result column="MSG_SHORT"	 property="msgShort"	 javaType="java.lang.String"/>
 		<result column="MSG_ALL"	 property="msgAll"	 javaType="java.lang.String"/>
-
     </resultMap>
     
     <!-- 新增信息 -->

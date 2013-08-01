@@ -1,6 +1,5 @@
 package com.xukea.common.util.cache;
 
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -11,13 +10,13 @@ import com.xukea.framework.util.ContextUtil;
 import com.xukea.main.role.model.Menu;
 import com.xukea.main.role.service.MenuService;
 
-
 /**
  * 所有菜单资源缓存<br>
  * 
- * @author  FishBoy
+ * @author 木木大叔
+ * @QQ     285198830
  * @version 1.0
- * @date    2012-02-16
+ * @date    2012-12-27
  */
 public class MenuCache extends BaseCache<Menu>{
 	private static String GROUP_NAME     = "menu";
@@ -117,7 +116,7 @@ public class MenuCache extends BaseCache<Menu>{
 			
 			//缓存当前对象
 			this.put(item.getCode(), item);
-			this.put(item.getShortWord(), item);
+//			this.put(item.getShortWord(), item);
 			
 			//所有菜单只缓存有URL的对象
 			menus.add(item);

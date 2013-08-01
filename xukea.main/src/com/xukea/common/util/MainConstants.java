@@ -2,12 +2,14 @@ package com.xukea.common.util;
 
 import com.xukea.framework.base.BaseConstants;
 
-
 /**
  * 主框架系统常量<br>
  * 该类主要用于主框架中，对于各个插件，请尽量不要采用该类处理
- * @author FishBoy
- * @version
+ * 
+ * @author 木木大叔
+ * @QQ     285198830
+ * @version 1.0
+ * @date    2012-12-27
  */
 public final class MainConstants extends BaseConstants{
 	

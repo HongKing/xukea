@@ -5,9 +5,11 @@ import javax.mail.PasswordAuthentication;
 
 /**
  * 发件帐号密码
- * @author FishBoy
- * @version
- * @date   2012.02.09
+ * 
+ * @author 木木大叔
+ * @QQ     285198830
+ * @version 1.0
+ * @date    2012.02.09
  */
 public class SMTPAuthenticator extends Authenticator {
 	private String	user;

@@ -8,22 +8,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.xukea.framework.base.BaseRestSpringController;
-import com.xukea.main.role.model.Role;
 
 /**
  * 角色管理Controller
- * @author 石头
- *
+ * 
+ * @author 木木大叔
+ * @QQ     285198830
+ * @version 1.0
+ * @date    2012-12-27
  */
 @Controller
 @RequestMapping("/main/role")
-public class RoleController extends BaseRestSpringController<Role, String>{
+public class RoleController extends BaseRestSpringController {
 	
 	/**
 	 * 首页
 	 */
 	@Override
-	public ModelAndView index(HttpServletRequest request, HttpServletResponse response, Role obj) {
+	public ModelAndView index(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView result = new ModelAndView();
 		result.setViewName("/main/role/index");
 		return result;

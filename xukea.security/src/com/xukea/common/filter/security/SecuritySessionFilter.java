@@ -15,9 +15,12 @@ import org.springframework.util.Assert;
 import com.xukea.common.util.cache.Config;
 
 /**
+ * security session 过滤器
  * 
- * @author Administrator
- *
+ * @author 木木大叔
+ * @QQ     285198830
+ * @version 1.0
+ * @date    2012-12-27
  */
 public class SecuritySessionFilter extends ConcurrentSessionFilter {
     private LogoutHandler[] handlers = new LogoutHandler[] {new SecurityContextLogoutHandler()};

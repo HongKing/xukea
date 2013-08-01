@@ -5,22 +5,18 @@ import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 
 import com.xukea.common.util.cache.Config;
-
-
+import com.xukea.main.user.model.User;
 
 /**
  * 用户基本信息(该类不可更改名字）
- * @author 石头
- *
+ * 
+ * @author 木木大叔
+ * @QQ     285198830
+ * @version 1.0
+ * @date    2011.12.26
  */
-public class UserBasicInfo {
+public class UserBasicInfo extends User {
 	private static final String SESSION_NAME = Config.getInstance().getString("user.basic.info.sessname");
-
-	/************ 常用属性 *************/
-	private long   userId;   //用户ID
-	private String userName; //用户名
-	private String realName; //真实名
-	private String email;    //邮箱
 
 	/************ 扩展属性 *************/
 	private HashMap<String, Object> attribute = new HashMap<String, Object>();
@@ -45,31 +41,6 @@ public class UserBasicInfo {
 		return (UserBasicInfo)request.getSession().getAttribute(SESSION_NAME);
 	}
 
-	public long getUserId() {
-		return userId;
-	}
-	public void setUserId(long userId) {
-		this.userId = userId;
-	}
-	public String getUserName() {
-		return userName;
-	}
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-	public String getRealName() {
-		return realName;
-	}
-	public void setRealName(String realName) {
-		this.realName = realName;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	
 	/**
 	 * 获取扩展信息
 	 * @param key

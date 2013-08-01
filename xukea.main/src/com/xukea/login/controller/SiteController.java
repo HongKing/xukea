@@ -1,6 +1,5 @@
 package com.xukea.login.controller;
 
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,21 +13,23 @@ import com.xukea.common.exception.PageNotFoundException;
 import com.xukea.common.exception.UnLoginException;
 import com.xukea.framework.base.BaseRestSpringController;
 
-
 /**
  * 系统默认的controller处理
- * @author 石头
- *
+ * 
+ * @author 木木大叔
+ * @QQ     285198830
+ * @version 1.0
+ * @date    2012-12-27
  */
 @Controller
 @RequestMapping("/")
-public class SiteController extends BaseRestSpringController<Object, Long>{
+public class SiteController extends BaseRestSpringController{
 	
 	/**
 	 * 首页
 	 */
 	@Override
-	public ModelAndView index(HttpServletRequest request, HttpServletResponse response, Object obj) {
+	public ModelAndView index(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView result = new ModelAndView();
 		result.setViewName("/index");
 		return result;
@@ -55,9 +56,3 @@ public class SiteController extends BaseRestSpringController<Object, Long>{
 		}
 	}
 }
- 
-
-	 
-
-	
-

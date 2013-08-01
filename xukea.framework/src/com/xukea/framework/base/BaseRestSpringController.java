@@ -22,20 +22,25 @@ import org.springframework.web.servlet.ModelAndView;
  * /userinfo/{id}   DELETE  => delete()  
  * /userinfo/delete DELETE  => batchDelete()  
  * </pre>
+ * 
+ * @author 木木大叔
+ * @QQ     285198830
+ * @version 1.0
+ * @date    2012-12-27
  */
-public abstract class BaseRestSpringController<Entity, PK> extends BaseSpringController {
+public abstract class BaseRestSpringController extends BaseSpringController {
 	
 	//特别说明: 由于spring的方法参数映射太过于灵活,如果以下参数不适应你,请自己修改参数并修改代码生成器模板
 	// 如果你不喜欢 HttpServletRequest request,HttpServletResponse response作为方法参数，也请删除
 
 	/** 默认 */
 	@RequestMapping
-	public abstract ModelAndView index(HttpServletRequest request, HttpServletResponse response, Entity model);
+	public abstract ModelAndView index(HttpServletRequest request, HttpServletResponse response);
 
 	/** 首页 */
 	@RequestMapping(value="/index")
-	public ModelAndView _index(HttpServletRequest request, HttpServletResponse response, Entity model) {
-		return index(request, response, model);
+	public ModelAndView _index(HttpServletRequest request, HttpServletResponse response) {
+		return index(request, response);
 	}
 	
 //	/** 进入新增 */

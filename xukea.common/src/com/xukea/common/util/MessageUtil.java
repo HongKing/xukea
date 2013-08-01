@@ -10,8 +10,12 @@ import com.xukea.system.message.service.SendEmailService;
 
 /**
  * 消息通知（邮件、站内消息、短信）
- * @author FishBoy
- * @version
+ * TODO 需完善 
+ * 
+ * @author 木木大叔
+ * @QQ     285198830
+ * @version 1.0
+ * @date    2012-02-16
  */
 public class MessageUtil {
 	private static Object lock = new Object(); 

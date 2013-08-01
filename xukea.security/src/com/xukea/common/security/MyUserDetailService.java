@@ -18,8 +18,11 @@ import com.xukea.main.user.service.UserService;
 
 /**
  * 用户权限信息等基本数据封装
- * @author Administrator
- *
+ * 
+ * @author 木木大叔
+ * @QQ     285198830
+ * @version 1.0
+ * @date    2012-12-27
  */
 public class MyUserDetailService implements UserDetailsService {
 

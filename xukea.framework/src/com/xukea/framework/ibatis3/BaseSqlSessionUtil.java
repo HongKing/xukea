@@ -1,14 +1,19 @@
 package com.xukea.framework.ibatis3;
 
-
 import org.apache.ibatis.mapping.BoundSql;
 import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.mapping.SqlSource;
 
 import com.xukea.framework.base.BaseStringUtil;
 
-
-
+/**
+ * SqlSession工具类
+ * 
+ * @author 木木大叔
+ * @QQ     285198830
+ * @version 1.0
+ * @date    2012-12-27
+ */
 public class BaseSqlSessionUtil{
 
 	/**

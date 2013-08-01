@@ -17,7 +17,6 @@ import com.xukea.framework.ibatis3.BaseSqlSessionUtil;
 import com.xukea.framework.ibatis3.plugin.dialect.Dialect;
 import com.xukea.framework.util.PropertiesHelper;
 
-
 /**
  * 为ibatis3提供基于方言(Dialect)的分页查询的插件
  * 
@@ -32,6 +31,10 @@ import com.xukea.framework.util.PropertiesHelper;
  *	&lt;/plugins>
  * </pre>
  * 
+ * @author 木木大叔
+ * @QQ     285198830
+ * @version 1.0
+ * @date    2012-12-27
  */
 @Intercepts({@Signature(
 		type   = Executor.class,

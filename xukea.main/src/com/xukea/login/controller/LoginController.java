@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.security.authentication.AuthenticationServiceException;
+import org.springframework.beans.BeanUtils;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,7 +18,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.xukea.common.UserBasicInfo;
 import com.xukea.common.filter.security.SecurityLoginFilter;
-import com.xukea.common.filter.security.SecuritySessionFilter;
 import com.xukea.common.util.WebUtil;
 import com.xukea.framework.base.BaseRestSpringController;
 import com.xukea.framework.util.ContextUtil;
@@ -30,15 +29,17 @@ import com.xukea.main.role.service.RoleService;
 import com.xukea.main.user.model.User;
 import com.xukea.main.user.service.UserService;
 
-
 /**
  * 登录Controller
- * @author 石头
- *
+ * 
+ * @author 木木大叔
+ * @QQ     285198830
+ * @version 1.0
+ * @date    2012-12-27
  */
 @Controller
 @RequestMapping("/login")
-public class LoginController extends BaseRestSpringController<User, Long>{
+public class LoginController extends BaseRestSpringController{
 
 	@Resource
 	private MenuService menuService;
@@ -53,7 +54,7 @@ public class LoginController extends BaseRestSpringController<User, Long>{
 	 * 首页
 	 */
 	@Override
-	public ModelAndView index(HttpServletRequest request, HttpServletResponse response, User obj) {
+	public ModelAndView index(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView result = new ModelAndView();
 		result.setViewName("/login/login");
 		return result;
@@ -105,10 +106,7 @@ public class LoginController extends BaseRestSpringController<User, Long>{
 		
 		//set user to UserBasicInfo
 		UserBasicInfo userInfo = new UserBasicInfo();
-		userInfo.setUserId(user.getId());
-		userInfo.setUserName(user.getUserName());
-		userInfo.setRealName(user.getRealName());
-		userInfo.setEmail(user.getEmail());
+		BeanUtils.copyProperties(user, userInfo);
 		
 		// get user's menu
 		List<Menu> menus = menuService.getSubMenuByUID(user.getId(), "");
@@ -154,9 +152,3 @@ public class LoginController extends BaseRestSpringController<User, Long>{
 		return new ModelAndView("redirect:/login");
 	}
 }
- 
-
-	 
-
-	
-

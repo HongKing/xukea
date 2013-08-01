@@ -12,8 +12,11 @@ import net.sf.json.processors.JsonValueProcessor;
 
 /**
  * JSON格式化：日期
- * @author FishBoy
- * @version
+ * 
+ * @author 木木大叔
+ * @QQ     285198830
+ * @version 1.0
+ * @date    2012-02-16
  */
 public class JsonDateValueProcessor implements JsonValueProcessor {
     public static final String DEFAULT_PATTERN = BaseConstants.FORMAT_DATE_TIME;  

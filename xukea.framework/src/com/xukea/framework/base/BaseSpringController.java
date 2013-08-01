@@ -7,6 +7,7 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.propertyeditors.CharacterEditor;
 import org.springframework.beans.propertyeditors.CustomNumberEditor;
@@ -30,10 +31,14 @@ import com.xukea.framework.util.editor.ShortEditor;
 
 /**
  * Spring 控制器基类
- * @author FishBoy
- *
+ * 
+ * @author 木木大叔
+ * @QQ     285198830
+ * @version 1.0
+ * @date    2012-12-27
  */
 public class BaseSpringController extends MultiActionController {
+    protected final Logger log = Logger.getLogger(this.getClass());
 	
 	static {
 		//注册converters

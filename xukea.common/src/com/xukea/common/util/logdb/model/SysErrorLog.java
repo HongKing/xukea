@@ -3,11 +3,13 @@ package com.xukea.common.util.logdb.model;
 import java.util.Date;
 import com.xukea.framework.base.BaseEntity;
 
-
 /**
+ * 系统日志 BEAN 对象
  * 
- * @author 
- * @version
+ * @author 木木大叔
+ * @QQ     285198830
+ * @version 1.0
+ * @date    2012-02-16
  */
 public class SysErrorLog extends BaseEntity {
 	

@@ -3,9 +3,13 @@ package com.xukea.common.util.crypto;
 import javax.crypto.*;
 import javax.crypto.spec.SecretKeySpec; 
 
-
 /**
  * 字符串 DESede(3DES) 加密
+ * 
+ * @author 木木大叔
+ * @QQ     285198830
+ * @version 1.0
+ * @date    2012-02-16
  */
 public class DES {
 

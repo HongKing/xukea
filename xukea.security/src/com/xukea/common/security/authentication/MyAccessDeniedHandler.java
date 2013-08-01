@@ -18,8 +18,11 @@ import com.xukea.common.util.cache.Config;
 
 /**
  * 无权限访问异常处理，只有登录后的无效访问才处理，未登录状态将不进入该类
- * @author Administrator
- *
+ * 
+ * @author 木木大叔
+ * @QQ     285198830
+ * @version 1.0
+ * @date    2012-12-27
  */
 public class MyAccessDeniedHandler implements AccessDeniedHandler {
 

@@ -4,11 +4,13 @@ import java.util.Collection;
 
 import org.springframework.security.core.GrantedAuthority;
 
-
 /**
  * Spring Security用户信息
- * @author Administrator
- *
+ * 
+ * @author 木木大叔
+ * @QQ     285198830
+ * @version 1.0
+ * @date    2012-12-27
  */
 public class MyUserDetail extends org.springframework.security.core.userdetails.User {
 	

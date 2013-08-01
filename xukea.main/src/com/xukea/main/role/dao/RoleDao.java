@@ -7,11 +7,13 @@ import org.springframework.stereotype.Repository;
 import com.xukea.framework.base.BaseDao;
 import com.xukea.main.role.model.Role;
 
-
 /**
+ * 角色处理Dao
  * 
- * @author 
- * @version
+ * @author 木木大叔
+ * @QQ     285198830
+ * @version 1.0
+ * @date    2012-12-27
  */
 @Repository
 public class RoleDao  extends BaseDao{
