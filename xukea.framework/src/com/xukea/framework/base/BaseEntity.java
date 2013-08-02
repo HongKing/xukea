@@ -58,7 +58,7 @@ public class BaseEntity implements Serializable {
                 }
                 
                 if(    "class java.util.Date".equalsIgnoreCase(type.toString()) 
-                	|| "class java.sql.Date".equals(type.toString())
+                	|| "class java.sql.Date".equalsIgnoreCase(type.toString())
                 ){
                     // 如果是日期格式，则将其格式化
                 	val = dateFormat.format(val);
