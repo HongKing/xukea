@@ -46,16 +46,29 @@ public abstract class BaseCache<T> extends GeneralCacheAdministrator {
 	}
 
 	/**
-	 * 获取被缓存的对象
+	 * 获取被缓存的对象<br>
+	 * 刷新缓存
 	 * 
-	 * @param key
-	 * @return
-	 * @throws NeedsRefreshException
+	 * @param key      键
 	 */
 	public T get(String key) {
+		return get(key, true);
+	}
+
+	/**
+	 * 获取被缓存的对象
+	 * 
+	 * @param key      键
+	 * @param refresh  若取不到值，是否刷新
+	 */
+	public T get(String key, boolean refresh) {
 		try {
 			return (T)this.getFromCache(this.group + "_" + key, this.refreshPeriod);
 		} catch (NeedsRefreshException e) {
+			if(!refresh){
+				log.debug("Not refresh cache, there is no cache for : "+key);
+				return null;
+			}
 			//如果一个NeedsRefreshException出现 必须调用putInCache或cancelUpdate来避免死锁情况发生.
 			this.cancelUpdate(this.group + "_" + key);
 			this.refresh(); //刷新缓存
@@ -64,7 +77,7 @@ public abstract class BaseCache<T> extends GeneralCacheAdministrator {
 				return (T)this.getFromCache(this.group + "_" + key, this.refreshPeriod);
 			} catch (NeedsRefreshException ee) {
 				//刷新缓存后，还有异常的话，说明该key对应的数据不存在
-				log.error("There is no cache for : "+key);
+				log.error("After refresh cache, there is no cache for : "+key);
 				return null;
 			}
 		}
@@ -81,24 +94,38 @@ public abstract class BaseCache<T> extends GeneralCacheAdministrator {
 	}
 	
 	/**
-	 * 获取被缓存的List对象
+	 * 获取被缓存的List对象<br>
+	 * 刷新缓存
 	 * 
-	 * @param key
-	 * @return
-	 * @throws NeedsRefreshException
+	 * @param key      键
 	 */
 	public List<T> getList(String key) {
+		return getList(key, true);
+	}
+	
+	/**
+	 * 获取被缓存的List对象
+	 * 
+	 * @param key      键
+	 * @param refresh  若取不到值，是否刷新
+	 */
+	public List<T> getList(String key, boolean refresh) {
 		try {
 			return (List<T>) this.getFromCache(this.group + "_" + key + "_list", this.refreshPeriod);
 		} catch (NeedsRefreshException e) {
-			this.cancelUpdate(this.group + "_" + key);
+			if(!refresh){
+				log.debug("Not refresh cache, there is no list cache for : "+key);
+				return null;
+			}
+			//如果一个NeedsRefreshException出现 必须调用putInCache或cancelUpdate来避免死锁情况发生.
+			this.cancelUpdate(this.group + "_" + key + "_list");
 			this.refresh(); //刷新缓存
 			// 刷新后，重新获取数据
 			try {
 				return (List<T>) this.getFromCache(this.group + "_" + key + "_list", this.refreshPeriod);
 			} catch (NeedsRefreshException ee) {
 				//刷新缓存后，还有异常的话，说明该key对应的数据不存在
-				log.error("There is no cache for : "+key);
+				log.error("After refresh cache, there is no list cache for : "+key);
 				return null;
 			}
 		}
@@ -111,7 +138,7 @@ public abstract class BaseCache<T> extends GeneralCacheAdministrator {
 	 */
 	public void remove(String key) {
 		//获取缓存对象
-		T temp = this.get(key);
+		T temp = this.get(key, false);
 		if(temp==null) return;
 		//删除缓存
 		this.flushEntry(this.group + "_" + key);
@@ -124,7 +151,7 @@ public abstract class BaseCache<T> extends GeneralCacheAdministrator {
 	 */
 	public void removeList(String key) {
 		//获取缓存对象
-		List<T> temp = this.getList(key);
+		List<T> temp = this.getList(key, false);
 		if(temp==null) return;
 		//删除缓存
 		this.flushEntry(this.group + "_" + key + "_list");

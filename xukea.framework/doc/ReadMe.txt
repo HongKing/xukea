@@ -1,0 +1,1 @@
+用eclipse打包导出时，需要选择 Add directory entries，从而保证jar包中的xml配置文件生效
