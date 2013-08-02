@@ -74,23 +74,5 @@ public class BaseEntity implements Serializable {
         	return null;
         }
 	}
-
-		 // 一个判断son是否直接继承自father的简单函数
-		 public static boolean genericCheck(Class<?> son, Object fathera) {
-			 return InitializingBean.class.isAssignableFrom(son);//(son.getSuperclass() .getGenericSuperclass() instanceof Collection);
-		 }
-
-		 public static void main(String[] args) {
-//		  System.out.println(genericCheck(String.class, Object.class));
-		  System.out.println(genericCheck(BaseDao.class, Object.class));
-		  System.out.println(genericCheck(DaoSupport.class, DaoSupport.class));
-		  System.out.println(genericCheck(InitializingBean.class, InitializingBean.class));
-		  System.out.println(genericCheck(Object.class, Object.class));
-		  System.out.println(genericCheck(List.class, List.class));
-		  System.out.println(genericCheck(ArrayList.class, Collection.class));
-		  //你在你的程序里,这样输出一下就知道了,A是否直接继承了B.
-		  //System.out.println(ClassTest.genericCheck(A.class, B.class));
-		 }
-
-
+	
 }

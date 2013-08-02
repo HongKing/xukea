@@ -1,5 +1,7 @@
 package com.xukea.framework.base;
 
+import org.apache.log4j.Logger;
+
 
 /**
  * 线程基类
@@ -9,7 +11,9 @@ package com.xukea.framework.base;
  * @version 1.0
  * @date    2012-12-27
  */
-public abstract class BaseThread extends Thread{
+public abstract class BaseThread extends Thread {
+	protected final Logger log = Logger.getLogger(getClass());
+	
 	public static final int NEW      = 0; //新建
 	public static final int WAITING  = 1; //就绪
 	public static final int WORKING  = 2; //工作中
