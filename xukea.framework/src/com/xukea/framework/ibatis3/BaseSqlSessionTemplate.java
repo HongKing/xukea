@@ -1,8 +1,18 @@
 package com.xukea.framework.ibatis3;
 
 
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
+
+import net.sf.jsqlparser.JSQLParserException;
+import net.sf.jsqlparser.parser.CCJSqlParserManager;
+import net.sf.jsqlparser.schema.Column;
+import net.sf.jsqlparser.schema.Table;
+import net.sf.jsqlparser.statement.select.PlainSelect;
+import net.sf.jsqlparser.statement.select.Select;
+import net.sf.jsqlparser.statement.select.SelectExpressionItem;
+import net.sf.jsqlparser.statement.select.SelectItem;
 
 import org.apache.ibatis.mapping.BoundSql;
 import org.apache.ibatis.mapping.MappedStatement;
@@ -11,6 +21,7 @@ import org.apache.ibatis.mapping.ResultMapping;
 import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.log4j.Logger;
 import org.mybatis.spring.SqlSessionTemplate;
 
 import com.xukea.framework.util.PageList;
@@ -24,7 +35,8 @@ import com.xukea.framework.util.PageList;
  * @date    2012-12-27
  */
 public class BaseSqlSessionTemplate extends SqlSessionTemplate {
-
+	private final Logger log = Logger.getLogger(getClass());
+	private CCJSqlParserManager parserManager = new CCJSqlParserManager();// SQL语法解析器
 	  
 	public BaseSqlSessionTemplate(SqlSessionFactory sqlSessionFactory) {
 		super(sqlSessionFactory);
@@ -113,14 +125,54 @@ public class BaseSqlSessionTemplate extends SqlSessionTemplate {
 		
     	return pageList;
     }
-    
+
     /**
-     * 生成统计SQL
+     * 生成统计SQL<br>
+     * 采用JSQLParser语法解析器解析SQL语句，避免出现SQL注入等BUG
      * 
      * @param sql
      * @return
      */
     private String buildCountSql(String sql){
+    	// 解析SQL
+    	Select select = null;
+    	try {
+    		select = (Select)parserManager.parse(new StringReader(sql));
+		} catch (JSQLParserException e) {
+			log.error("parser sql error: < "+ sql +" >", e);
+			return oldBBuildCountSql(sql);
+		}
+		PlainSelect ps = (PlainSelect) select.getSelectBody();
+
+		// 去除排序、分组等语句
+		ps.setGroupByColumnReferences(null);
+		ps.setOrderByElements(null);
+		ps.setHaving(null);
+		ps.setTop(null);
+		ps.setLimit(null);
+		
+		if(ps.getDistinct()!=null){
+			return "SELECT count(*) FROM ( "+ ps.toString() +" ) mybatis_count_table_1900";
+		}else{
+			// 替换查询列为统计值
+			SelectExpressionItem newCountSelect = new SelectExpressionItem();
+			newCountSelect.setExpression(new Column(new Table(), "count(*)"));
+			List<SelectItem> list = new ArrayList<SelectItem>();
+			list.add(newCountSelect);
+			ps.setSelectItems(list);
+			
+			return ps.toString();
+		}
+    }
+
+    /**
+     * 生成统计SQL<br>
+     * 功能较弱，无纠错处理，不灵活
+     * 
+     * @param sql
+     * @return
+     */
+    private String oldBBuildCountSql(String sql){
     	// 去除换行符等字符
     	sql = sql.trim();
 		sql = sql.replaceAll("\\n", " ");
