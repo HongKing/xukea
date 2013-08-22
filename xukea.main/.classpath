@@ -53,5 +53,6 @@
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/spring-security-config-3.2.0.M1.jar"/>
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/spring-security-core-3.2.0.M1.jar"/>
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/spring-security-web-3.2.0.M1.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/jsqlparser-0.8.4-SNAPSHOT.jar"/>
 	<classpathentry kind="output" path="webapp/WEB-INF/classes"/>
 </classpath>
