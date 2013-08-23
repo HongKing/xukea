@@ -1,6 +1,5 @@
 package com.xukea.framework.ibatis3;
 
-
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +24,7 @@ import org.apache.log4j.Logger;
 import org.mybatis.spring.SqlSessionTemplate;
 
 import com.xukea.framework.util.PageList;
+import com.xukea.framework.util.sqlparser.SqlDeParser;
 
 /**
  * SQL执行模板
@@ -152,7 +152,7 @@ public class BaseSqlSessionTemplate extends SqlSessionTemplate {
 		ps.setLimit(null);
 		
 		if(ps.getDistinct()!=null){
-			return "SELECT count(*) FROM ( "+ ps.toString() +" ) mybatis_count_table_1900";
+			return "SELECT count(*) FROM ( "+ deParserSql(select) +" ) mybatis_count_table_1900";
 		}else{
 			// 替换查询列为统计值
 			SelectExpressionItem newCountSelect = new SelectExpressionItem();
@@ -161,7 +161,7 @@ public class BaseSqlSessionTemplate extends SqlSessionTemplate {
 			list.add(newCountSelect);
 			ps.setSelectItems(list);
 			
-			return ps.toString();
+			return deParserSql(select);
 		}
     }
 
@@ -205,5 +205,17 @@ public class BaseSqlSessionTemplate extends SqlSessionTemplate {
 		sql = "SELECT count(*) " + sql;
 		
 		return sql;
+    }
+    
+    /**
+     * 获取解析后的SQL语句
+     * @param select
+     * @return
+     */
+    private String deParserSql(Select select){
+		StringBuilder stringBuffer = new StringBuilder();
+		SqlDeParser deParser = new SqlDeParser(stringBuffer);
+		deParser.visit(select);
+		return stringBuffer.toString();
     }
 } 

@@ -107,7 +107,9 @@ public class PagerTag<T> extends TagSupport {
 	 * @return
 	 */
 	private String getPageUrl(int page){
-		if(url.indexOf("?")>=0){
+		if(url==null || "".equals(url)){
+			return page+"";
+		}else if(url.indexOf("?")>=0){
 			return url + page;
 		}else{
 			return url +"/"+ page;

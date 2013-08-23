@@ -30,7 +30,8 @@ import com.xukea.main.user.model.User;
 import com.xukea.main.user.service.UserService;
 
 /**
- * 登录Controller
+ * 登录Controller<br>
+ * 登录验证已经放到Security中，只有退出由该Controller处理
  * 
  * @author 木木大叔
  * @QQ     285198830
