@@ -32,9 +32,9 @@ public class Role extends BaseEntity {
 	 public void setName(String name){ 
 	 	 this.name=name; 
 	 } 
-	 public String getShortWord(){ 
-	 	 return this.shortWord; 
-	 } 
+//	 public String getShortWord(){ 
+//	 	 return this.shortWord; 
+//	 } 
 	 public void setShortWord(String shortWord){ 
 	 	 this.shortWord=shortWord; 
 	 } 

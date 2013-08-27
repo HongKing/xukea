@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+
+<mapper namespace="com.xukea.main.rule.model.Rule" >
+    <resultMap id="RuleMap" type="com.xukea.main.rule.model.Rule">
+		<result column="ID"	 property="id"	 javaType="java.lang.Long"/>
+		<result column="ROLE_CODE"	 property="roleCode"	 javaType="java.lang.String"/>
+		<result column="NAME"	 property="name"	 javaType="java.lang.String"/>
+		<result column="TAB_NAME"	 property="tabName"	 javaType="java.lang.String"/>
+		<result column="RULES"	 property="rules"	 javaType="java.lang.String"/>
+		<result column="TAB_COMMENT"	 property="tabComment"	 javaType="java.lang.String"/>
+        <result column="ROLE_NAME"    property="roleName"     javaType="java.lang.String"/>
+    </resultMap>
+    
+    
+    
+    <!-- 新增信息 -->
+    <insert id="insert" parameterType="com.xukea.main.rule.model.Rule" >
+	<![CDATA[
+		INSERT INTO ACC_RULES (
+		    ID, ROLE_CODE,NAME, TAB_NAME, RULES
+		) VALUES (
+			#{id},#{roleCode}, #{name}, #{tabName}, #{rules}
+		)
+	]]>
+    </insert>
+	
+    <!-- 删除信息 -->
+    <delete id="delete" parameterType="java.lang.Long">
+    <![CDATA[
+        DELETE FROM ACC_RULES
+        WHERE ID = #{id} 
+    ]]>
+    </delete>
+    
+    <select id="getAllRule" resultMap="RuleMap">
+    	SELECT t1.*,t2.NAME AS ROLE_NAME FROM ACC_RULES t1,USR_ROLE t2 WHERE t1.ROLE_CODE= t2.CODE
+    </select>
+    
+     <select id="getRuleById" resultMap="RuleMap" parameterType="java.lang.Long">
+    	SELECT * FROM ACC_RULES  WHERE ID = #{rid}
+    </select>
+    
+    <update id="updateRule" parameterType="com.xukea.main.rule.model.Rule">
+    	UPDATE ACC_RULES
+		   SET ROLE_CODE = #{roleCode},
+		   NAME = #{name}, 
+		   TAB_NAME = #{tabName}, 
+		   RULES = #{rules}
+		WHERE ID = #{id}
+    </update>
+    
+    <delete id="delRule" parameterType="java.lang.Long">
+    	DELETE FROM ACC_RULES
+    	WHERE ID = #{rid}
+    </delete>
+    
+</mapper>

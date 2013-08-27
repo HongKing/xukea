@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <plugins>
+        <!-- plugin 执行顺序为：后加载的先执行，类似于堆栈模式 -->
+        
+        <!-- 指定数据库分页方言Dialect, 其它方言:OracleDialect,SQLServerDialect,MySQLDialect-->
+        <!-- 最后添加分页语句 -->
+		<plugin interceptor="com.xukea.framework.ibatis3.plugin.OffsetLimitInterceptor">
+			<property name="dialectClass" value="com.xukea.framework.ibatis3.plugin.dialect.OracleDialect"/>
+			<!--  
+            <property name="dialectClass" value="com.xukea.framework.ibatis3.plugin.dialect.DB2Dialect"/>
+            <property name="dialectClass" value="com.xukea.framework.ibatis3.plugin.dialect.H2Dialect"/>
+            <property name="dialectClass" value="com.xukea.framework.ibatis3.plugin.dialect.HSQLDialect"/>
+            <property name="dialectClass" value="com.xukea.framework.ibatis3.plugin.dialect.MySQLDialect"/>
+            <property name="dialectClass" value="com.xukea.framework.ibatis3.plugin.dialect.SQLServerDialect"/>
+            -->
+		</plugin>
+		
+		<!-- 数据权限拦截器，优先处理数据权限拦截 -->
+        <plugin interceptor="com.xukea.common.mybatis.plugin.DataPolicyInterceptor">
+        </plugin>
+	</plugins>
+    
+</configuration>

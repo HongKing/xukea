@@ -9,6 +9,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler;
 import org.springframework.web.servlet.resource.ResourceHttpRequestHandler;
 
+import com.xukea.common.UserBasicInfo;
+import com.xukea.common.util.ThreadLocalInstance;
 import com.xukea.common.exception.PageNotFoundException;
 import com.xukea.common.exception.UnauthorizedException;
 import com.xukea.common.util.cache.MenuCache;
@@ -32,8 +34,7 @@ public class RequestGlobalAdapter extends BaseRequestAdapter {
 	 * 访问统计等
 	 */
 	@Override
-	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) 
-			throws Exception {
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		log.debug("preHandle");
 
 		// 授权控制
@@ -43,6 +44,9 @@ public class RequestGlobalAdapter extends BaseRequestAdapter {
 			throw new UnauthorizedException("授权过期，请获取新的授权信息");
 		}
 
+		// 绑定当前用户到本次线程中
+		ThreadLocalInstance.set("UserBasicInfo", UserBasicInfo.getFromSession(request));
+		
 		String from = request.getRequestURI().substring(request.getContextPath().length());
 		
 		// 是否是REST URL
@@ -66,8 +70,7 @@ public class RequestGlobalAdapter extends BaseRequestAdapter {
 	 * 后处理（调用了Service并返回ModelAndView，但未进行页面渲染）
 	 */
 	@Override
-	public void postHandle( HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) 
-			throws Exception {
+	public void postHandle( HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
 		log.debug("postHandle");
 
 		// 如果是资源文件不做处理
@@ -95,8 +98,10 @@ public class RequestGlobalAdapter extends BaseRequestAdapter {
 	 * 返回处理（已经渲染了页面,这里抛出的异常不影响前端的页面展现）
 	 */
 	@Override
-	public void afterCompletion( HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) 
-			throws Exception {
+	public void afterCompletion( HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+		// 释放当前线程缓存的局部变量
+		ThreadLocalInstance.remove();
+		
 		log.debug("afterCompletion");
 		if(ex!=null){
 			log.error(ex);
