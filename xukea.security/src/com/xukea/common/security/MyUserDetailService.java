@@ -42,7 +42,7 @@ public class MyUserDetailService implements UserDetailsService {
 		List<Role> roles = roleService.getRoleByUserId(user.getId());
         List<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
         for(Role role : roles){
-            GrantedAuthority temp = new SimpleGrantedAuthority(role.getShortWord());
+            GrantedAuthority temp = new SimpleGrantedAuthority(role.getCode());
             grantedAuthorities.add(temp);
         }
         // 生成SpringSecurity所需的UserDetail

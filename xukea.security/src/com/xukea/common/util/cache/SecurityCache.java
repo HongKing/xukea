@@ -93,7 +93,7 @@ public class SecurityCache extends BaseCache<List<ConfigAttribute>>{
             List<ConfigAttribute> list = new ArrayList<ConfigAttribute>();
         	for(Role role : roles){
         		// 转换角色名为Spring Security的格式
-        		ConfigAttribute temp = new SecurityConfig(role.getShortWord());
+        		ConfigAttribute temp = new SecurityConfig(role.getCode());
         		list.add(temp);
         	}
             this.put(menu.getCode(), list);

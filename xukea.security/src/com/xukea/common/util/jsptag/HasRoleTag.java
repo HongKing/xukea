@@ -62,7 +62,7 @@ public class HasRoleTag extends BodyTagSupport{
         // 判断用户是否有权限操作
         boolean flag = false;
         for(Role role : userRoles){
-        	String userRoleName = role.getShortWord();
+        	String userRoleName = role.getCode();
         	for(ConfigAttribute conf : urlRoles){
         		String urlRoleName = conf.getAttribute();
         		if(userRoleName.equals(urlRoleName)){
