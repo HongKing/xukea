@@ -42,7 +42,15 @@ public abstract class BaseCache<T> extends GeneralCacheAdministrator {
 	 * @param value
 	 */
 	public void put(String key, T value) {
-		this.putInCache(this.group + "_" + key, value, new String[]{group});
+		boolean updated = false;
+		try{
+			this.putInCache(this.group + "_" + key, value, new String[]{group});
+			updated = true;
+		}finally{
+			if(!updated){
+				this.cancelUpdate(this.group + "_" + key);
+			}
+		}
 	}
 
 	/**
@@ -65,17 +73,19 @@ public abstract class BaseCache<T> extends GeneralCacheAdministrator {
 		try {
 			return (T)this.getFromCache(this.group + "_" + key, this.refreshPeriod);
 		} catch (NeedsRefreshException e) {
+			//如果一个NeedsRefreshException出现 必须调用putInCache或cancelUpdate来避免死锁情况发生.
+			this.cancelUpdate(this.group + "_" + key);
 			if(!refresh){
 				log.debug("Not refresh cache, there is no cache for : "+key);
 				return null;
 			}
-			//如果一个NeedsRefreshException出现 必须调用putInCache或cancelUpdate来避免死锁情况发生.
-			this.cancelUpdate(this.group + "_" + key);
 			this.refresh(); //刷新缓存
 			// 刷新后，重新获取数据
 			try {
 				return (T)this.getFromCache(this.group + "_" + key, this.refreshPeriod);
 			} catch (NeedsRefreshException ee) {
+				//如果一个NeedsRefreshException出现 必须调用putInCache或cancelUpdate来避免死锁情况发生.
+				this.cancelUpdate(this.group + "_" + key);
 				//刷新缓存后，还有异常的话，说明该key对应的数据不存在
 				log.error("After refresh cache, there is no cache for : "+key);
 				return null;
@@ -90,7 +100,15 @@ public abstract class BaseCache<T> extends GeneralCacheAdministrator {
 	 * @param value
 	 */
 	public void putList(String key, List<T> value) {
-		this.putInCache(this.group + "_" + key + "_list", value, new String[]{group});
+		boolean updated = false;
+		try{
+			this.putInCache(this.group + "_" + key + "_list", value, new String[]{group});
+			updated = true;
+		}finally{
+			if(!updated){
+				this.cancelUpdate(this.group + "_" + key + "_list");
+			}
+		}
 	}
 	
 	/**
@@ -113,17 +131,19 @@ public abstract class BaseCache<T> extends GeneralCacheAdministrator {
 		try {
 			return (List<T>) this.getFromCache(this.group + "_" + key + "_list", this.refreshPeriod);
 		} catch (NeedsRefreshException e) {
+			//如果一个NeedsRefreshException出现 必须调用putInCache或cancelUpdate来避免死锁情况发生.
+			this.cancelUpdate(this.group + "_" + key + "_list");
 			if(!refresh){
 				log.debug("Not refresh cache, there is no list cache for : "+key);
 				return null;
 			}
-			//如果一个NeedsRefreshException出现 必须调用putInCache或cancelUpdate来避免死锁情况发生.
-			this.cancelUpdate(this.group + "_" + key + "_list");
 			this.refresh(); //刷新缓存
 			// 刷新后，重新获取数据
 			try {
 				return (List<T>) this.getFromCache(this.group + "_" + key + "_list", this.refreshPeriod);
 			} catch (NeedsRefreshException ee) {
+				//如果一个NeedsRefreshException出现 必须调用putInCache或cancelUpdate来避免死锁情况发生.
+				this.cancelUpdate(this.group + "_" + key + "_list");
 				//刷新缓存后，还有异常的话，说明该key对应的数据不存在
 				log.error("After refresh cache, there is no list cache for : "+key);
 				return null;
