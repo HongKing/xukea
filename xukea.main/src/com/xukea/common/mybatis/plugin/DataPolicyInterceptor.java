@@ -7,7 +7,9 @@ import java.util.Properties;
 import net.sf.jsqlparser.JSQLParserException;
 import net.sf.jsqlparser.expression.BinaryExpression;
 import net.sf.jsqlparser.expression.Expression;
+import net.sf.jsqlparser.expression.Parenthesis;
 import net.sf.jsqlparser.expression.operators.conditional.AndExpression;
+import net.sf.jsqlparser.expression.operators.conditional.OrExpression;
 import net.sf.jsqlparser.expression.operators.relational.Between;
 import net.sf.jsqlparser.expression.operators.relational.ExistsExpression;
 import net.sf.jsqlparser.expression.operators.relational.InExpression;
@@ -145,7 +147,7 @@ public class DataPolicyInterceptor implements Interceptor{
 			StringBuilder stringBuffer = new StringBuilder();
 			SqlDeParser deParser = new SqlDeParser(stringBuffer);
 			deParser.visit(select);
-			// 替换SQL语句中的常量
+			// 替换SQL语句中的常量，如果缓存解析后的SQL则在此处替换
 			sql = replaceSqlConstant(stringBuffer.toString());
 			
 			// 拼装新的SQL语句
@@ -226,7 +228,7 @@ public class DataPolicyInterceptor implements Interceptor{
 			return subSelect;
 		}
 		
-		// AND, OR 等表达式处理
+		// AND, OR, =, <>, >, <, <=, >=, LIKE, NOT LIKE 等表达式处理
 		if(where instanceof BinaryExpression){
 			BinaryExpression newWhere = (BinaryExpression) where;
 			
@@ -239,6 +241,14 @@ public class DataPolicyInterceptor implements Interceptor{
 			return newWhere;
 		}
 
+		// 以括号括起来的表达式
+		if(where instanceof Parenthesis){
+			Parenthesis newWhere = (Parenthesis) where;
+			Expression left = newWhere.getExpression();
+			newWhere.setExpression(getWhere(left));
+			return newWhere;
+		}
+		
 		// IN, NOT IN 处理
 		if(where instanceof InExpression){
 			InExpression newWhere = (InExpression) where;
@@ -281,7 +291,7 @@ public class DataPolicyInterceptor implements Interceptor{
 			return newWhere;
 		}
 		
-		//Between
+		//BETWEEN
 		if(where instanceof Between){
 			Between newWhere = (Between) where;
 
@@ -308,13 +318,8 @@ public class DataPolicyInterceptor implements Interceptor{
 	 * @return
 	 */
 	private Expression getRuleSql(Table table, String rule){
-		String sql = "";
-		if(table.getAlias()==null || "".equals(table.getAlias())){
-			sql = "SELECT * FROM "+ table +" WHERE "+ rule;
-		}else{
-			sql = "SELECT * FROM "+ table +" WHERE "+ table.getAlias() +"."+ rule;
-		}
-		
+		// 解析规则SQL
+		String sql = "SELECT * FROM "+ table +" WHERE "+ rule;
 		Select select = null;
 		try {
 			select = (Select)parserManager.parse(new StringReader(sql));
@@ -322,9 +327,104 @@ public class DataPolicyInterceptor implements Interceptor{
 			log.error("parser sql error: < "+ sql +" >", e);
 			return null;
 		}
-		
+		// 获取条件规则对象
 		PlainSelect selectBody = (PlainSelect) select.getSelectBody();
-		return selectBody.getWhere();
+		if(table.getAlias()==null){
+			return selectBody.getWhere();
+		}else{
+			return addTableAlias4Rule(table, selectBody.getWhere());
+		}
+	}
+	
+	/**
+	 * 为规则条件添加表别名<br>
+	 * 只需要在左侧表达式上添加表别名
+	 * 
+	 * @param where
+	 * @return
+	 */
+	private Expression addTableAlias4Rule(Table table, Expression where){
+		if(where==null) return null;
+
+		// AND, OR 表达式处理
+		if(where instanceof AndExpression || where instanceof OrExpression){
+			BinaryExpression newWhere = (BinaryExpression) where;
+			// 左侧表达式继续递归处理
+			Expression left = newWhere.getLeftExpression();
+			newWhere.setLeftExpression(addTableAlias4Rule(table, left));
+			// 右侧表达式继续递归处理
+			Expression right = newWhere.getRightExpression();
+			newWhere.setRightExpression(addTableAlias4Rule(table, right));
+			
+			return newWhere;
+		}
+		
+		// 以括号括起来的表达式
+		if(where instanceof Parenthesis){
+			Parenthesis newWhere = (Parenthesis) where;
+			Expression left = newWhere.getExpression();
+			newWhere.setExpression(addTableAlias4Rule(table, left));
+			return newWhere;
+		}
+
+		// 以下为各个表达式处理，左侧表达式添加表别名，右侧表达式不处理
+		// =, <>, >, <, <=, >=, LIKE, NOT LIKE等表达式处理
+		if(where instanceof BinaryExpression){
+			BinaryExpression newWhere = (BinaryExpression) where;
+			Expression left = newWhere.getLeftExpression();
+			newWhere.setLeftExpression(replaceTableAlias4Col(table, left));
+			
+			return newWhere;
+		}
+
+		// IN, NOT IN 处理
+		if(where instanceof InExpression){
+			InExpression newWhere = (InExpression) where;
+			Expression left = newWhere.getLeftExpression();
+			newWhere.setLeftExpression(replaceTableAlias4Col(table, left));
+			
+			return newWhere;
+		}
+
+		// IS NULL, IS NOT NULL 处理
+		if(where instanceof IsNullExpression){
+			IsNullExpression newWhere = (IsNullExpression) where;
+			Expression left = newWhere.getLeftExpression();
+			newWhere.setLeftExpression(replaceTableAlias4Col(table, left));
+			
+			return newWhere;
+		}
+		
+		//BETWEEN
+		if(where instanceof Between){
+			Between newWhere = (Between) where;
+			Expression left = newWhere.getLeftExpression();
+			newWhere.setLeftExpression(replaceTableAlias4Col(table, left));
+			
+			return newWhere;
+		}
+
+		// 其他不处理，如：EXISTS, NOT EXISTS 等
+		return where;
+	}
+
+	/**
+	 * 替换列对象中的表别名
+	 * @param table
+	 * @param where
+	 * @return
+	 */
+	private Expression replaceTableAlias4Col(Table table, Expression where){
+		if(where==null) return null;
+		
+		// 如果是列对象，则替换返回
+		if(where instanceof Column){
+			Column col = (Column)where;
+			col.setTable(table);
+			return col;
+		}else{
+			return where;
+		}
 	}
 	
 	/**
@@ -358,7 +458,7 @@ public class DataPolicyInterceptor implements Interceptor{
 	 */
 	private String replaceSqlConstant(String rule){
 		rule = rule.trim();
-		rule = rule.replaceAll("@LOGIN_USER_ID@", user.getId()+""); // 当前登录用户ID
+		rule = rule.replaceAll("\\[LOGIN_USER_ID\\]", user.getId()+""); // 当前登录用户ID
 		return rule;
 	}
 	
