@@ -1,5 +1,9 @@
 package com.xukea.framework.base;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
@@ -18,7 +22,7 @@ import org.apache.log4j.Logger;
  * @version 1.0
  * @date    2012-12-27
  */
-public class BaseEntity implements Serializable {
+public class BaseEntity implements Serializable, Cloneable {
 	protected Logger log = Logger.getLogger(this.getClass());
 	
 	private SimpleDateFormat dateFormat = new SimpleDateFormat(BaseConstants.FORMAT_TIMESTAMP);
@@ -70,5 +74,48 @@ public class BaseEntity implements Serializable {
         	return null;
         }
 	}
+
+	/**
+	 * 对象拷贝（浅拷贝）
+	 * @return
+	 */
+	public BaseEntity clone() {
+		return clone(false);
+	}
 	
+	/**
+	 * 对象拷贝
+	 * 
+	 * @param flag 拷贝模式  <b>true</b>：深拷贝 <b>false</b>：浅拷贝 
+	 * @return
+	 */
+	public BaseEntity clone(boolean flag) {
+		if(flag){
+			// 深拷贝：采用对象序列化/反序列化的机制，进行对象的深度copy
+			try {
+				// 序列化
+				ByteArrayOutputStream bout = new ByteArrayOutputStream();
+				ObjectOutputStream out = new ObjectOutputStream(bout);
+				out.writeObject(this);
+				out.close();
+				// 反序列化
+				ByteArrayInputStream bin = new ByteArrayInputStream(bout.toByteArray());
+				ObjectInputStream in = new ObjectInputStream(bin);
+				Object ret = in.readObject();
+				in.close();
+				return (BaseEntity) ret;
+			} catch (Exception e) {
+				return null;
+			}
+		}else{
+			// 浅拷贝：Object的clone只是对象的影子copy，除了基础数据和String类型copy的是值，其他复杂类型还是copy的应用
+			BaseEntity o = null;
+			try {
+				o = (BaseEntity)super.clone();
+			} catch(CloneNotSupportedException e) {
+				log.error("BaseEntity clone failed", e);
+			}
+			return o;
+		}
+	}
 }
