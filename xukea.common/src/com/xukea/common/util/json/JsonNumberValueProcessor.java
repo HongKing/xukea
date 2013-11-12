@@ -4,7 +4,6 @@ import java.text.DecimalFormat;
 
 import com.xukea.framework.base.BaseConstants;
 
-
 import net.sf.json.JsonConfig;
 import net.sf.json.processors.JsonValueProcessor;
 
