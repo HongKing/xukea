@@ -10,6 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.Collection;
 
 import net.sf.json.JSONArray;
+import net.sf.json.JSONNull;
 import net.sf.json.JSONObject;
 
 import org.apache.log4j.Logger;
@@ -53,7 +54,7 @@ public class BaseEntity implements Serializable, Cloneable {
                 
                 // 如果值为空，则不处理
                 if(val==null){
-                	json.put(key, null);
+                	json.put(key, JSONNull.getInstance());// 不能直接放null，否则等同于remove(key)
                 	continue;
                 }
                 
