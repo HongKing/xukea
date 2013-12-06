@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans  http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/tx       http://www.springframework.org/schema/tx/spring-tx-3.0.xsd"
        default-lazy-init="false">
 
-    <!-- 数据源1 -->
-    
+    <!-- 默认数据源 -->
+    <!-- 数据源定义,使用JNDI连接 -->
     <!-- 
     <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
         <property name="jndiName">
@@ -14,26 +17,54 @@
     </bean>
     -->
     
-    <!-- 数据源定义,使用Apache DBCP 连接池 -->
+    <!-- 数据源定义,使用 Apache DBCP 连接池 -->
+    <!-- 
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="${default.driver}"/>
-        <property name="url" value="${default.url}"/>
+        <property name="url"             value="${default.url}"/>
         <property name="username" value="${default.username}"/>
-        <property name="password" value="${default.password}"/>
+        <property name="password" value="${default.password}"/> 
+        <property name="initialSize" value="5"/>  
+        <property name="maxActive" value="10"/>  
+        <property name="maxWait" value="60000"/>  
+        <property name="poolPreparedStatements" value="true"/>    
     </bean>
-    <!--  
-    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
-        <property name="dataSource" ref="dataSource"/>org.mybatis.spring.SqlSessionFactoryBean
-    </bean>-->
+    -->
+    
+    <!-- 数据源定义,使用 C3P0 连接池 -->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+        <property name="driverClass" value="${default.driver}"/>
+        <property name="jdbcUrl"     value="${default.url}"/>
+        <property name="user"        value="${default.username}"/>
+        <property name="password"    value="${default.password}"/>
+    </bean>
+    
+    <!-- 使用spring的事务管理 -->
     <!-- Transaction manager for a single JDBC DataSource -->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"/>
     </bean>
     
+    <!-- 使用spring的会话管理 -->
     <bean id="sqlSessionFactory" class="com.xukea.framework.ibatis3.BaseSqlSessionFactoryBean">
-        <property name="configLocation" value="classpath:mybatis/plugin.xml"/>
+        <property name="configLocation" value="classpath:ibatis3/plugin.xml"/>
         <property name="mapperLocations" value="classpath*:/com/**/model/*.default.xml"/>
         <property name="dataSource" ref="dataSource"/>
     </bean>
+    
+    <!-- 支持 @Transactional 标记 -->
+    <tx:annotation-driven proxy-target-class="true"/>
+    
+    <!-- 基本事务定义,使用transactionManager作事务管理,默认get* find*方法的事务为readonly,其余方法按默认设置.
+                 默认的设置请参考Spring文档事务一章. transaction-manager="transactionManager"-->
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="find*"   propagation="SUPPORTS" read-only="true"/>
+            <tx:method name="get*"    propagation="SUPPORTS" read-only="true"/>
+            <tx:method name="query*"  propagation="SUPPORTS" read-only="true"/>
+            <tx:method name="select*" propagation="SUPPORTS" read-only="true"/>
+            <tx:method name="*"       propagation="REQUIRED" read-only="false"/>
+        </tx:attributes>
+    </tx:advice>
     
 </beans>
